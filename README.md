@@ -1,3 +1,1 @@
 > 开发中...
-
-![loading](http://images.monsterlin.com/loading.gif)
