@@ -3,6 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
+
+    useLibrary 'org.apache.http.legacy'
+
+
     defaultConfig {
         applicationId "com.monsterlin.pigeon"
         minSdkVersion 15
@@ -11,12 +15,14 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -24,6 +30,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'  //Bmob数据服务SDK
+    compile 'cn.bmob.android:bmob-push:0.8' //Bmob推送
+    compile 'cn.bmob.android:bmob-im:2.0.6@aar'  //Bmob IM
+    compile 'cn.bmob.android:http-legacy:1.0' //Bmob兼容Android6.0的Http服务
+    compile 'com.orhanobut:logger:1.15' //log日志服务
+    compile 'me.weyye.hipermission:library:1.0.7' // 6.0 权限申请库
+
+    compile 'me.drakeet.materialdialog:library:1.2.2' //material dialog
 }
