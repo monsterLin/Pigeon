@@ -1,4 +1,4 @@
-﻿package com.monsterlin.pigeon.base;
+package com.monsterlin.pigeon.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 
 
 /**
- *  @autor : Hensen_
- *  @desc : 内置懒加载的基类
- *  @url : http://blog.csdn.net/qq_30379689/article/details/58034750
+ * @autor : Hensen_
+ * @desc : 内置懒加载的基类
+ * @url : http://blog.csdn.net/qq_30379689/article/details/58034750
  */
 
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
@@ -82,6 +82,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         initData();
 
         isFirstLoad = false;
-       
+
     }
 }
