@@ -47,4 +47,5 @@ dependencies {
 
     compile 'com.roughike:bottom-bar:2.0'
     compile 'me.drakeet.materialdialog:library:1.2.2' //material dialog
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
