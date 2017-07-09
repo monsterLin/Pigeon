@@ -3,6 +3,7 @@ package com.monsterlin.pigeon.constant;
 /**
  * @author : monsterLin
  * @email ： monster941025@gmail.com
+ * @github : https://github.com/monsterLin
  * @time : 2017/7/5
  * @desc : Bmob 配置文件
  * @version: 1.0

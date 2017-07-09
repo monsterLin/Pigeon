@@ -5,7 +5,8 @@ import android.widget.Toast;
 
 /**
  * @author : monsterLin
- * @email ： monster941025@gmail.com
+ * @email : monster941025@gmail.com
+ * @github : https://github.com/monsterLin
  * @time : 2017/7/5
  * @desc : Toast弹出层
  * @version: 1.0

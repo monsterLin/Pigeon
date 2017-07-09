@@ -11,7 +11,8 @@ import me.drakeet.materialdialog.MaterialDialog;
 
 /**
  * @author : monsterLin
- * @email ： monster941025@gmail.com
+ * @email : monster941025@gmail.com
+ * @github : https://github.com/monsterLin
  * @time : 2017/7/5
  * @desc : 网络检测
  * @version: 1.0
