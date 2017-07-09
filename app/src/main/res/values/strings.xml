@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pigeon</string>
+    <string name="tab_home">飞鸽</string>
+    <string name="tab_chat">消息</string>
+    <string name="tab_tools">发现</string>
+    <string name="tab_person">我</string>
 </resources>

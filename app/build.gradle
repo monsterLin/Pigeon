@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "com.monsterlin.pigeon"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -35,6 +35,8 @@ dependencies {
     })
 
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+
     testCompile 'junit:junit:4.12'
     compile 'cn.bmob.android:bmob-sdk:3.5.0'  //Bmob数据服务SDK
     compile 'cn.bmob.android:bmob-push:0.8' //Bmob推送
@@ -43,5 +45,6 @@ dependencies {
     compile 'com.orhanobut:logger:1.15' //log日志服务
     compile 'me.weyye.hipermission:library:1.0.7' // 6.0 权限申请库
 
+    compile 'com.roughike:bottom-bar:2.0'
     compile 'me.drakeet.materialdialog:library:1.2.2' //material dialog
 }
