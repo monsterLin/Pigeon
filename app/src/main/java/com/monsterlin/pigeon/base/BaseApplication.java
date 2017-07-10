@@ -34,7 +34,9 @@ public abstract class BaseApplication extends Application {
 
         mainThread = Thread.currentThread();
 
+        //自定义异常捕获
         CrashHandler.getInstance().init(this);
+
         initConfigs();
     }
 

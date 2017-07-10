@@ -1,8 +1,6 @@
 package com.monsterlin.pigeon.common;
 
 import android.app.Activity;
-import android.content.Context;
-
 import java.util.Stack;
 
 /**
@@ -10,7 +8,7 @@ import java.util.Stack;
  * @email : cdanry@163.com
  * @github : https://github.com/Danry-sky
  * @time : 2017/7/9
- * @desc : crashHandler设置为单例模式
+ * @desc : 统一app程序当中所有的activity栈管理
  * @version : 1.0
  */
 

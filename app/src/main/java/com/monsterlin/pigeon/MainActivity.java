@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity {
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
+                int a = 1;
                 switch (tabId) {
                     case R.id.tab_home:
                         setSelect(0);

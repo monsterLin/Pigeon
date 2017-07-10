@@ -15,4 +15,13 @@
     <string name="forgetPass_edt_num">请输入你绑定的手机号</string>
     <string name="forgetPass_btn">找回密码</string>
     <string name="forgetPass_tv_tips">找回密码会将验证码发送至你绑定的手机号中，请注意查收</string>
+    <string name="upgrade">升级说明</string>
+    <string name="android_versions">Android版本</string>
+    <string name="versions">飞鸽: 6.1.4</string>
+    <string name="tip">已经是最新版本</string>
+    <string name="visit_website">访问官方网站</string>
+    <string name="love_me">喜欢我们，去评分</string>
+    <string name="recommend">推荐给好友</string>
+    <string name="website">官方网站</string>
+    <string name="check">检查新版本</string>
 </resources>

@@ -53,13 +53,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * View设置OnClick事件
      */
-    public  <E extends View> void setOnClick(E view){
+    public <E extends View> void setOnClick(E view) {
         view.setOnClickListener(this);
     }
 
 
     /**
      * 初始化ToolBar
+     *
      * @param toolbar
      * @param title
      * @param isBack
@@ -80,6 +81,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 跳转Activity
+     *
      * @param cls
      */
     public void nextActivity(Class cls) {
@@ -88,6 +90,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 带数据包的跳转
+     *
      * @param cls
      * @param bundle
      */
