@@ -2,7 +2,9 @@ package com.monsterlin.pigeon.ui;
 
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
@@ -19,6 +21,8 @@ public class LoginActivity extends BaseActivity {
 
     private TextInputLayout mUserNameWrapper, mUserPassWrapper;
     private EditText mEdtUserName, mEdtUserPass;
+    private Button mBtnLogin;
+    private TextView mTvRegister, mTvForgetPass;
 
     @Override
     public int getLayoutId() {
@@ -36,11 +40,17 @@ public class LoginActivity extends BaseActivity {
         mUserNameWrapper.setHint("飞鸽号");
         mUserPassWrapper.setHint("密码");
 
+        mBtnLogin = findView(R.id.login_btn);
+        mTvRegister = findView(R.id.login_tv_register);
+        mTvForgetPass = findView(R.id.login_tv_forgetPass);
+
     }
 
     @Override
     public void initListener() {
-
+        setOnClick(mBtnLogin);
+        setOnClick(mTvRegister);
+        setOnClick(mTvForgetPass);
     }
 
     @Override
@@ -50,6 +60,15 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void processClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.login_btn:
+                break;
+            case R.id.login_tv_register:
+                nextActivity(RegisterActivity.class);
+                break;
+            case R.id.login_tv_forgetPass:
+                nextActivity(ForgetPassActivity.class);
+                break;
+        }
     }
 }

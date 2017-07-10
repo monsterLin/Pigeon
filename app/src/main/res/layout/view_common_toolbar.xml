@@ -13,4 +13,5 @@
         android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme.AppBarOverlay" />
+
 </LinearLayout>
