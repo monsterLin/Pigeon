@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
+import com.monsterlin.pigeon.utils.ToastUtils;
 
 /**
  * @author : monsterLin
@@ -62,6 +63,7 @@ public class LoginActivity extends BaseActivity {
     public void processClick(View v) {
         switch (v.getId()) {
             case R.id.login_btn:
+                ToastUtils.showToast(this,"这是一个自定义的边框和底色的提示框");
                 break;
             case R.id.login_tv_register:
                 nextActivity(RegisterActivity.class);

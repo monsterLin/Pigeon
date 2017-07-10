@@ -14,4 +14,9 @@ public class BmobConfig {
      * Bmob APPID
      */
     public static final String APPID = "fe1d94a8f037d610f8d693f41d81e41e";
+
+    /**
+     * 短信验证码模板
+     */
+    public static final String SMSTEMPLATE = "STemplate";
 }
