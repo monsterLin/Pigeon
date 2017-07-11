@@ -3,10 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="about_tv_check">#000000</color>
     <color name="white">#ffffff</color>
     <color name="borrow">#FFEBB9</color>
     <color name="gray">#7C663F</color>
     <color name="ashy">#BCB199</color>
     <color name="aWhite">#F0EFF4</color>
+
 </resources>
