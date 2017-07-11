@@ -8,6 +8,7 @@ import android.util.SparseArray;
 import android.view.View;
 
 import com.monsterlin.pigeon.common.AppManager;
+import com.monsterlin.pigeon.widget.LoadingDialog;
 
 /**
  * @autor : Hensen_
@@ -18,6 +19,8 @@ import com.monsterlin.pigeon.common.AppManager;
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     private SparseArray<View> mViews;
+
+    public LoadingDialog dialog;
 
     public abstract int getLayoutId();
 
@@ -38,7 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         mViews = new SparseArray<>();
         setContentView(getLayoutId());
-        AppManager.getAppManager().addActivity(this);
+        AppManager.getAppManager().addActivity(this); //添加Activity到堆栈中
+        dialog = new LoadingDialog(this);
         initViews();
         initListener();
         initData();
@@ -63,6 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 初始化ToolBar
+     *
      * @param toolbar
      * @param title
      * @param isBack
@@ -83,6 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 跳转Activity
+     *
      * @param cls
      */
     public void nextActivity(Class cls) {
@@ -91,6 +97,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 带数据包的跳转
+     *
      * @param cls
      * @param bundle
      */
@@ -104,6 +111,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AppManager.getAppManager().finishActivity(this);
+        AppManager.getAppManager().finishActivity(this);//销毁当前堆栈
     }
 }

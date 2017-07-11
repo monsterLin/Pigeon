@@ -7,11 +7,9 @@ import android.content.Context;
 import java.util.Stack;
 
 /**
- *
- * @Description: Activity管理类：用于管理Activity和退出程序 
  * @author zhaokaiqiang
- * @date 2014-11-20 下午4:53:33 
- *
+ * @Description: Activity管理类：用于管理Activity和退出程序
+ * @date 2014-11-20 下午4:53:33
  */
 public class AppManager {
 
@@ -25,7 +23,7 @@ public class AppManager {
     }
 
     /**
-     * 单一实例 
+     * 单一实例
      */
     public static AppManager getAppManager() {
         if (instance == null) {
@@ -35,7 +33,7 @@ public class AppManager {
     }
 
     /**
-     * 添加Activity到堆栈 
+     * 添加Activity到堆栈
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
@@ -45,7 +43,7 @@ public class AppManager {
     }
 
     /**
-     * 获取当前Activity（堆栈中最后一个压入的） 
+     * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
         Activity activity = activityStack.lastElement();
@@ -53,7 +51,7 @@ public class AppManager {
     }
 
     /**
-     * 结束当前Activity（堆栈中最后一个压入的） 
+     * 结束当前Activity（堆栈中最后一个压入的）
      */
     public void finishActivity() {
         Activity activity = activityStack.lastElement();
@@ -61,7 +59,7 @@ public class AppManager {
     }
 
     /**
-     * 结束指定的Activity 
+     * 结束指定的Activity
      */
     public void finishActivity(Activity activity) {
         if (activity != null) {
@@ -72,7 +70,7 @@ public class AppManager {
     }
 
     /**
-     * 结束指定类名的Activity 
+     * 结束指定类名的Activity
      */
     public void finishActivity(Class<?> cls) {
         for (Activity activity : activityStack) {
@@ -83,7 +81,7 @@ public class AppManager {
     }
 
     /**
-     * 结束所有Activity 
+     * 结束所有Activity
      */
     public void finishAllActivity() {
         for (int i = 0; i < activityStack.size(); i++) {
@@ -95,7 +93,7 @@ public class AppManager {
     }
 
     /**
-     * 退出应用程序 
+     * 退出应用程序
      */
     public void AppExit(Context context) {
         try {
@@ -110,6 +108,7 @@ public class AppManager {
 
     /**
      * 获取堆栈的大小
+     *
      * @return
      */
     public int getSize() {

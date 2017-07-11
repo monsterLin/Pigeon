@@ -20,4 +20,6 @@
     <string name="about_tv_recommend">推荐给好友</string>
     <string name="about_tv_website">官方网站</string>
     <string name="about_tv_check">检查新版本</string>
+    <string name="tv_loading">请稍后...</string>
+    <string name="register_btn_getSmsCode">一键获取</string>
 </resources>

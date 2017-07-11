@@ -145,6 +145,7 @@ public class RegisterActivity extends BaseActivity {
                             if (user != null) {
                                 //注册并且登陆成功
                                 dialog.dismissDialog();
+                                //TODO 跳到选择个人类型的页面
                                 nextActivity(MainActivity.class);
                                 AppManager.getAppManager().finishActivity(LoginActivity.class);  //结束指定的Activity
                                 AppManager.getAppManager().finishActivity(); //结束当前Activity

@@ -1,16 +1,23 @@
 package com.monsterlin.pigeon.ui;
 
 import android.support.design.widget.TextInputLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.monsterlin.pigeon.MainActivity;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
+import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.utils.ToastUtils;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.LogInListener;
 
 /**
  * @author : monsterLin
@@ -27,6 +34,10 @@ public class LoginActivity extends BaseActivity {
     private Button mBtnLogin;
     private TextView mTvRegister, mTvForgetPass;
     private ImageView mIvAbout;
+
+    private String userNameString, userPassString;
+
+    private BmobUser bmobUser ;
 
     @Override
     public int getLayoutId() {
@@ -62,14 +73,40 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        AppManager.getAppManager().addActivity(this);
+        bmobUser=BmobUser.getCurrentUser();
+        if (bmobUser!=null){
+            AppManager.getAppManager().finishActivity();
+            nextActivity(MainActivity.class);
+        }
     }
 
     @Override
     public void processClick(View v) {
         switch (v.getId()) {
             case R.id.login_btn:
-                ToastUtils.showToast(this, "这是一个自定义的边框和底色的提示框");
+                dialog.showDialog();
+                userNameString = mEdtUserName.getText().toString();
+                userPassString = mEdtUserPass.getText().toString();
+
+                if (!TextUtils.isEmpty(userNameString)&&!TextUtils.isEmpty(userPassString)){
+                    BmobUser.loginByAccount(userNameString, userPassString, new LogInListener<User>() {
+                        @Override
+                        public void done(User user, BmobException e) {
+                            if (user!=null){
+                                //TODO 判断是否含有家庭，如果有家庭则跳转到主界面
+                                dialog.dismissDialog();
+                                nextActivity(MainActivity.class);
+                                AppManager.getAppManager().finishActivity();
+                            }else {
+                                dialog.dismissDialog();
+                                ToastUtils.showToast(LoginActivity.this,e.getMessage());
+                            }
+                        }
+                    });
+                }else {
+                    dialog.dismissDialog();
+                    ToastUtils.showToast(LoginActivity.this,"请正确填写登陆信息");
+                }
                 break;
             case R.id.login_tv_register:
                 nextActivity(RegisterActivity.class);
