@@ -20,11 +20,70 @@
             android:id="@+id/register_edt_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/register_edt_num"
             android:inputType="number" />
 
     </android.support.design.widget.TextInputLayout>
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp">
+
+
+        <Button
+            android:id="@+id/register_btn_getSmsCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="一键获取" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/register_smsWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/register_btn_getSmsCode">
+
+            <EditText
+                android:id="@+id/register_edt_smsCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_passwordWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/register_edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_rePasswordWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/register_edt_rePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/register_btn"

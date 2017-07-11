@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
+import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.utils.ToastUtils;
 
 /**
@@ -40,7 +41,7 @@ public class LoginActivity extends BaseActivity {
         mEdtUserName = findView(R.id.login_edt_userName);
         mEdtUserPass = findView(R.id.login_edt_userPass);
 
-        mUserNameWrapper.setHint("飞鸽号");
+        mUserNameWrapper.setHint("飞鸽号／手机号");
         mUserPassWrapper.setHint("密码");
 
         mBtnLogin = findView(R.id.login_btn);
@@ -61,7 +62,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        AppManager.getAppManager().addActivity(this);
     }
 
     @Override

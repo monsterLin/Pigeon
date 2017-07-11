@@ -100,7 +100,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         collectionException(e);
         try {
             t.sleep(2000);
-            AppManager.getAppManager().removeAll();
+            AppManager.getAppManager().finishAllActivity();
             Process.killProcess(Process.myPid());
             System.exit(0);
         } catch (InterruptedException e1) {

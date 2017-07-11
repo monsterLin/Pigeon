@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.View;
 
+import com.monsterlin.pigeon.common.AppManager;
+
 /**
  * @autor : Hensen_
  * @desc : Activity的基类
@@ -36,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         mViews = new SparseArray<>();
         setContentView(getLayoutId());
+        AppManager.getAppManager().addActivity(this);
         initViews();
         initListener();
         initData();
@@ -98,4 +101,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         startActivity(i);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.getAppManager().finishActivity(this);
+    }
 }
