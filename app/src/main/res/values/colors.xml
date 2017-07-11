@@ -8,7 +8,5 @@
     <color name="borrow">#FFEBB9</color>
     <color name="gray">#7C663F</color>
     <color name="ashy">#BCB199</color>
-    <color name="upgrade_bg">#E28CB1</color>
-    <color name="view_bg">#F8D2DF</color>
-    <color name="check_upgrade_bg">#F0EFF4</color>
+    <color name="aWhite">#F0EFF4</color>
 </resources>
