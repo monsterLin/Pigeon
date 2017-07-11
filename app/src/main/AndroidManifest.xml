@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.RegisterActivity"/>
+        <activity android:name=".ui.RegisterOrResetActivity"/>
         <activity android:name=".ui.ForgetPassActivity"/>
         <activity android:name=".ui.UpgradeExplainActivity"/>
         <activity android:name=".ui.AboutActivity"/>

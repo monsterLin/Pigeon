@@ -22,9 +22,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.bmob.v3.BmobSMS;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * @author : monsterLin
@@ -32,13 +34,13 @@ import cn.bmob.v3.listener.SaveListener;
  * @email : monster941025@gmail.com
  * @github : https://github.com/monsterLin
  * @time : 2017/7/10
- * @desc : 手机号注册界面
+ * @desc : 注册和重置密码界面
  */
-public class RegisterActivity extends BaseActivity {
+public class RegisterOrResetActivity extends BaseActivity {
 
     private Toolbar mToolBar;
     private TextInputLayout mTelNumWrapper, mPasswordWrapper, mRePasswordWrapper, mSmsWrapper;
-    private Button mBtnRegister, mBtnGetSmsCode;
+    private Button mBtn, mBtnGetSmsCode;
     private EditText mEdtNum, mEdtSmsCode, mEdtPassword, mEdtRePassword;
 
     private boolean isTel, isTruePassword;
@@ -46,42 +48,53 @@ public class RegisterActivity extends BaseActivity {
 
     private LoadingDialog dialog;
 
+    private int sign; //标志位，来确定是用户注册还是忘记密码  0 : 注册  ； 1 ：忘记密码
+
     @Override
     public int getLayoutId() {
-        return R.layout.activity_register;
+        return R.layout.activity_register_or_reset;
     }
 
     @Override
     public void initViews() {
-        mToolBar = findView(R.id.common_toolbar);
-        initToolBar(mToolBar, "注册", true);
+        sign = getIntent().getIntExtra("sign", 0);
 
-        mTelNumWrapper = findView(R.id.register_telNumWrapper);
+        mToolBar = findView(R.id.common_toolbar);
+
+        mTelNumWrapper = findView(R.id.telNumWrapper);
         mTelNumWrapper.setHint("手机号");
 
-        mEdtNum = findView(R.id.register_edt_num);
-        mEdtSmsCode = findView(R.id.register_edt_smsCode);
-        mEdtPassword = findView(R.id.register_edt_password);
-        mEdtRePassword = findView(R.id.register_edt_rePassword);
+        mEdtNum = findView(R.id.edt_num);
+        mEdtSmsCode = findView(R.id.edt_smsCode);
+        mEdtPassword = findView(R.id.edt_password);
+        mEdtRePassword = findView(R.id.edt_rePassword);
 
-        mBtnRegister = findView(R.id.register_btn);
-        mBtnGetSmsCode = findView(R.id.register_btn_getSmsCode);
+        mBtn = findView(R.id.btn);
+        mBtnGetSmsCode = findView(R.id.btn_getSmsCode);
 
-        mPasswordWrapper = findView(R.id.register_passwordWrapper);
+        mPasswordWrapper = findView(R.id.passwordWrapper);
         mPasswordWrapper.setHint("密码");
-        mRePasswordWrapper = findView(R.id.register_rePasswordWrapper);
+        mRePasswordWrapper = findView(R.id.rePasswordWrapper);
         mRePasswordWrapper.setHint("确认密码");
 
-        mSmsWrapper = findView(R.id.register_smsWrapper);
+        mSmsWrapper = findView(R.id.smsWrapper);
         mSmsWrapper.setHint("验证码");
 
         dialog = new LoadingDialog(this);
+
+        if (sign == 0) {
+            initToolBar(mToolBar, "注册", true);
+            mBtn.setText("注册");
+        } else if (sign == 1) {
+            initToolBar(mToolBar, "重置密码", true);
+            mBtn.setText("重置密码");
+        }
     }
 
     @Override
     public void initListener() {
         setOnClick(mBtnGetSmsCode);
-        setOnClick(mBtnRegister);
+        setOnClick(mBtn);
     }
 
     @Override
@@ -92,7 +105,7 @@ public class RegisterActivity extends BaseActivity {
     @Override
     public void processClick(View v) {
         switch (v.getId()) {
-            case R.id.register_btn_getSmsCode:
+            case R.id.btn_getSmsCode:
                 telNumString = mEdtNum.getText().toString();
                 isTel = vertifyTel(telNumString);
 
@@ -103,7 +116,7 @@ public class RegisterActivity extends BaseActivity {
                         public void done(Integer smsCode, BmobException e) {
                             if (e == null) {
                                 Logger.i("本次验证码为：" + smsCode);
-                                ToastUtils.showToast(RegisterActivity.this, "验证码发送完毕");
+                                ToastUtils.showToast(RegisterOrResetActivity.this, "验证码发送完毕");
                                 mEdtSmsCode.setText(smsCode);
                             } else {
                                 Logger.e(e.getMessage());
@@ -116,16 +129,7 @@ public class RegisterActivity extends BaseActivity {
 
                 break;
 
-            case R.id.register_btn:
-                /**
-                 * 在这里要进行的操作包括：
-                 * 1. 表单验证
-                 * 2. 验证码的验证
-                 * 3. 注册信息
-                 * 4. 注册完成后的登陆
-                 * 5. 登陆成功的跳转
-                 */
-
+            case R.id.btn:
                 telNumString = mEdtNum.getText().toString();
                 smsCodeString = mEdtSmsCode.getText().toString();
                 passwordString = mEdtPassword.getText().toString();
@@ -134,34 +138,80 @@ public class RegisterActivity extends BaseActivity {
                 isTel = vertifyTel(telNumString); //判断是否为正确的手机号
                 isTruePassword = vertifyTwoPassword(passwordString, rePassWordString);//进行两次输入的密码校验
 
-                if (isTel && isTruePassword) {
-                    dialog.showDialog();
-                    User user = new User();
-                    user.setPassword(rePassWordString);
-                    user.setMobilePhoneNumber(telNumString);
-                    user.signOrLogin(smsCodeString, new SaveListener<User>() {
-                        @Override
-                        public void done(User user, BmobException e) {
-                            if (user != null) {
-                                //注册并且登陆成功
-                                dialog.dismissDialog();
-                                //TODO 跳到选择个人类型的页面
-                                nextActivity(MainActivity.class);
-                                AppManager.getAppManager().finishActivity(LoginActivity.class);  //结束指定的Activity
-                                AppManager.getAppManager().finishActivity(); //结束当前Activity
-
-                            } else {
-                                dialog.dismissDialog();
-                                ToastUtils.showToast(RegisterActivity.this, e.getMessage());
-                            }
-                        }
-                    });
-                } else {
-                    dialog.dismissDialog();
-                    ToastUtils.showToast(RegisterActivity.this, "请检查输入信息");
+                if (sign == 0) {
+                    registerUser();
+                } else if (sign == 1) {
+                    resetPassword();
                 }
 
+
                 break;
+        }
+    }
+
+    /**
+     * 重置密码
+     */
+    private void resetPassword() {
+        if (isTel && isTruePassword) {
+            dialog.showDialog();
+            BmobUser.resetPasswordBySMSCode(smsCodeString, rePassWordString, new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        dialog.dismissDialog();
+                        ToastUtils.showToast(RegisterOrResetActivity.this, "重置密码成功");
+                        AppManager.getAppManager().finishActivity();
+                    } else {
+                        dialog.dismissDialog();
+                        ToastUtils.showToast(RegisterOrResetActivity.this, e.getMessage());
+                    }
+                }
+            });
+
+        } else {
+            dialog.dismissDialog();
+            ToastUtils.showToast(RegisterOrResetActivity.this, "请检查输入信息");
+        }
+    }
+
+    /**
+     * 用户注册
+     */
+    private void registerUser() {
+        /**
+         * 在这里要进行的操作包括：
+         * 1. 表单验证
+         * 2. 验证码的验证
+         * 3. 注册信息
+         * 4. 注册完成后的登陆
+         * 5. 登陆成功的跳转
+         */
+        if (isTel && isTruePassword) {
+            dialog.showDialog();
+            User user = new User();
+            user.setPassword(rePassWordString);
+            user.setMobilePhoneNumber(telNumString);
+            user.signOrLogin(smsCodeString, new SaveListener<User>() {
+                @Override
+                public void done(User user, BmobException e) {
+                    if (user != null) {
+                        //注册并且登陆成功
+                        dialog.dismissDialog();
+                        //TODO 跳到选择个人类型的页面
+                        nextActivity(MainActivity.class);
+                        AppManager.getAppManager().finishActivity(LoginActivity.class);  //结束指定的Activity
+                        AppManager.getAppManager().finishActivity(); //结束当前Activity
+
+                    } else {
+                        dialog.dismissDialog();
+                        ToastUtils.showToast(RegisterOrResetActivity.this, e.getMessage());
+                    }
+                }
+            });
+        } else {
+            dialog.dismissDialog();
+            ToastUtils.showToast(RegisterOrResetActivity.this, "请检查输入信息");
         }
     }
 

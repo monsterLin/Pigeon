@@ -1,5 +1,6 @@
 package com.monsterlin.pigeon.ui;
 
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
@@ -38,6 +39,7 @@ public class LoginActivity extends BaseActivity {
     private String userNameString, userPassString;
 
     private BmobUser bmobUser ;
+    private Bundle bundle ;
 
     @Override
     public int getLayoutId() {
@@ -109,10 +111,14 @@ public class LoginActivity extends BaseActivity {
                 }
                 break;
             case R.id.login_tv_register:
-                nextActivity(RegisterActivity.class);
+                bundle = new Bundle();
+                bundle.putInt("sign",0);
+                nextActivity(RegisterOrResetActivity.class,bundle);
                 break;
             case R.id.login_tv_forgetPass:
-                nextActivity(ForgetPassActivity.class);
+                bundle = new Bundle();
+                bundle.putInt("sign",1);
+                nextActivity(RegisterOrResetActivity.class,bundle);
                 break;
             case R.id.login_iv_about:
                 nextActivity(AboutActivity.class);

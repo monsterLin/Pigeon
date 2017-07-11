@@ -9,7 +9,7 @@
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/register_telNumWrapper"
+        android:id="@+id/telNumWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -17,7 +17,7 @@
         android:layout_marginTop="15dp">
 
         <EditText
-            android:id="@+id/register_edt_num"
+            android:id="@+id/edt_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number" />
@@ -34,27 +34,27 @@
 
 
         <Button
-            android:id="@+id/register_btn_getSmsCode"
+            android:id="@+id/btn_getSmsCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/register_btn_getSmsCode" />
+            android:text="@string/btn_getSmsCode" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/register_smsWrapper"
+            android:id="@+id/smsWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/register_btn_getSmsCode">
+            android:layout_toLeftOf="@id/btn_getSmsCode">
 
             <EditText
-                android:id="@+id/register_edt_smsCode"
+                android:id="@+id/edt_smsCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
     </RelativeLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/register_passwordWrapper"
+        android:id="@+id/passwordWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -62,7 +62,7 @@
         android:layout_marginTop="8dp">
 
         <EditText
-            android:id="@+id/register_edt_password"
+            android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
@@ -70,7 +70,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/register_rePasswordWrapper"
+        android:id="@+id/rePasswordWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -78,7 +78,7 @@
         android:layout_marginTop="8dp">
 
         <EditText
-            android:id="@+id/register_edt_rePassword"
+            android:id="@+id/edt_rePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
@@ -86,13 +86,12 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/register_btn"
+        android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/register_btn" />
+        android:layout_marginTop="12dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -100,7 +99,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="12dp"
-        android:text="@string/register_tv_tips" />
+        android:text="@string/tv_tips" />
 
 
 </LinearLayout>

@@ -9,9 +9,7 @@
     <string name="login_btn">登陆</string>
     <string name="login_tv_register">手机注册</string>
     <string name="login_tv_forgetPass">忘记密码</string>
-    <string name="register_edt_num">请输入正确的手机号码</string>
-    <string name="register_btn">注册</string>
-    <string name="register_tv_tips">手机号码可作为登陆账号，是找回密码的重要凭证</string>
+    <string name="tv_tips">手机号码可作为登陆账号，是找回密码的重要凭证</string>
     <string name="forgetPass_edt_num">请输入你绑定的手机号</string>
     <string name="forgetPass_btn">找回密码</string>
     <string name="forgetPass_tv_tips">找回密码会将验证码发送至你绑定的手机号中，请注意查收</string>
@@ -21,5 +19,5 @@
     <string name="about_tv_website">官方网站</string>
     <string name="about_tv_check">检查新版本</string>
     <string name="tv_loading">请稍后...</string>
-    <string name="register_btn_getSmsCode">一键获取</string>
+    <string name="btn_getSmsCode">一键获取</string>
 </resources>
