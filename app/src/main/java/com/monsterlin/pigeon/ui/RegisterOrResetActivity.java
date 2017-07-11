@@ -107,7 +107,7 @@ public class RegisterOrResetActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_getSmsCode:
                 telNumString = mEdtNum.getText().toString();
-                isTel = vertifyTel(telNumString);
+                isTel = verifyTel(telNumString);
 
                 if (!TextUtils.isEmpty(telNumString) && isTel) {
                     loadSMS();
@@ -135,8 +135,8 @@ public class RegisterOrResetActivity extends BaseActivity {
                 passwordString = mEdtPassword.getText().toString();
                 rePassWordString = mEdtRePassword.getText().toString();
 
-                isTel = vertifyTel(telNumString); //判断是否为正确的手机号
-                isTruePassword = vertifyTwoPassword(passwordString, rePassWordString);//进行两次输入的密码校验
+                isTel = verifyTel(telNumString); //判断是否为正确的手机号
+                isTruePassword = verifyTwoPassword(passwordString, rePassWordString);//进行两次输入的密码校验
 
                 if (sign == 0) {
                     registerUser();
@@ -222,9 +222,9 @@ public class RegisterOrResetActivity extends BaseActivity {
      * @param rePassWordString 第二次输入的密码
      * @return
      */
-    private boolean vertifyTwoPassword(String passwordString, String rePassWordString) {
-        boolean isPass1 = vertifyPassword(passwordString);
-        boolean isPass2 = vertifyPassword(rePassWordString);
+    private boolean verifyTwoPassword(String passwordString, String rePassWordString) {
+        boolean isPass1 = verifyPassword(passwordString);
+        boolean isPass2 = verifyPassword(rePassWordString);
 
         if (isPass1 && isPass2) {
             if (passwordString.equals(rePassWordString)) {
@@ -241,7 +241,7 @@ public class RegisterOrResetActivity extends BaseActivity {
      * @param passwordString 密码
      * @return
      */
-    private boolean vertifyPassword(String passwordString) {
+    private boolean verifyPassword(String passwordString) {
         if (!TextUtils.isEmpty(passwordString) && passwordString.length() >= 6) {
             return true;
         }
@@ -254,7 +254,7 @@ public class RegisterOrResetActivity extends BaseActivity {
      * @param telNumString 手机号
      * @return
      */
-    private boolean vertifyTel(String telNumString) {
+    private boolean verifyTel(String telNumString) {
         if (!TextUtils.isEmpty(telNumString)) {
             String regExp = "^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$"; //手机号的正则表达式
             Pattern p = Pattern.compile(regExp);
