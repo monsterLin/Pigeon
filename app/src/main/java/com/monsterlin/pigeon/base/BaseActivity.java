@@ -60,7 +60,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 初始化ToolBar
-     *
      * @param toolbar
      * @param title
      * @param isBack
@@ -81,7 +80,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 跳转Activity
-     *
      * @param cls
      */
     public void nextActivity(Class cls) {
@@ -90,7 +88,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 带数据包的跳转
-     *
      * @param cls
      * @param bundle
      */

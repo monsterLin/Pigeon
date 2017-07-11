@@ -2,8 +2,6 @@ package com.monsterlin.pigeon.ui;
 
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
@@ -14,11 +12,11 @@ import com.monsterlin.pigeon.base.BaseActivity;
  * @email : cdanry@163.com
  * @github : https://github.com/Danry-sky
  * @time : 2017/7/10
- * @desc :
+ * @desc : 升级说明
  */
 public class UpgradeExplainActivity extends BaseActivity {
 
-    private TextView toolbar_title;
+    private Toolbar mToolBar;
 
     @Override
     public int getLayoutId() {
@@ -27,12 +25,8 @@ public class UpgradeExplainActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        Toolbar toolbar = findView(R.id.common_toolbar);
-        toolbar_title = findView(R.id.toolbar_title);
-        toolbar_title.setText("升级说明");
-        toolbar.setNavigationIcon(R.mipmap.left);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
+        mToolBar = findView(R.id.common_toolbar);
+        initToolBar(mToolBar, "升级说明", true);
     }
 
     @Override
