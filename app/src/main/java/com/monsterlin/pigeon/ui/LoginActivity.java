@@ -78,7 +78,8 @@ public class LoginActivity extends BaseActivity {
         bmobUser=BmobUser.getCurrentUser();
         if (bmobUser!=null){
             AppManager.getAppManager().finishActivity();
-            nextActivity(MainActivity.class);
+            //TODO 判断是否含有家庭，如果有家庭则跳转到主界面
+            nextActivity(GuideFamilyActivity.class);
         }
     }
 
@@ -97,7 +98,8 @@ public class LoginActivity extends BaseActivity {
                             if (user!=null){
                                 //TODO 判断是否含有家庭，如果有家庭则跳转到主界面
                                 dialog.dismissDialog();
-                                nextActivity(MainActivity.class);
+                                nextActivity(GuideFamilyActivity.class);
+                                //nextActivity(MainActivity.class);
                                 AppManager.getAppManager().finishActivity();
                             }else {
                                 dialog.dismissDialog();
