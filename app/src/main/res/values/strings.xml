@@ -24,4 +24,5 @@
     <string name="familyGuide_tv_create">没有家庭？创建家庭</string>
     <string name="familyGuide_tv_tips">体验全部功能请创建或者加入家庭</string>
     <string name="familyGuide_btn_copy">复制</string>
+    <string name="family_edt_create">请输入家庭名</string>
 </resources>

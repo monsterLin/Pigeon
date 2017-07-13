@@ -12,12 +12,17 @@ import android.widget.TextView;
 import com.monsterlin.pigeon.MainActivity;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
+import com.monsterlin.pigeon.bean.Family;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.utils.ToastUtils;
 
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 
 /**
@@ -75,11 +80,26 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        //TODO 由于这个地方含有了网络请求，必然含有网络延迟性的跳转性问题，所以这个地方需要处理下
         bmobUser=BmobUser.getCurrentUser();
         if (bmobUser!=null){
-            AppManager.getAppManager().finishActivity();
-            //TODO 判断是否含有家庭，如果有家庭则跳转到主界面
-            nextActivity(GuideFamilyActivity.class);
+            //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
+            //TODO 目前判断的是当前用户是否为创建者
+            BmobUser currentUser = BmobUser.getCurrentUser(User.class);
+            BmobQuery<Family> queryFamily = new BmobQuery<>();
+            queryFamily.addWhereEqualTo("familyCreator", currentUser);
+            queryFamily.findObjects(new FindListener<Family>() {
+                @Override
+                public void done(List<Family> list, BmobException e) {
+                    if (null != list) {
+                        AppManager.getAppManager().finishActivity();
+                        nextActivity(MainActivity.class);
+                    } else {
+                        AppManager.getAppManager().finishActivity();
+                        nextActivity(GuideFamilyActivity.class);
+                    }
+                }
+            });
         }
     }
 
@@ -92,15 +112,33 @@ public class LoginActivity extends BaseActivity {
                 userPassString = mEdtUserPass.getText().toString();
 
                 if (!TextUtils.isEmpty(userNameString)&&!TextUtils.isEmpty(userPassString)){
+
                     BmobUser.loginByAccount(userNameString, userPassString, new LogInListener<User>() {
                         @Override
                         public void done(User user, BmobException e) {
                             if (user!=null){
-                                //TODO 判断是否含有家庭，如果有家庭则跳转到主界面
-                                dialog.dismissDialog();
-                                nextActivity(GuideFamilyActivity.class);
-                                //nextActivity(MainActivity.class);
-                                AppManager.getAppManager().finishActivity();
+                                //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
+                                //TODO 目前判断的是当前用户是否为创建者
+                                //TODO currentUser可以替换为此类变量中的bmobUser
+                                BmobUser currentUser = BmobUser.getCurrentUser(User.class);
+                                BmobQuery<Family> queryFamily = new BmobQuery<>();
+                                queryFamily.addWhereEqualTo("familyCreator", currentUser);
+                                queryFamily.findObjects(new FindListener<Family>() {
+                                    @Override
+                                    public void done(List<Family> list, BmobException e) {
+                                        if (null != list) {
+                                            dialog.dismissDialog();
+                                            AppManager.getAppManager().finishActivity();
+                                            nextActivity(MainActivity.class);
+                                        } else {
+                                            dialog.dismissDialog();
+                                            AppManager.getAppManager().finishActivity();
+                                            nextActivity(GuideFamilyActivity.class);
+
+                                        }
+                                    }
+                                });
+
                             }else {
                                 dialog.dismissDialog();
                                 ToastUtils.showToast(LoginActivity.this,e.getMessage());
