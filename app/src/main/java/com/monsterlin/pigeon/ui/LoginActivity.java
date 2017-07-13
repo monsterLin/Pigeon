@@ -15,6 +15,7 @@ import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.Family;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
+import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
 
 import java.util.List;
@@ -45,6 +46,8 @@ public class LoginActivity extends BaseActivity {
 
     private BmobUser bmobUser ;
     private Bundle bundle ;
+
+    private boolean isCreateFamily = false;  //是否有家庭
 
     @Override
     public int getLayoutId() {
@@ -80,26 +83,20 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        //TODO 由于这个地方含有了网络请求，必然含有网络延迟性的跳转性问题，所以这个地方需要处理下
         bmobUser=BmobUser.getCurrentUser();
         if (bmobUser!=null){
             //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
             //TODO 目前判断的是当前用户是否为创建者
-            BmobUser currentUser = BmobUser.getCurrentUser(User.class);
-            BmobQuery<Family> queryFamily = new BmobQuery<>();
-            queryFamily.addWhereEqualTo("familyCreator", currentUser);
-            queryFamily.findObjects(new FindListener<Family>() {
-                @Override
-                public void done(List<Family> list, BmobException e) {
-                    if (null != list) {
-                        AppManager.getAppManager().finishActivity();
-                        nextActivity(MainActivity.class);
-                    } else {
-                        AppManager.getAppManager().finishActivity();
-                        nextActivity(GuideFamilyActivity.class);
-                    }
-                }
-            });
+            isCreateFamily=SPUtils.getBoolean("isCreateFamily",false);
+
+            if (isCreateFamily){
+                AppManager.getAppManager().finishActivity();
+                nextActivity(MainActivity.class);
+            }else {
+                AppManager.getAppManager().finishActivity();
+                nextActivity(GuideFamilyActivity.class);
+            }
+
         }
     }
 
@@ -119,20 +116,20 @@ public class LoginActivity extends BaseActivity {
                             if (user!=null){
                                 //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
                                 //TODO 目前判断的是当前用户是否为创建者
-                                //TODO currentUser可以替换为此类变量中的bmobUser
-                                BmobUser currentUser = BmobUser.getCurrentUser(User.class);
                                 BmobQuery<Family> queryFamily = new BmobQuery<>();
-                                queryFamily.addWhereEqualTo("familyCreator", currentUser);
+                                queryFamily.addWhereEqualTo("familyCreator", bmobUser);
                                 queryFamily.findObjects(new FindListener<Family>() {
                                     @Override
                                     public void done(List<Family> list, BmobException e) {
                                         if (null != list) {
                                             dialog.dismissDialog();
                                             AppManager.getAppManager().finishActivity();
+                                            SPUtils.putBoolean("isCreateFamily",true);
                                             nextActivity(MainActivity.class);
                                         } else {
                                             dialog.dismissDialog();
                                             AppManager.getAppManager().finishActivity();
+                                            SPUtils.putBoolean("isCreateFamily",false);
                                             nextActivity(GuideFamilyActivity.class);
 
                                         }

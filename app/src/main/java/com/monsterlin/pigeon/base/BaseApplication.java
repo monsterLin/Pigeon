@@ -40,4 +40,8 @@ public abstract class BaseApplication extends Application {
         initConfigs();
     }
 
+    public static Context getContext() {
+        return context;
+    }
+
 }

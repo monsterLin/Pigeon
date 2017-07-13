@@ -15,8 +15,11 @@ import cn.bmob.v3.Bmob;
  */
 public class PigeonApplication extends BaseApplication{
 
+
     @Override
     public void initConfigs() {
         Bmob.initialize(this, BmobConfig.APPID);
     }
+
+
 }
