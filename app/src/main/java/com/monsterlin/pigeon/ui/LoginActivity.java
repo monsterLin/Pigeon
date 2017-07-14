@@ -44,8 +44,8 @@ public class LoginActivity extends BaseActivity {
 
     private String userNameString, userPassString;
 
-    private BmobUser bmobUser ;
-    private Bundle bundle ;
+    private BmobUser bmobUser;
+    private Bundle bundle;
 
     private boolean isCreateFamily = false;  //是否有家庭
 
@@ -83,16 +83,16 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        bmobUser=BmobUser.getCurrentUser();
-        if (bmobUser!=null){
+        bmobUser = BmobUser.getCurrentUser();
+        if (bmobUser != null) {
             //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
             //TODO 目前判断的是当前用户是否为创建者
-            isCreateFamily=SPUtils.getBoolean("isCreateFamily",false);
+            isCreateFamily = SPUtils.getBoolean("isCreateFamily", false);
 
-            if (isCreateFamily){
+            if (isCreateFamily) {
                 AppManager.getAppManager().finishActivity();
                 nextActivity(MainActivity.class);
-            }else {
+            } else {
                 AppManager.getAppManager().finishActivity();
                 nextActivity(GuideFamilyActivity.class);
             }
@@ -108,54 +108,57 @@ public class LoginActivity extends BaseActivity {
                 userNameString = mEdtUserName.getText().toString();
                 userPassString = mEdtUserPass.getText().toString();
 
-                if (!TextUtils.isEmpty(userNameString)&&!TextUtils.isEmpty(userPassString)){
+                if (!TextUtils.isEmpty(userNameString) && !TextUtils.isEmpty(userPassString)) {
 
                     BmobUser.loginByAccount(userNameString, userPassString, new LogInListener<User>() {
                         @Override
                         public void done(User user, BmobException e) {
-                            if (user!=null){
+                            if (user != null) {
                                 //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
                                 //TODO 目前判断的是当前用户是否为创建者
                                 BmobQuery<Family> queryFamily = new BmobQuery<>();
-                                queryFamily.addWhereEqualTo("familyCreator", bmobUser);
+                                queryFamily.addWhereEqualTo("familyCreator", user);
+                                queryFamily.include("familyCreator");
                                 queryFamily.findObjects(new FindListener<Family>() {
                                     @Override
                                     public void done(List<Family> list, BmobException e) {
-                                        if (null != list) {
-                                            dialog.dismissDialog();
-                                            AppManager.getAppManager().finishActivity();
-                                            SPUtils.putBoolean("isCreateFamily",true);
-                                            nextActivity(MainActivity.class);
-                                        } else {
-                                            dialog.dismissDialog();
-                                            AppManager.getAppManager().finishActivity();
-                                            SPUtils.putBoolean("isCreateFamily",false);
-                                            nextActivity(GuideFamilyActivity.class);
+                                        if (e==null){
+                                            if (list.size()!=0) {
+                                                dialog.dismissDialog();
+                                                AppManager.getAppManager().finishActivity();
+                                                SPUtils.putBoolean("isCreateFamily", true);
+                                                nextActivity(MainActivity.class);
+                                            } else {
+                                                dialog.dismissDialog();
+                                                AppManager.getAppManager().finishActivity();
+                                                SPUtils.putBoolean("isCreateFamily", false);
+                                                nextActivity(GuideFamilyActivity.class);
 
+                                            }
                                         }
                                     }
                                 });
 
-                            }else {
+                            } else {
                                 dialog.dismissDialog();
-                                ToastUtils.showToast(LoginActivity.this,e.getMessage());
+                                ToastUtils.showToast(LoginActivity.this, e.getMessage());
                             }
                         }
                     });
-                }else {
+                } else {
                     dialog.dismissDialog();
-                    ToastUtils.showToast(LoginActivity.this,"请正确填写登陆信息");
+                    ToastUtils.showToast(LoginActivity.this, "请正确填写登陆信息");
                 }
                 break;
             case R.id.login_tv_register:
                 bundle = new Bundle();
-                bundle.putInt("sign",0);
-                nextActivity(RegisterOrResetActivity.class,bundle);
+                bundle.putInt("sign", 0);
+                nextActivity(RegisterOrResetActivity.class, bundle);
                 break;
             case R.id.login_tv_forgetPass:
                 bundle = new Bundle();
-                bundle.putInt("sign",1);
-                nextActivity(RegisterOrResetActivity.class,bundle);
+                bundle.putInt("sign", 1);
+                nextActivity(RegisterOrResetActivity.class, bundle);
                 break;
             case R.id.login_iv_about:
                 nextActivity(AboutActivity.class);

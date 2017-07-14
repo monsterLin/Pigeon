@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.monsterlin.pigeon.MainActivity;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.constant.BmobConfig;
+import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.monsterlin.pigeon.widget.CountDownButtonHelper;
 import com.monsterlin.pigeon.widget.LoadingDialog;
@@ -198,10 +198,11 @@ public class RegisterOrResetActivity extends BaseActivity {
                     if (user != null) {
                         //注册并且登陆成功
                         dialog.dismissDialog();
-                        //TODO 跳到选择个人类型的页面
-                        nextActivity(MainActivity.class);
-                        AppManager.getAppManager().finishActivity(LoginActivity.class);  //结束指定的Activity
+
+                        SPUtils.putBoolean("isCreateFamily",false);
                         AppManager.getAppManager().finishActivity(); //结束当前Activity
+                        nextActivity(GuideFamilyActivity.class);
+                        AppManager.getAppManager().finishActivity(LoginActivity.class);  //结束指定的Activity
 
                     } else {
                         dialog.dismissDialog();
@@ -247,6 +248,7 @@ public class RegisterOrResetActivity extends BaseActivity {
      */
     private boolean verifyTel(String telNumString) {
         if (!TextUtils.isEmpty(telNumString)) {
+            //TODO 正则表达式所涵盖的手机号不全
             String regExp = "^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$"; //手机号的正则表达式
             Pattern p = Pattern.compile(regExp);
             Matcher m = p.matcher(telNumString);
