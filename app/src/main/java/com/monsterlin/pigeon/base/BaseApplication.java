@@ -7,7 +7,7 @@ import android.os.Handler;
 import com.monsterlin.pigeon.common.CrashHandler;
 
 /**
- * @autor : Hensen_
+ * @author : Hensen_
  * @desc : Application的基类
  * @url : http://blog.csdn.net/qq_30379689/article/details/58034750
  */
@@ -16,6 +16,7 @@ public abstract class BaseApplication extends Application {
 
     public abstract void initConfigs();
 
+    //TODO  Context会产生内存泄漏
     public static Context context = null;
 
     public static Handler handler = null;

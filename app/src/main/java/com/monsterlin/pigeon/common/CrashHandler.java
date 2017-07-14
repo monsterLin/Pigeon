@@ -10,11 +10,11 @@ import android.widget.Toast;
 
 /**
  * @author : danry
+ * @version : 1.0
  * @email : cdanry@163.com
  * @github : https://github.com/Danry-sky
  * @time : 2017/7/9
  * @desc : crashHandler设置为单例模式
- * @version : 1.0
  */
 
 
@@ -26,6 +26,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     }
 
+    //TODO 这个地方会产生内存泄漏
     public static CrashHandler getInstance() {
 
         if (crashHandler == null) {
@@ -50,8 +51,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 把信息提示汉化，记录日志信息，反馈给后台
      *
-     * @param t
-     * @param e
+     * @param t 进程
+     * @param e 异常
      */
 
     @Override
@@ -60,7 +61,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             handlerException(t, e);
         } else {
             //系统默认处理
-            defaultUncaughtExceptionHandler.uncaughtException(t, e);
+            defaultUncaughtExceptionHandler.uncaughtException(t, null);
         }
 
     }
@@ -69,22 +70,18 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 判断是否需要自己处理
      *
-     * @param e
-     * @return
+     * @param e 异常
+     * @return bollean
      */
     private boolean isHandler(Throwable e) {
-        if (e == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return e != null;
     }
 
     /**
      * 自定义异常处理
      *
-     * @param t
-     * @param e
+     * @param t 进程
+     * @param e 异常
      */
     private void handlerException(Thread t, Throwable e) {
         new Thread() {
@@ -99,7 +96,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
         collectionException(e);
         try {
-            t.sleep(2000);
+            Thread.sleep(2000);
             AppManager.getAppManager().finishAllActivity();
             Process.killProcess(Process.myPid());
             System.exit(0);
@@ -111,7 +108,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 收集奔溃异常信息
      *
-     * @param e
+     * @param e 异常
      */
     private void collectionException(Throwable e) {
         final String deviceInfo = Build.DEVICE + Build.VERSION.SDK_INT + Build.PRODUCT;

@@ -8,13 +8,13 @@
         android:id="@+id/main_contentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/main_bottombar" />
+        android:layout_above="@+id/main_bottom_bar" />
 
     <com.roughike.bottombar.BottomBar
-        android:id="@+id/main_bottombar"
+        android:id="@+id/main_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        app:bb_tabXmlResource="@xml/bottombar_tabs" />
+        app:bb_tabXmlResource="@xml/bottom_bar_tabs" />
 
 </RelativeLayout>

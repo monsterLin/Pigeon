@@ -2,6 +2,7 @@ package com.monsterlin.pigeon.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
@@ -11,7 +12,7 @@ import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.widget.LoadingDialog;
 
 /**
- * @autor : Hensen_
+ * @author : Hensen_
  * @desc : Activity的基类
  * @url : http://blog.csdn.net/qq_30379689/article/details/58034750
  */
@@ -68,15 +69,21 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * 初始化ToolBar
      *
-     * @param toolbar
-     * @param title
-     * @param isBack
+     * @param toolbar ToolBar的实例
+     * @param title 标题
+     * @param isBack 是否出现返回按钮
      */
     public void initToolBar(Toolbar toolbar, String title, boolean isBack) {
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         if (isBack) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            try {
+                ActionBar actionBar = getSupportActionBar();
+                if (null != actionBar)
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -84,12 +91,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                 }
             });
         }
+
     }
 
     /**
      * 跳转Activity
      *
-     * @param cls
+     * @param cls 要跳转的Activity
      */
     public void nextActivity(Class cls) {
         nextActivity(cls, null);
@@ -98,8 +106,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * 带数据包的跳转
      *
-     * @param cls
-     * @param bundle
+     * @param cls 要跳转的Activity
+     * @param bundle 数据包
      */
     public void nextActivity(Class cls, Bundle bundle) {
         Intent i = new Intent(this, cls);

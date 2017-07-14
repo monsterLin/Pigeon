@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
-            android:text="我的飞鸽号：4b5ff780ff"
+            android:text="@string/test_familyGuide_tv_pigeonId"
             android:textColor="@color/white" />
 
 
@@ -28,8 +28,8 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/familyGuide_tv_pigeonId"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@id/familyGuide_tv_pigeonId"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/familyGuide_tv_pigeonId"
             android:background="@drawable/shape_copy_style"
             android:text="@string/familyGuide_btn_copy"
             android:textColor="@color/colorPrimary" />
@@ -58,7 +58,7 @@
             android:id="@+id/familyGuide_edt_searchFamily"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_search"
+            android:drawableEnd="@drawable/ic_search"
             android:hint="@string/familyGuide_edt_searchFamily"
             android:inputType="text" />
 
@@ -73,12 +73,12 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
-        android:gravity="right"
+        android:gravity="end"
         android:text="@string/familyGuide_tv_create" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="宣传图位置"/>
+        android:text="@string/test_familyGuide_banner_tip"/>
 </LinearLayout>

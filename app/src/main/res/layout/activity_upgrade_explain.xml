@@ -10,5 +10,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="升级说明" />
+        android:text="@string/test_upgrade_txt" />
 </LinearLayout>

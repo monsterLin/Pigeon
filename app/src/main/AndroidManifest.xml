@@ -30,12 +30,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.RegisterOrResetActivity"/>
-        <activity android:name=".ui.ForgetPassActivity"/>
-        <activity android:name=".ui.UpgradeExplainActivity"/>
-        <activity android:name=".ui.AboutActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".ui.GuideFamilyActivity"/>
+        <activity android:name=".ui.RegisterOrResetActivity" />
+        <activity android:name=".ui.ForgetPassActivity" />
+        <activity android:name=".ui.UpgradeExplainActivity" />
+        <activity android:name=".ui.AboutActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.GuideFamilyActivity" />
+        <activity android:name=".ui.ChatActivity" />
     </application>
 
 </manifest>

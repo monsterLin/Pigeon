@@ -18,6 +18,7 @@
 
         <EditText
             android:id="@+id/edt_num"
+            android:labelFor="@id/edt_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number" />
@@ -44,10 +45,12 @@
             android:id="@+id/smsWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btn_getSmsCode">
+            android:layout_toStartOf="@id/btn_getSmsCode">
 
             <EditText
                 android:id="@+id/edt_smsCode"
+                android:labelFor="@id/edt_smsCode"
+                android:hint="@string/edt_smsCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -63,6 +66,7 @@
 
         <EditText
             android:id="@+id/edt_password"
+            android:labelFor="@id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
@@ -79,6 +83,7 @@
 
         <EditText
             android:id="@+id/edt_rePassword"
+            android:labelFor="@id/edt_rePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />

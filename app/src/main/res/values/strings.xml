@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">Pigeon</string>
-    <string name="tab_home">飞鸽</string>
-    <string name="tab_chat">消息</string>
-    <string name="tab_tools">发现</string>
-    <string name="tab_person">我</string>
     <string name="login_edt_userName">飞鸽号</string>
     <string name="login_edt_userPass">密码</string>
     <string name="login_btn">登陆</string>
@@ -18,11 +14,18 @@
     <string name="about_tv_recommend">推荐给好友</string>
     <string name="about_tv_website">官方网站</string>
     <string name="about_tv_check">检查新版本</string>
-    <string name="tv_loading">请稍后...</string>
+    <string name="tv_loading">请稍后&#8230;</string>
     <string name="btn_getSmsCode">一键获取</string>
     <string name="familyGuide_edt_searchFamily">创建者飞鸽号</string>
     <string name="familyGuide_tv_create">没有家庭？创建家庭</string>
     <string name="familyGuide_tv_tips">体验全部功能请创建或者加入家庭</string>
     <string name="familyGuide_btn_copy">复制</string>
     <string name="family_edt_create">请输入家庭名</string>
+    <string name="edt_smsCode">验证码</string>
+    <string name="test_familyGuide_tv_pigeonId">我的飞鸽号：4b5ff780ff</string>
+    <string name="test_familyGuide_banner_tip">宣传图位置</string>
+    <string name="test_upgrade_txt">升级说明</string>
+    <string name="test_home_txt">主页</string>
+    <string name="test_person_txt">个人中心</string>
+    <string name="test_tools_txt">工具</string>
 </resources>

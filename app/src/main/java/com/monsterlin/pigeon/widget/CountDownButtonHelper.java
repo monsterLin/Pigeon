@@ -69,7 +69,7 @@ public class CountDownButtonHelper {
     /**
      * 设置倒计时结束的监听器
      *
-     * @param listener
+     * @param listener 监听器
      */
     public void setOnFinishListener(OnFinishListener listener) {
         this.listener = listener;
@@ -82,7 +82,7 @@ public class CountDownButtonHelper {
      *
      */
     public interface OnFinishListener {
-        public void finish();
+        void finish();
     }
 
 }

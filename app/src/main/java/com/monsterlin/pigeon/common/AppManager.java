@@ -8,8 +8,8 @@ import java.util.Stack;
 
 /**
  * @author zhaokaiqiang
- * @Description: Activity管理类：用于管理Activity和退出程序
- * @date 2014-11-20 下午4:53:33
+ * @desc: Activity管理类：用于管理Activity和退出程序
+ * @time 2014-11-20 下午4:53:33
  */
 public class AppManager {
 
@@ -37,7 +37,7 @@ public class AppManager {
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<>();
         }
         activityStack.add(activity);
     }
@@ -46,8 +46,7 @@ public class AppManager {
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
-        Activity activity = activityStack.lastElement();
-        return activity;
+        return activityStack.lastElement();
     }
 
     /**
@@ -65,7 +64,6 @@ public class AppManager {
         if (activity != null) {
             activityStack.remove(activity);
             activity.finish();
-            activity = null;
         }
     }
 
@@ -103,13 +101,14 @@ public class AppManager {
             activityMgr.killBackgroundProcesses(context.getPackageName());
             System.exit(0);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * 获取堆栈的大小
      *
-     * @return
+     * @return size
      */
     public int getSize() {
         return activityStack.size();

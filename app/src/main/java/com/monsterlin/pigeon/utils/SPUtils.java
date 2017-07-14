@@ -22,7 +22,7 @@ public class SPUtils {
         if (sp == null) {
             sp = getContext().getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
         }
-        sp.edit().clear().commit();
+        sp.edit().clear().apply();
     }
 
 

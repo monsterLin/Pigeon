@@ -179,7 +179,7 @@ public class RegisterOrResetActivity extends BaseActivity {
      * 用户注册
      */
     private void registerUser() {
-        /**
+        /*
          * 在这里要进行的操作包括：
          * 1. 表单验证
          * 2. 验证码的验证
@@ -220,39 +220,30 @@ public class RegisterOrResetActivity extends BaseActivity {
      *
      * @param passwordString   第一次输入的密码
      * @param rePassWordString 第二次输入的密码
-     * @return
+     * @return boolean
      */
     private boolean verifyTwoPassword(String passwordString, String rePassWordString) {
         boolean isPass1 = verifyPassword(passwordString);
         boolean isPass2 = verifyPassword(rePassWordString);
 
-        if (isPass1 && isPass2) {
-            if (passwordString.equals(rePassWordString)) {
-                return true;
-            }
-            return false;
-        }
-        return false;
+        return isPass1 && isPass2 && passwordString.equals(rePassWordString);
     }
 
     /**
      * 检验密码的合法性
      *
      * @param passwordString 密码
-     * @return
+     * @return boolean
      */
     private boolean verifyPassword(String passwordString) {
-        if (!TextUtils.isEmpty(passwordString) && passwordString.length() >= 6) {
-            return true;
-        }
-        return false;
+        return !TextUtils.isEmpty(passwordString) && passwordString.length() >= 6;
     }
 
     /**
      * 使用正则表达式验证手机号
      *
      * @param telNumString 手机号
-     * @return
+     * @return boolean
      */
     private boolean verifyTel(String telNumString) {
         if (!TextUtils.isEmpty(telNumString)) {

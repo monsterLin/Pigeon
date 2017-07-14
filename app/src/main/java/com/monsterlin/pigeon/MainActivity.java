@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mBottomBar = findView(R.id.main_bottombar);
+        mBottomBar = findView(R.id.main_bottom_bar);
     }
 
     @Override

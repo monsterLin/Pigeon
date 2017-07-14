@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 
 /**
- * @autor : Hensen_
+ * @author : Hensen_
  * @desc : 内置懒加载的基类
  * @url : http://blog.csdn.net/qq_30379689/article/details/58034750
  */

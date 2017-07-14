@@ -46,7 +46,7 @@ public class NetUtils {
     /**
      * 显示提示框
      *
-     * @param context
+     * @param context 上下文
      */
 
     public void showDialog(final Context context) {
@@ -56,7 +56,7 @@ public class NetUtils {
                 .setPositiveButton("setting", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = null;
+                        Intent intent ;
                         try {
                             @SuppressWarnings("deprecation")
                             String sdkVersion = android.os.Build.VERSION.SDK;
