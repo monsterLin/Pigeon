@@ -1,9 +1,14 @@
 package com.monsterlin.pigeon.ui;
 
+import android.app.AlertDialog;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,16 +23,16 @@ import com.monsterlin.pigeon.bean.Family;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.utils.ToastUtils;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
+import cc.duduhuo.dialog.smartisan.NormalDialog;
+import cc.duduhuo.dialog.smartisan.SmartisanDialog;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
-import me.drakeet.materialdialog.MaterialDialog;
 
 /**
  * @author : monsterLin
@@ -44,7 +49,6 @@ public class GuideFamilyActivity extends BaseActivity {
     private TextInputLayout mFamilyIdWrapper;
     private EditText mEdtSearch;
     private TextView mTvCreate, mTvUserId;
-    private MaterialDialog mMDialog;
     private View viewCreate;
     private User currentUser;
 
@@ -68,6 +72,8 @@ public class GuideFamilyActivity extends BaseActivity {
     @Override
     public void initListener() {
         setOnClick(mTvCreate);
+        setOnClick(mBtnCopy);
+
         mEdtSearch.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -82,7 +88,53 @@ public class GuideFamilyActivity extends BaseActivity {
                 if (event.getX() > mEdtSearch.getWidth()
                         - mEdtSearch.getPaddingRight()
                         - drawable.getIntrinsicWidth()) {
-                    ToastUtils.showToast(GuideFamilyActivity.this, "我被按下了");
+
+                    //TODO 此部分代码需要封装和重构
+                    String searchCreateId = mEdtSearch.getText().toString();
+                    if (!TextUtils.isEmpty(searchCreateId)) {
+                        BmobQuery<Family> queryFamily = new BmobQuery<>();
+                        queryFamily.addWhereEqualTo("familyCreator", searchCreateId);
+                        queryFamily.findObjects(new FindListener<Family>() {
+                            @Override
+                            public void done(List<Family> list, BmobException e) {
+                                if (e == null) {
+                                    if (list.size() != 0) {
+                                        final Family family = list.get(0);
+                                        if (null != family) {
+
+                                            final NormalDialog dialog = SmartisanDialog.createNormalDialog(GuideFamilyActivity.this);
+                                            dialog.setTitle("查询结果")
+                                                    .setMsg(family.getFamilyName())
+                                                    .setMsgGravity(Gravity.CENTER)
+                                                    .setLeftBtnText("取消")
+                                                    .setRightBtnText("加入")
+                                                    .show();
+
+                                            dialog.setOnSelectListener(new NormalDialog.OnSelectListener() {
+                                                @Override
+                                                public void onLeftSelect() {
+                                                    //TODO 加入家庭的功能实现
+                                                    dialog.dismiss();
+                                                }
+
+                                                @Override
+                                                public void onRightSelect() {
+                                                    dialog.dismiss();
+                                                }
+                                            });
+
+                                        }
+                                    } else {
+                                        ToastUtils.showToast(GuideFamilyActivity.this, "未查询到此家庭");
+                                    }
+                                } else {
+                                    ToastUtils.showToast(GuideFamilyActivity.this, e.getMessage());
+                                }
+                            }
+                        });
+                    } else {
+                        ToastUtils.showToast(GuideFamilyActivity.this, "请输入创建者ID");
+                    }
                 }
                 return false;
             }
@@ -99,10 +151,8 @@ public class GuideFamilyActivity extends BaseActivity {
     public void processClick(View v) {
         switch (v.getId()) {
             case R.id.familyGuide_tv_create:
-                //currentUser = BmobUser.getCurrentUser(User.class);
                 BmobQuery<Family> queryFamily = new BmobQuery<>();
                 queryFamily.addWhereEqualTo("familyCreator", currentUser);
-                Logger.i("familyCreator","CurrentUser："+currentUser.getObjectId());
                 queryFamily.include("familyCreator");
                 queryFamily.findObjects(new FindListener<Family>() {
                     @Override
@@ -120,22 +170,31 @@ public class GuideFamilyActivity extends BaseActivity {
                     }
                 });
                 break;
+            case R.id.familyGuide_btn_copy:
+                String userId = mTvUserId.getText().toString();
+                if (!TextUtils.isEmpty(userId)) {
+                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    cm.setText(userId);
+                    ToastUtils.showToast(GuideFamilyActivity.this, "复制成功，快分享给你的家庭吧");
+                }
+
+                break;
         }
     }
 
-
     /**
-     * 展示创建家庭弹出框并且完成创建家庭的功能
+     * 创建家庭弹出框
      */
     private void showCreateFamilyDialog() {
         viewCreate = LayoutInflater.from(this).inflate(R.layout.view_simple_create_family, null);
         final EditText mEdtFamily = (EditText) viewCreate.findViewById(R.id.family_edt_create);
-        mMDialog = new MaterialDialog(this)
+        AlertDialog dialog = new AlertDialog
+                .Builder(this)
                 .setTitle("创建家庭")
                 .setView(viewCreate)
-                .setPositiveButton("确定", new View.OnClickListener() {
+                .setPositiveButton("创建", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(DialogInterface dialog, int which) {
                         String familyName = mEdtFamily.getText().toString();
                         if (!TextUtils.isEmpty(familyName)) {
                             Family family = new Family();
@@ -154,16 +213,16 @@ public class GuideFamilyActivity extends BaseActivity {
                                 }
                             });
                         }
-
-                        mMDialog.dismiss();
                     }
                 })
-                .setNegativeButton("取消", new View.OnClickListener() {
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        mMDialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
-                });
-        mMDialog.show();
+                }).create();
+        dialog.show();
     }
+
+
 }

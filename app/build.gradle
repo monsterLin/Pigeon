@@ -44,8 +44,8 @@ dependencies {
     compile 'com.orhanobut:logger:1.15'         //log日志服务
     compile 'me.weyye.hipermission:library:1.0.7'   // 6.0 权限申请库
     compile 'com.roughike:bottom-bar:2.0'
-    compile 'me.drakeet.materialdialog:library:1.2.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'cc.duduhuo.dialog:smartisan-dialog:1.0.0'
     testCompile 'junit:junit:4.12'
 }

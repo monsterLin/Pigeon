@@ -248,8 +248,7 @@ public class RegisterOrResetActivity extends BaseActivity {
      */
     private boolean verifyTel(String telNumString) {
         if (!TextUtils.isEmpty(telNumString)) {
-            //TODO 正则表达式所涵盖的手机号不全
-            String regExp = "^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$"; //手机号的正则表达式
+            String regExp = "^((13[0-9])|(15[^4])|(18[0-9])|(17[0-8])|(147,145))\\d{8}$";
             Pattern p = Pattern.compile(regExp);
             Matcher m = p.matcher(telNumString);
             return m.find();
