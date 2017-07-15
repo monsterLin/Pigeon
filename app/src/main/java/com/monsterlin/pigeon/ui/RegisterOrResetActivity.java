@@ -242,7 +242,10 @@ public class RegisterOrResetActivity extends BaseActivity {
 
     /**
      * 使用正则表达式验证手机号
-     *
+     * 移动：139   138   137   136   135   134   147   150   151   152   157   158    159   178  182   183   184   187   188  
+     * 联通：130   131   132   155   156   185   186   145   176  
+     * 电信：133   153   177   173   180   181   189 
+     * 虚拟运营商：170  171
      * @param telNumString 手机号
      * @return boolean
      */
