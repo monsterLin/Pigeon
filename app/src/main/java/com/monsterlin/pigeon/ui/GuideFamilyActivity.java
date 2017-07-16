@@ -101,28 +101,7 @@ public class GuideFamilyActivity extends BaseActivity {
                                     if (list.size() != 0) {
                                         final Family family = list.get(0);
                                         if (null != family) {
-
-                                            final NormalDialog dialog = SmartisanDialog.createNormalDialog(GuideFamilyActivity.this);
-                                            dialog.setTitle("查询结果")
-                                                    .setMsg(family.getFamilyName())
-                                                    .setMsgGravity(Gravity.CENTER)
-                                                    .setLeftBtnText("取消")
-                                                    .setRightBtnText("加入")
-                                                    .show();
-
-                                            dialog.setOnSelectListener(new NormalDialog.OnSelectListener() {
-                                                @Override
-                                                public void onLeftSelect() {
-                                                    //TODO 加入家庭的功能实现
-                                                    dialog.dismiss();
-                                                }
-
-                                                @Override
-                                                public void onRightSelect() {
-                                                    dialog.dismiss();
-                                                }
-                                            });
-
+                                            showJoinFamilyDialog(family);
                                         }
                                     } else {
                                         ToastUtils.showToast(GuideFamilyActivity.this, "未查询到此家庭");
@@ -140,6 +119,7 @@ public class GuideFamilyActivity extends BaseActivity {
             }
         });
     }
+
 
     @Override
     public void initData() {
@@ -166,7 +146,6 @@ public class GuideFamilyActivity extends BaseActivity {
                         } else {
                             ToastUtils.showToast(GuideFamilyActivity.this, e.getMessage());
                         }
-
                     }
                 });
                 break;
@@ -177,7 +156,6 @@ public class GuideFamilyActivity extends BaseActivity {
                     cm.setText(userId);
                     ToastUtils.showToast(GuideFamilyActivity.this, "复制成功，快分享给你的家庭吧");
                 }
-
                 break;
         }
     }
@@ -224,5 +202,30 @@ public class GuideFamilyActivity extends BaseActivity {
         dialog.show();
     }
 
+    /**
+     * 展示加入家庭对话框
+     *
+     * @param family 家庭
+     */
+    private void showJoinFamilyDialog(Family family) {
+        final NormalDialog dialog = SmartisanDialog.createNormalDialog(GuideFamilyActivity.this);
+        dialog.setTitle("查询结果")
+                .setMsg(family.getFamilyName())
+                .setMsgGravity(Gravity.CENTER)
+                .setLeftBtnText("取消")
+                .setRightBtnText("加入")
+                .show();
 
+        dialog.setOnSelectListener(new NormalDialog.OnSelectListener() {
+            @Override
+            public void onLeftSelect() {
+                //TODO 加入家庭的功能实现
+                dialog.dismiss();
+            }
+            @Override
+            public void onRightSelect() {
+                dialog.dismiss();
+            }
+        });
+    }
 }
