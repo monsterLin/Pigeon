@@ -15,6 +15,9 @@ public class User extends BmobUser {
 
     private int age ; //用户年龄
     private int type ; // 0 : 子女 & 1 ：父母
+    private Boolean isCreate ;  //创建家庭
+    private Boolean isJoin ;  //加入家庭
+    private Family family ;  //加入的家庭
 
     public int getAge() {
         return age;
@@ -30,5 +33,29 @@ public class User extends BmobUser {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public Boolean getIsCreate() {
+        return isCreate;
+    }
+
+    public void setIsCreate(Boolean create) {
+        isCreate = create;
+    }
+
+    public Boolean getIsJoin() {
+        return isJoin;
+    }
+
+    public void setIsJoin(Boolean join) {
+        isJoin = join;
+    }
+
+    public Family getFamily() {
+        return family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
     }
 }

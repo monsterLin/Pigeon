@@ -17,7 +17,9 @@ import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
+import com.orhanobut.logger.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -47,7 +49,8 @@ public class LoginActivity extends BaseActivity {
     private BmobUser bmobUser;
     private Bundle bundle;
 
-    private boolean isCreateFamily = false;  //是否有家庭
+    private boolean isCreateFamily = false;  //是否创建家庭
+    private boolean isJoinFamily = false ; //是否加入家庭
 
     @Override
     public int getLayoutId() {
@@ -88,8 +91,9 @@ public class LoginActivity extends BaseActivity {
             //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
             //TODO 目前判断的是当前用户是否为创建者
             isCreateFamily = SPUtils.getBoolean("isCreateFamily", false);
+            isJoinFamily = SPUtils.getBoolean("isJoinFamily",false);
 
-            if (isCreateFamily) {
+            if (isCreateFamily||isJoinFamily) {
                 AppManager.getAppManager().finishActivity();
                 nextActivity(MainActivity.class);
             } else {
@@ -114,11 +118,10 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void done(User user, BmobException e) {
                             if (user != null) {
-                                //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
-                                //TODO 目前判断的是当前用户是否为创建者
+                                //TODO 登陆逻辑存在Bug
                                 BmobQuery<Family> queryFamily = new BmobQuery<>();
                                 queryFamily.addWhereEqualTo("familyCreator", user);
-                                queryFamily.include("familyCreator");
+                                queryFamily.addWhereContainedIn("familyList", Arrays.asList(user.getObjectId()));
                                 queryFamily.findObjects(new FindListener<Family>() {
                                     @Override
                                     public void done(List<Family> list, BmobException e) {
@@ -126,12 +129,11 @@ public class LoginActivity extends BaseActivity {
                                             if (list.size()!=0) {
                                                 dialog.dismissDialog();
                                                 AppManager.getAppManager().finishActivity();
-                                                SPUtils.putBoolean("isCreateFamily", true);
+                                                SPUtils.putBoolean("isJoinFamily",true);
                                                 nextActivity(MainActivity.class);
                                             } else {
                                                 dialog.dismissDialog();
                                                 AppManager.getAppManager().finishActivity();
-                                                SPUtils.putBoolean("isCreateFamily", false);
                                                 nextActivity(GuideFamilyActivity.class);
 
                                             }

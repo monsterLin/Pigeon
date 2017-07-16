@@ -22,6 +22,7 @@ import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.Family;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
+import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
 
 import java.util.List;
@@ -33,6 +34,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * @author : monsterLin
@@ -138,10 +140,10 @@ public class GuideFamilyActivity extends BaseActivity {
                     @Override
                     public void done(List<Family> list, BmobException e) {
                         if (e == null) {
-                            if (list.size() != 0) {
-                                ToastUtils.showToast(GuideFamilyActivity.this, "你已经创建过家庭");
-                            } else {
+                            if (list.size() == 0) {
                                 showCreateFamilyDialog();
+                            } else {
+                                ToastUtils.showToast(GuideFamilyActivity.this, "你已经创建过家庭");
                             }
                         } else {
                             ToastUtils.showToast(GuideFamilyActivity.this, e.getMessage());
@@ -175,16 +177,30 @@ public class GuideFamilyActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String familyName = mEdtFamily.getText().toString();
                         if (!TextUtils.isEmpty(familyName)) {
-                            Family family = new Family();
+                            final Family family = new Family();
                             family.setFamilyName(familyName);
                             family.setFamilyCreator(currentUser);
                             family.save(new SaveListener<String>() {
                                 @Override
                                 public void done(String s, BmobException e) {
                                     if (e == null) {
-                                        ToastUtils.showToast(GuideFamilyActivity.this, "创建成功，快去邀请你的家庭成员吧");
-                                        nextActivity(MainActivity.class);
-                                        AppManager.getAppManager().finishActivity();
+                                        User user = new User();
+                                        user.setIsCreate(true);
+                                        user.setFamily(family);
+                                        user.update(currentUser.getObjectId(), new UpdateListener() {
+                                            @Override
+                                            public void done(BmobException e) {
+                                                if (e==null){
+                                                    SPUtils.putBoolean("isCreateFamily",true);
+                                                    ToastUtils.showToast(GuideFamilyActivity.this, "创建成功，快去邀请你的家庭成员吧");
+                                                    nextActivity(MainActivity.class);
+                                                    AppManager.getAppManager().finishActivity();
+                                                }else {
+                                                    ToastUtils.showToast(GuideFamilyActivity.this,"更新用户信息失败："+e.getMessage());
+                                                }
+                                            }
+                                        });
+
                                     } else {
                                         ToastUtils.showToast(GuideFamilyActivity.this, "创建家庭失败：" + e.getMessage());
                                     }
@@ -207,7 +223,7 @@ public class GuideFamilyActivity extends BaseActivity {
      *
      * @param family 家庭
      */
-    private void showJoinFamilyDialog(Family family) {
+    private void showJoinFamilyDialog(final Family family) {
         final NormalDialog dialog = SmartisanDialog.createNormalDialog(GuideFamilyActivity.this);
         dialog.setTitle("查询结果")
                 .setMsg(family.getFamilyName())
@@ -219,11 +235,39 @@ public class GuideFamilyActivity extends BaseActivity {
         dialog.setOnSelectListener(new NormalDialog.OnSelectListener() {
             @Override
             public void onLeftSelect() {
-                //TODO 加入家庭的功能实现
                 dialog.dismiss();
             }
+
             @Override
             public void onRightSelect() {
+                final Family updateFamily = new Family();
+                updateFamily.setObjectId(family.getObjectId());
+                updateFamily.addUnique("familyList", currentUser);
+                updateFamily.update(family.getObjectId(), new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if (e == null) {
+                            User user = new User();
+                            user.setIsJoin(true);
+                            user.setFamily(updateFamily);
+                            user.update(currentUser.getObjectId(), new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+                                    if (e==null){
+                                        ToastUtils.showToast(GuideFamilyActivity.this, "加入家庭成功");
+                                        SPUtils.putBoolean("isJoinFamily",true);
+                                    }  else {
+                                        ToastUtils.showToast(GuideFamilyActivity.this,"更新用户信息失败："+e.getMessage());
+                                    }
+                                }
+                            });
+                        } else {
+                            ToastUtils.showToast(GuideFamilyActivity.this, "加入家庭失败：" + e.getMessage());
+                        }
+                    }
+                });
+
+
                 dialog.dismiss();
             }
         });

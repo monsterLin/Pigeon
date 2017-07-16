@@ -16,6 +16,8 @@ public class Family extends BmobObject{
 
     //一个家庭含有一个创建者和多个成员，属于一对多的关系
 
+    //TODO 加入家庭或者创建家庭的时候加入到本地的SP中
+
     private String familyName ; //家庭名
     private User familyCreator ; //创建者
     private List<User> familyList ; //家庭成员
@@ -43,4 +45,6 @@ public class Family extends BmobObject{
     public void setFamilyList(List<User> familyList) {
         this.familyList = familyList;
     }
+
+
 }
