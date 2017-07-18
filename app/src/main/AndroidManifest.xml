@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".ui.user.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,13 +30,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.RegisterOrResetActivity" />
+        <activity android:name=".ui.user.RegisterOrResetActivity" />
         <activity android:name=".ui.ForgetPassActivity" />
-        <activity android:name=".ui.UpgradeExplainActivity" />
-        <activity android:name=".ui.AboutActivity" />
+        <activity android:name=".ui.app.UpgradeExplainActivity" />
+        <activity android:name=".ui.app.AboutActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.GuideFamilyActivity" />
-        <activity android:name=".ui.ChatActivity" />
+        <activity android:name=".ui.family.GuideFamilyActivity" />
+        <activity android:name=".ui.chat.ChatActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.monsterlin.pigeon.ui;
+package com.monsterlin.pigeon.ui.user;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -15,9 +15,10 @@ import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.Family;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
+import com.monsterlin.pigeon.ui.app.AboutActivity;
+import com.monsterlin.pigeon.ui.family.GuideFamilyActivity;
 import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
-import com.orhanobut.logger.Logger;
 
 import java.util.Arrays;
 import java.util.List;

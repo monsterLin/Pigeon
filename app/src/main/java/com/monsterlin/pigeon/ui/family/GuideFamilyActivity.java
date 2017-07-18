@@ -1,4 +1,4 @@
-package com.monsterlin.pigeon.ui;
+package com.monsterlin.pigeon.ui.family;
 
 import android.app.AlertDialog;
 import android.content.ClipboardManager;

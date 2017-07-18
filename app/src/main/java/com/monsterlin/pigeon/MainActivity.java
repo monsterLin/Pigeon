@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.monsterlin.pigeon.base.BaseActivity;
+import com.monsterlin.pigeon.ui.chat.ChatActivity;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.monsterlin.pigeon.view.HomeFragment;
 import com.monsterlin.pigeon.view.PersonFragment;
@@ -72,7 +73,7 @@ public class MainActivity extends BaseActivity {
                         setSelect(0);
                         break;
                     case R.id.tab_chat:
-                        //跳转到Activity
+                        nextActivity(ChatActivity.class);
                         break;
                     case R.id.tab_tools:
                         setSelect(1);

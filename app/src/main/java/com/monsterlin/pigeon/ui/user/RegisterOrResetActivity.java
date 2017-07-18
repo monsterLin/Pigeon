@@ -1,4 +1,4 @@
-package com.monsterlin.pigeon.ui;
+package com.monsterlin.pigeon.ui.user;
 
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +12,7 @@ import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.constant.BmobConfig;
+import com.monsterlin.pigeon.ui.family.GuideFamilyActivity;
 import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.monsterlin.pigeon.widget.CountDownButtonHelper;
