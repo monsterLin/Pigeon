@@ -44,7 +44,7 @@ import cn.bmob.v3.BmobUser;
  * @email : monster941025@gmail.com
  * @github : https://github.com/monsterLin
  * @time : 2017/7/5
- * @desc : MainActivity
+ * @desc : ChatActivity
  * @version: 1.0
  */
 public class MainActivity extends BaseActivity {

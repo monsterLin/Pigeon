@@ -37,6 +37,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.family.GuideFamilyActivity" />
         <activity android:name=".ui.chat.ChatActivity" />
+
+
     </application>
 
 </manifest>
