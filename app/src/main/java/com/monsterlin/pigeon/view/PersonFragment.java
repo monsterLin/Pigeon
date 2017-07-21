@@ -15,6 +15,8 @@ import com.monsterlin.pigeon.base.BaseFragment;
  */
 
 public class PersonFragment extends BaseFragment {
+
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_person;
@@ -22,6 +24,7 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     public void initViews() {
+
 
     }
 
