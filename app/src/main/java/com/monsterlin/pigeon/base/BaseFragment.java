@@ -15,12 +15,11 @@ import android.view.ViewGroup;
  */
 
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
-
     private boolean isVisible = false;
     private boolean isInitView = false;
     private boolean isFirstLoad = true;
 
-    private View convertView;
+    public View convertView;
     private SparseArray<View> mViews;
 
     public abstract int getLayoutId();
@@ -34,12 +33,18 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public abstract void processClick(View v);
 
     @Override
+    public void onClick(View v) {
+        processClick(v);
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             isVisible = true;
             lazyLoad();
         } else {
+            //设置已经不是可见的
             isVisible = false;
         }
     }
@@ -55,9 +60,17 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         return convertView;
     }
 
-    @Override
-    public void onClick(View v) {
-        processClick(v);
+    //懒加载
+    private void lazyLoad() {
+        if (!isFirstLoad || !isVisible || !isInitView) {
+            //如果不是第一次加载、不是可见的、不是初始化View，则不加载数据
+            return;
+        }
+        //加载数据
+        initListener();
+        initData();
+        //设置已经不是第一次加载
+        isFirstLoad = false;
     }
 
     public <E extends View> E findView(int viewId) {
@@ -72,19 +85,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         return null;
     }
 
-    private void lazyLoad() {
-        if (!isFirstLoad || !isVisible || !isInitView) {
-            //不加载数据
-            return;
-        }
-        //加载数据
-        initListener();
-        initData();
-
-        isFirstLoad = false;
-
+    public  <E extends View> void setOnClick(E view){
+        view.setOnClickListener(this);
     }
-
-
 }
 

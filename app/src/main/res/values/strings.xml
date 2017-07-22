@@ -27,4 +27,7 @@
     <string name="test_home_txt">主页</string>
     <string name="test_person_txt">个人中心</string>
     <string name="test_tools_txt">工具</string>
+    <string name="tools_tv_topNews">今日资讯</string>
+    <string name="tools_tv_healthy">健康资讯</string>
+    <string name="tools_tv_rumour">辟谣助手</string>
 </resources>

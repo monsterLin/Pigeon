@@ -37,7 +37,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.family.GuideFamilyActivity" />
         <activity android:name=".ui.chat.ChatActivity" />
-
+        <activity android:name=".ui.tools.TopNewsActivity"/>
 
     </application>
 
