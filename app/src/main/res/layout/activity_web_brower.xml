@@ -5,7 +5,7 @@
 
     <include layout="@layout/view_common_toolbar"/>
 
-    <com.boxue.just.widget.ProgressWebView
+    <com.monsterlin.pigeon.widget.ProgressWebView
         android:id="@+id/brower_pwv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

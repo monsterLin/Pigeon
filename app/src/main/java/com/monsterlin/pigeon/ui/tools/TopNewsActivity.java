@@ -52,14 +52,14 @@ public class TopNewsActivity extends BaseActivity{
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000);
+                refreshlayout.finishRefresh(1000);
             }
         });
 
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000);
+                refreshlayout.finishRefresh(1000);
             }
         });
     }
@@ -70,7 +70,7 @@ public class TopNewsActivity extends BaseActivity{
         OkHttpUtils
                 .get()
                 .url(url)
-                .addParams("type", "top")
+                .addParams("type", "shehui")
                 .addParams("key", ApiConfig.TOP_NEWS_APIKEY)
                 .build()
                 .execute(new TopNewsCallBack() {

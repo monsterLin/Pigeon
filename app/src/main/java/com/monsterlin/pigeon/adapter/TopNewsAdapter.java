@@ -1,6 +1,7 @@
 package com.monsterlin.pigeon.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.bean.news.Data;
+import com.monsterlin.pigeon.ui.BrowerActivity;
 import com.monsterlin.pigeon.vholder.TopNewsVHolder;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +42,7 @@ public class TopNewsAdapter extends RecyclerView.Adapter<TopNewsVHolder> {
     }
 
     @Override
-    public void onBindViewHolder(TopNewsVHolder holder, int position) {
+    public void onBindViewHolder(TopNewsVHolder holder, final int position) {
         holder.mTvTitle.setText(newsBeanList.get(position).getTitle());
         holder.mTvFrom.setText(newsBeanList.get(position).getAuthor_name());
         holder.mTvDate.setText(newsBeanList.get(position).getDate());
@@ -48,6 +50,14 @@ public class TopNewsAdapter extends RecyclerView.Adapter<TopNewsVHolder> {
         Picasso.with(mContext).load(newsBeanList.get(position).getThumbnail_pic_s02()).placeholder(R.mipmap.ic_launcher).into(holder.mIvImg2);
         Picasso.with(mContext).load(newsBeanList.get(position).getThumbnail_pic_s03()).placeholder(R.mipmap.ic_launcher).into(holder.mIvImg3);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mContext, BrowerActivity.class);
+                i.putExtra("url",newsBeanList.get(position).getUrl());
+                mContext.startActivity(i);
+            }
+        });
     }
 
     @Override
