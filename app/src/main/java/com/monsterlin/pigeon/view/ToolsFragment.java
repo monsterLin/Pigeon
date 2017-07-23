@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.monsterlin.pigeon.R;
+import com.monsterlin.pigeon.constant.ApiConfig;
+import com.monsterlin.pigeon.ui.BrowerActivity;
 import com.monsterlin.pigeon.ui.tools.TopNewsActivity;
 
 /**
@@ -54,8 +56,12 @@ public class ToolsFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), TopNewsActivity.class));
                 break;
             case R.id.tools_tv_healthy:
+
                 break;
             case R.id.tools_tv_rumour:
+                Intent rumourIntent = new Intent(getContext(), BrowerActivity.class);
+                rumourIntent.putExtra("url", ApiConfig.RUMOUR_SMASH_WEBSITE);
+                startActivity(rumourIntent);
                 break;
         }
     }
