@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.bean.news.Data;
-import com.monsterlin.pigeon.ui.BrowerActivity;
+import com.monsterlin.pigeon.ui.brower.BrowerActivity;
 import com.monsterlin.pigeon.vholder.TopNewsVHolder;
 import com.squareup.picasso.Picasso;
 

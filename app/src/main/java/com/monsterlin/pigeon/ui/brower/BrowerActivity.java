@@ -1,4 +1,4 @@
-package com.monsterlin.pigeon.ui;
+package com.monsterlin.pigeon.ui.brower;
 
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;

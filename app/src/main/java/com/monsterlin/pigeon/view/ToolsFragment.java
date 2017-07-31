@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.constant.ApiConfig;
-import com.monsterlin.pigeon.ui.BrowerActivity;
+import com.monsterlin.pigeon.ui.brower.BrowerActivity;
 import com.monsterlin.pigeon.ui.tools.TopNewsActivity;
 
 /**

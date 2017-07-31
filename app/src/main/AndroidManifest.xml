@@ -39,7 +39,7 @@
         <activity android:name=".ui.family.GuideFamilyActivity" />
         <activity android:name=".ui.chat.ChatActivity" />
         <activity android:name=".ui.tools.TopNewsActivity"/>
-        <activity android:name=".ui.BrowerActivity"/>
+        <activity android:name=".ui.brower.BrowerActivity"/>
 
         <activity android:name=".ui.Sticker.NoteActivity"/>
         <activity android:name=".ui.Sticker.StickerActivity"/>
