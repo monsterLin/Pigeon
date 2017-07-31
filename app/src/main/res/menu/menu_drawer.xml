@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_all"
+        android:title="全部"/>
+    <item
+        android:id="@+id/item_work"
+        android:title="工作" />
+    <item
+        android:id="@+id/item_study"
+        android:title="学习" />
+
+    <item
+        android:id="@+id/item_life"
+        android:title="生活"/>
+
+
+</menu>
