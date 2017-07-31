@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/home_toolbar"
-        layout="@layout/view_home_toolbar" />
+        layout="@layout/view_custom_toolbar" />
 
 
     <RelativeLayout
@@ -32,7 +32,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawableTop="@drawable/ic_home_family"
                     android:gravity="center_horizontal"
                     android:padding="4dp"
                     android:text="一家人" />
@@ -51,7 +51,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawableTop="@drawable/ic_home_notes"
                     android:gravity="center_horizontal"
                     android:padding="4dp"
                     android:text="亲情贴" />
@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawableTop="@drawable/ic_home_weather"
                     android:gravity="center_horizontal"
                     android:padding="4dp"
                     android:text="天气通" />
@@ -87,7 +87,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/ic_launcher"
+                    android:drawableTop="@drawable/ic_home_robot"
                     android:gravity="center_horizontal"
                     android:padding="4dp"
                     android:text="机器人" />
