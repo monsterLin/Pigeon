@@ -1,0 +1,12 @@
+<android.support.design.widget.NavigationView
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nv_main_menu"
+    android:layout_width="220dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:clickable="true"
+    app:itemTextColor="@color/white"
+    android:layout_centerInParent="true"
+    android:background="@color/colorPrimary"
+    app:menu="@menu/menu_drawer"/>

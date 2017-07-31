@@ -15,6 +15,7 @@
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+
     <application
         android:name=".application.PigeonApplication"
         android:allowBackup="true"
@@ -40,6 +41,8 @@
         <activity android:name=".ui.tools.TopNewsActivity"/>
         <activity android:name=".ui.BrowerActivity"/>
 
+        <activity android:name=".ui.Sticker.NoteActivity"/>
+        <activity android:name=".ui.Sticker.StickerActivity"/>
     </application>
 
 </manifest>

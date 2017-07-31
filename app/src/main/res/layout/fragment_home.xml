@@ -30,6 +30,7 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/home_tv_family"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/ic_home_family"
@@ -49,6 +50,7 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/home_tv_sticker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/ic_home_notes"
@@ -67,6 +69,7 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/home_tv_weather"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/ic_home_weather"
@@ -85,6 +88,7 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/home_tv_rebot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/ic_home_robot"
