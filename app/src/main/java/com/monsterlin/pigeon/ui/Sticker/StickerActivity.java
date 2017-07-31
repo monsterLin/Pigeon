@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -24,6 +23,7 @@ import com.monsterlin.pigeon.adapter.RecycleAdapter;
 import com.monsterlin.pigeon.bean.NoteEntity;
 import com.monsterlin.pigeon.constant.NotesConfig;
 import com.monsterlin.pigeon.database.NotesDB;
+import com.monsterlin.pigeon.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +119,7 @@ public class StickerActivity extends NBaseActivity {
                                 try {
                                     dbWrite.delete(NotesConfig.TABLE_NAME_NOTES, NotesConfig.COLUMN_NAME_ID + "=?", new String[]{Integer.toString(deleteId)});
                                 } catch (Exception e) {
-                                    Toast.makeText(StickerActivity.this, "删除记事失败~", Toast.LENGTH_SHORT).show();
+                                    ToastUtils.showToast(StickerActivity.this,"删除记事失败~");
                                 }
                                 getDatabaseData();
                                 mAdapter.notifyDataSetChanged();
@@ -129,7 +129,7 @@ public class StickerActivity extends NBaseActivity {
                         .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(StickerActivity.this, "你点击了取消", Toast.LENGTH_SHORT).show();
+                                ToastUtils.showToast(StickerActivity.this,"你点击了取消");
                                 mMaterialDialog.dismiss();
                             }
                         });

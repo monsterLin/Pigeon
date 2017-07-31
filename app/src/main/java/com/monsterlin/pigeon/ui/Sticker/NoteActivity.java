@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -26,6 +25,7 @@ import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.constant.NotesConfig;
 import com.monsterlin.pigeon.database.NotesDB;
 import com.monsterlin.pigeon.utils.MyDateUtils;
+import com.monsterlin.pigeon.utils.ToastUtils;
 
 /**
  * 类名：新建日记
@@ -44,7 +44,7 @@ public class NoteActivity extends NBaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notes);
+        setContentView(R.layout.activity_note);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);  //关闭软键盘
         ViewUtils.inject(this);
 
@@ -172,7 +172,8 @@ public class NoteActivity extends NBaseActivity implements View.OnClickListener 
                     finish();
                     break;
                 } else {
-                    Toast.makeText(NoteActivity.this, "标题和内容不可为空", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showToast(NoteActivity.this,"标题和内容不可为空");
+
                 }
         }
         return super.onOptionsItemSelected(item);
