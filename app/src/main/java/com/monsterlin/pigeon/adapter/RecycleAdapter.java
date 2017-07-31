@@ -101,7 +101,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
                  @Override
                  public void onClick(View v) {/*v 与 holder.itemView是同一个吗*/
                     int layoutPosition = holder.getLayoutPosition();/*得到布局的position*/
-//                     holder.getAdapterPosition()/*todo 与layoutPosition的区别是？*/
+//                     holder.getAdapterPosition()
                      mOnItemClickListener.onItemClick(holder.itemView, layoutPosition);
                  }
              });

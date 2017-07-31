@@ -62,7 +62,7 @@ public class StickerActivity extends NBaseActivity {
     RecyclerView rv_list;
 
     List<NoteEntity> mNoteEntityList = new ArrayList<NoteEntity>();
-    private RecycleAdapter mAdapter;/* todo */
+    private RecycleAdapter mAdapter;
 
     private int currentSort;
 
@@ -171,7 +171,7 @@ public class StickerActivity extends NBaseActivity {
                 mAdapter.notifyDataSetChanged();
 
                 dl_drawer.closeDrawers();
-                return false;/*todo 此处返回*/
+                return false;
             }
         });
 
@@ -208,7 +208,6 @@ public class StickerActivity extends NBaseActivity {
         Cursor cursorRead;
 
         //根据传入的id获取信息
-            /* todo */
         if (0 == currentSort) {
             cursorRead = dbRead.query(NotesConfig.TABLE_NAME_NOTES, null, null, null, null, null, null);
         } else {
@@ -274,7 +273,6 @@ public class StickerActivity extends NBaseActivity {
         return true;
     }
 
-    /*todo*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

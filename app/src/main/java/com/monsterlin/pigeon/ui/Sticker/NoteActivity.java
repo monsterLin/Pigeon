@@ -45,7 +45,6 @@ public class NoteActivity extends NBaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
-        //TODO 切换动画
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);  //关闭软键盘
         ViewUtils.inject(this);
 
@@ -228,9 +227,9 @@ public class NoteActivity extends NBaseActivity implements View.OnClickListener 
                 sort = cInput.getInt(cInput.getColumnIndex(NotesConfig.COLUMN_NAME_NOTE_SORT));
                 tvSortItem.setText(sortName[sort]);
             }
-        } else {/*如果数据库中不存在该数据*//*todo*/
+        } else {/*如果数据库中不存在该数据*/
             String currentTime = MyDateUtils.subTime(MyDateUtils.getTimeAsString(MyDateUtils.getTimeAsDate()));
-            tvCreateDate.setText("创建时间  " + currentTime);/* TODO */
+            tvCreateDate.setText("创建时间  " + currentTime);
             tvSort.setText(sortName[getIntent().getIntExtra(NotesConfig.COLUMN_NAME_NOTE_SORT, 0)]);
         }
 
