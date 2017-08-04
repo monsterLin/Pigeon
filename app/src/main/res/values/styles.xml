@@ -10,14 +10,4 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-
-    <style name="mypopwindow_anim_style">
-        <item name="android:windowEnterAnimation">@anim/popshow</item>
-        <!-- 指定显示的动画xml -->
-
-        <item name="android:windowExitAnimation">@anim/pophidden</item>
-        <!-- 指定消失的动画xml -->
-    </style>
 </resources>
