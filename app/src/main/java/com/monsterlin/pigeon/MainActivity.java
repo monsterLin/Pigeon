@@ -5,15 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.monsterlin.pigeon.base.BaseActivity;
-import com.monsterlin.pigeon.ui.chat.ChatActivity;
-import com.monsterlin.pigeon.utils.ToastUtils;
 import com.monsterlin.pigeon.view.HomeFragment;
 import com.monsterlin.pigeon.view.PersonFragment;
 import com.monsterlin.pigeon.view.ToolsFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
-
-import cn.bmob.v3.BmobUser;
 
 /**
  *
@@ -72,9 +68,9 @@ public class MainActivity extends BaseActivity {
                     case R.id.tab_home:
                         setSelect(0);
                         break;
-                    case R.id.tab_chat:
-                        nextActivity(ChatActivity.class);
-                        break;
+//                    case R.id.tab_chat:
+//                        nextActivity(ChatActivity.class);
+//                        break;
                     case R.id.tab_tools:
                         setSelect(1);
                         break;
@@ -88,7 +84,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        ToastUtils.showToast(this, BmobUser.getCurrentUser().getObjectId());
+       // ToastUtils.showToast(this, BmobUser.getCurrentUser().getObjectId());
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.Family;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
+import com.monsterlin.pigeon.constant.FamilyConfig;
 import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
 
@@ -52,7 +53,7 @@ public class GuideFamilyActivity extends BaseActivity {
     private EditText mEdtSearch;
     private TextView mTvCreate, mTvUserId;
     private View viewCreate;
-    private User currentUser;
+    private BmobUser currentUser;
 
     @Override
     public int getLayoutId() {
@@ -91,7 +92,6 @@ public class GuideFamilyActivity extends BaseActivity {
                         - mEdtSearch.getPaddingRight()
                         - drawable.getIntrinsicWidth()) {
 
-                    //TODO 此部分代码需要封装和重构
                     String searchCreateId = mEdtSearch.getText().toString();
                     if (!TextUtils.isEmpty(searchCreateId)) {
                         BmobQuery<Family> queryFamily = new BmobQuery<>();
@@ -179,24 +179,26 @@ public class GuideFamilyActivity extends BaseActivity {
                         if (!TextUtils.isEmpty(familyName)) {
                             final Family family = new Family();
                             family.setFamilyName(familyName);
-                            family.setFamilyCreator(currentUser);
+                            family.setFamilyCreator(BmobUser.getCurrentUser(User.class));
                             family.save(new SaveListener<String>() {
                                 @Override
                                 public void done(String s, BmobException e) {
                                     if (e == null) {
                                         User user = new User();
                                         user.setIsCreate(true);
+                                        user.setIsJoin(false);
                                         user.setFamily(family);
                                         user.update(currentUser.getObjectId(), new UpdateListener() {
                                             @Override
                                             public void done(BmobException e) {
                                                 if (e==null){
-                                                    SPUtils.putBoolean("isCreateFamily",true);
+                                                    SPUtils.putBoolean(FamilyConfig.SPEXIST,true);
                                                     ToastUtils.showToast(GuideFamilyActivity.this, "创建成功，快去邀请你的家庭成员吧");
-                                                    nextActivity(MainActivity.class);
                                                     AppManager.getAppManager().finishActivity();
+                                                    nextActivity(MainActivity.class);
+
                                                 }else {
-                                                    ToastUtils.showToast(GuideFamilyActivity.this,"更新用户信息失败："+e.getMessage());
+                                                    ToastUtils.showToast(GuideFamilyActivity.this,"更新家庭信息失败："+e.getMessage());
                                                 }
                                             }
                                         });
@@ -240,29 +242,22 @@ public class GuideFamilyActivity extends BaseActivity {
 
             @Override
             public void onRightSelect() {
-                final Family updateFamily = new Family();
-                updateFamily.setObjectId(family.getObjectId());
-                updateFamily.addUnique("familyList", currentUser);
-                updateFamily.update(family.getObjectId(), new UpdateListener() {
+                User user = new User();
+                user.setIsJoin(true);
+                user.setIsCreate(false);
+                user.setFamily(family);
+                user.update(currentUser.getObjectId(), new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
-                        if (e == null) {
-                            User user = new User();
-                            user.setIsJoin(true);
-                            user.setFamily(updateFamily);
-                            user.update(currentUser.getObjectId(), new UpdateListener() {
-                                @Override
-                                public void done(BmobException e) {
-                                    if (e==null){
-                                        ToastUtils.showToast(GuideFamilyActivity.this, "加入家庭成功");
-                                        SPUtils.putBoolean("isJoinFamily",true);
-                                    }  else {
-                                        ToastUtils.showToast(GuideFamilyActivity.this,"更新用户信息失败："+e.getMessage());
-                                    }
-                                }
-                            });
-                        } else {
-                            ToastUtils.showToast(GuideFamilyActivity.this, "加入家庭失败：" + e.getMessage());
+                        if (e==null) {
+                            SPUtils.putBoolean(FamilyConfig.SPEXIST,true);
+                            ToastUtils.showToast(GuideFamilyActivity.this,"加入家庭成功");
+                            AppManager.getAppManager().finishActivity();
+                            nextActivity(MainActivity.class);
+                            dialog.dismiss();
+                        }else {
+                            ToastUtils.showToast(GuideFamilyActivity.this,e.getErrorCode()+"");
+                            dialog.dismiss();
                         }
                     }
                 });

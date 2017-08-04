@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@color/colorPrimaryDark">
+        android:background="@drawable/login_banner">
 
         <ImageView
             android:id="@+id/login_iv_about"

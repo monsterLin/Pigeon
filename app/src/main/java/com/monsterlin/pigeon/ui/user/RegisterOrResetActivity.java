@@ -13,7 +13,6 @@ import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.constant.BmobConfig;
 import com.monsterlin.pigeon.ui.family.GuideFamilyActivity;
-import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.monsterlin.pigeon.widget.CountDownButtonHelper;
 import com.monsterlin.pigeon.widget.LoadingDialog;
@@ -200,7 +199,6 @@ public class RegisterOrResetActivity extends BaseActivity {
                         //注册并且登陆成功
                         dialog.dismissDialog();
 
-                        SPUtils.putBoolean("isCreateFamily",false);
                         AppManager.getAppManager().finishActivity(); //结束当前Activity
                         nextActivity(GuideFamilyActivity.class);
                         AppManager.getAppManager().finishActivity(LoginActivity.class);  //结束指定的Activity

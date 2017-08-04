@@ -5,7 +5,7 @@
     android:background="@color/aWhite"
     android:orientation="vertical">
 
-    <include layout="@layout/view_custom_toolbar" />
+    <include layout="@layout/view_common_toolbar" />
 
 
     <TextView

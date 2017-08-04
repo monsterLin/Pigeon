@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/home_toolbar"
-        layout="@layout/view_custom_toolbar" />
+        layout="@layout/view_common_toolbar" />
 
 
     <RelativeLayout

@@ -12,21 +12,16 @@ import android.widget.TextView;
 import com.monsterlin.pigeon.MainActivity;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
-import com.monsterlin.pigeon.bean.Family;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
+import com.monsterlin.pigeon.constant.FamilyConfig;
 import com.monsterlin.pigeon.ui.app.AboutActivity;
 import com.monsterlin.pigeon.ui.family.GuideFamilyActivity;
 import com.monsterlin.pigeon.utils.SPUtils;
 import com.monsterlin.pigeon.utils.ToastUtils;
 
-import java.util.Arrays;
-import java.util.List;
-
-import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 
 /**
@@ -50,8 +45,7 @@ public class LoginActivity extends BaseActivity {
     private BmobUser bmobUser;
     private Bundle bundle;
 
-    private boolean isCreateFamily = false;  //是否创建家庭
-    private boolean isJoinFamily = false ; //是否加入家庭
+    private boolean isExist = false ;
 
     @Override
     public int getLayoutId() {
@@ -89,12 +83,10 @@ public class LoginActivity extends BaseActivity {
     public void initData() {
         bmobUser = BmobUser.getCurrentUser();
         if (bmobUser != null) {
-            //登陆成功后，判断当前用户是否创建过家庭或者加入过家庭
-            //TODO 目前判断的是当前用户是否为创建者
-            isCreateFamily = SPUtils.getBoolean("isCreateFamily", false);
-            isJoinFamily = SPUtils.getBoolean("isJoinFamily",false);
 
-            if (isCreateFamily||isJoinFamily) {
+            isExist=SPUtils.getBoolean(FamilyConfig.SPEXIST,false);
+
+            if (isExist) {
                 AppManager.getAppManager().finishActivity();
                 nextActivity(MainActivity.class);
             } else {
@@ -119,28 +111,25 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void done(User user, BmobException e) {
                             if (user != null) {
-                                //TODO 登陆逻辑存在Bug
-                                BmobQuery<Family> queryFamily = new BmobQuery<>();
-                                queryFamily.addWhereEqualTo("familyCreator", user);
-                                queryFamily.addWhereContainedIn("familyList", Arrays.asList(user.getObjectId()));
-                                queryFamily.findObjects(new FindListener<Family>() {
-                                    @Override
-                                    public void done(List<Family> list, BmobException e) {
-                                        if (e==null){
-                                            if (list.size()!=0) {
-                                                dialog.dismissDialog();
-                                                AppManager.getAppManager().finishActivity();
-                                                SPUtils.putBoolean("isJoinFamily",true);
-                                                nextActivity(MainActivity.class);
-                                            } else {
-                                                dialog.dismissDialog();
-                                                AppManager.getAppManager().finishActivity();
-                                                nextActivity(GuideFamilyActivity.class);
 
-                                            }
-                                        }
+                                if (user.getFamily() != null) {
+                                    boolean isJoin = user.getIsJoin();
+                                    boolean isCreate = user.getIsCreate();
+
+                                    if (isJoin||isCreate) {
+                                        dialog.dismissDialog();
+                                        AppManager.getAppManager().finishActivity();
+                                        SPUtils.putBoolean(FamilyConfig.SPEXIST, true);
+                                        nextActivity(MainActivity.class);
                                     }
-                                });
+
+
+
+                                } else {
+                                    dialog.dismissDialog();
+                                    AppManager.getAppManager().finishActivity();
+                                    nextActivity(GuideFamilyActivity.class);
+                                }
 
                             } else {
                                 dialog.dismissDialog();
