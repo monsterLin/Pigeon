@@ -40,6 +40,7 @@
         <activity android:name=".ui.chat.ChatActivity" />
         <activity android:name=".ui.tools.TopNewsActivity"/>
         <activity android:name=".ui.brower.BrowerActivity"/>
+        <activity android:name=".ui.family.CreateFamilyActivity"/>
 
     </application>
 

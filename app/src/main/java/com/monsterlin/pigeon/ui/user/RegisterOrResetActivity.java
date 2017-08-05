@@ -12,7 +12,6 @@ import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.constant.BmobConfig;
-import com.monsterlin.pigeon.ui.family.GuideFamilyActivity;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.monsterlin.pigeon.widget.CountDownButtonHelper;
 import com.monsterlin.pigeon.widget.LoadingDialog;
@@ -195,13 +194,11 @@ public class RegisterOrResetActivity extends BaseActivity {
             user.signOrLogin(smsCodeString, new SaveListener<User>() {
                 @Override
                 public void done(User user, BmobException e) {
-                    if (user != null) {
-                        //注册并且登陆成功
-                        dialog.dismissDialog();
+                    if (e == null) {
 
-                        AppManager.getAppManager().finishActivity(); //结束当前Activity
-                        nextActivity(GuideFamilyActivity.class);
-                        AppManager.getAppManager().finishActivity(LoginActivity.class);  //结束指定的Activity
+                        dialog.dismissDialog();
+                        BmobUser.logOut();
+                        AppManager.getAppManager().finishActivity();
 
                     } else {
                         dialog.dismissDialog();

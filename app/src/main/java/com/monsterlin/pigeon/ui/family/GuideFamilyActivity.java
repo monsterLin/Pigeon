@@ -1,15 +1,11 @@
 package com.monsterlin.pigeon.ui.family;
 
-import android.app.AlertDialog;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +30,6 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
@@ -48,12 +43,11 @@ import cn.bmob.v3.listener.UpdateListener;
 public class GuideFamilyActivity extends BaseActivity {
 
     private Toolbar mToolBar;
-    private Button mBtnCopy;
+    private Button mBtnShare;
     private TextInputLayout mFamilyIdWrapper;
     private EditText mEdtSearch;
     private TextView mTvCreate, mTvUserId;
-    private View viewCreate;
-    private BmobUser currentUser;
+    private User currentUser;
 
     @Override
     public int getLayoutId() {
@@ -64,7 +58,7 @@ public class GuideFamilyActivity extends BaseActivity {
     public void initViews() {
         mToolBar = findView(R.id.common_toolbar);
         initToolBar(mToolBar, "飞鸽", false);
-        mBtnCopy = findView(R.id.familyGuide_btn_copy);
+        mBtnShare = findView(R.id.familyGuide_btn_share);
         mFamilyIdWrapper = findView(R.id.familyGuide_familyIdWrapper);
         mFamilyIdWrapper.setHint("创建者飞鸽号");
         mEdtSearch = findView(R.id.familyGuide_edt_searchFamily);
@@ -75,7 +69,7 @@ public class GuideFamilyActivity extends BaseActivity {
     @Override
     public void initListener() {
         setOnClick(mTvCreate);
-        setOnClick(mBtnCopy);
+        setOnClick(mBtnShare);
 
         mEdtSearch.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -141,7 +135,7 @@ public class GuideFamilyActivity extends BaseActivity {
                     public void done(List<Family> list, BmobException e) {
                         if (e == null) {
                             if (list.size() == 0) {
-                                showCreateFamilyDialog();
+                                nextActivity(CreateFamilyActivity.class);
                             } else {
                                 ToastUtils.showToast(GuideFamilyActivity.this, "你已经创建过家庭");
                             }
@@ -151,73 +145,16 @@ public class GuideFamilyActivity extends BaseActivity {
                     }
                 });
                 break;
-            case R.id.familyGuide_btn_copy:
+            case R.id.familyGuide_btn_share:
                 String userId = mTvUserId.getText().toString();
                 if (!TextUtils.isEmpty(userId)) {
-                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    cm.setText(userId);
-                    ToastUtils.showToast(GuideFamilyActivity.this, "复制成功，快分享给你的家庭吧");
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, userId);
+                    startActivity(Intent.createChooser(shareIntent, "分享"));
                 }
                 break;
         }
-    }
-
-    /**
-     * 创建家庭弹出框
-     */
-    private void showCreateFamilyDialog() {
-        viewCreate = LayoutInflater.from(this).inflate(R.layout.view_simple_create_family, null);
-        final EditText mEdtFamily = (EditText) viewCreate.findViewById(R.id.family_edt_create);
-        AlertDialog dialog = new AlertDialog
-                .Builder(this)
-                .setTitle("创建家庭")
-                .setView(viewCreate)
-                .setPositiveButton("创建", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String familyName = mEdtFamily.getText().toString();
-                        if (!TextUtils.isEmpty(familyName)) {
-                            final Family family = new Family();
-                            family.setFamilyName(familyName);
-                            family.setFamilyCreator(BmobUser.getCurrentUser(User.class));
-                            family.save(new SaveListener<String>() {
-                                @Override
-                                public void done(String s, BmobException e) {
-                                    if (e == null) {
-                                        User user = new User();
-                                        user.setIsCreate(true);
-                                        user.setIsJoin(false);
-                                        user.setFamily(family);
-                                        user.update(currentUser.getObjectId(), new UpdateListener() {
-                                            @Override
-                                            public void done(BmobException e) {
-                                                if (e==null){
-                                                    SPUtils.putBoolean(FamilyConfig.SPEXIST,true);
-                                                    ToastUtils.showToast(GuideFamilyActivity.this, "创建成功，快去邀请你的家庭成员吧");
-                                                    AppManager.getAppManager().finishActivity();
-                                                    nextActivity(MainActivity.class);
-
-                                                }else {
-                                                    ToastUtils.showToast(GuideFamilyActivity.this,"更新家庭信息失败："+e.getMessage());
-                                                }
-                                            }
-                                        });
-
-                                    } else {
-                                        ToastUtils.showToast(GuideFamilyActivity.this, "创建家庭失败：" + e.getMessage());
-                                    }
-                                }
-                            });
-                        }
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).create();
-        dialog.show();
     }
 
     /**

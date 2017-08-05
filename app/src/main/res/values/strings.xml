@@ -19,7 +19,7 @@
     <string name="familyGuide_edt_searchFamily">创建者飞鸽号</string>
     <string name="familyGuide_tv_create">没有家庭？创建家庭</string>
     <string name="familyGuide_tv_tips">体验全部功能请创建或者加入家庭</string>
-    <string name="familyGuide_btn_copy">复制</string>
+    <string name="familyGuide_btn_share">分享</string>
     <string name="family_edt_create">请输入家庭名</string>
     <string name="edt_smsCode">验证码</string>
     <string name="test_familyGuide_banner_tip">宣传图位置</string>
@@ -30,6 +30,7 @@
     <string name="tools_tv_topNews">今日资讯</string>
     <string name="tools_tv_healthy">健康资讯</string>
     <string name="tools_tv_rumour">辟谣助手</string>
+    <string name="action_create_family">创建家庭</string>
 
 
 </resources>

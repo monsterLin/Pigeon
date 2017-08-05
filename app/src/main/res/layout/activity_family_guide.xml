@@ -23,14 +23,14 @@
 
 
         <Button
-            android:id="@+id/familyGuide_btn_copy"
+            android:id="@+id/familyGuide_btn_share"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/familyGuide_tv_pigeonId"
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@id/familyGuide_tv_pigeonId"
             android:background="@drawable/shape_copy_style"
-            android:text="@string/familyGuide_btn_copy"
+            android:text="@string/familyGuide_btn_share"
             android:textColor="@color/colorPrimary" />
 
 
