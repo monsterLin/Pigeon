@@ -10,6 +10,7 @@ import com.monsterlin.pigeon.base.BaseFragment;
 import com.monsterlin.pigeon.bean.Tools;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
@@ -26,12 +27,9 @@ import cn.bmob.v3.listener.FindListener;
 
 public class ToolsFragment extends BaseFragment implements View.OnClickListener {
 
-//    private Toolbar mToolBar;
-//    private RefreshLayout mRefreshLayout;
     private RecyclerView mRvTools;
     private ToolsAdapter toolsAdapter;
     private BmobQuery<Tools> query;
-
 
     @Override
     public int getLayoutId() {
@@ -40,10 +38,7 @@ public class ToolsFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void initViews() {
-//        mToolBar = findView(R.id.common_toolbar);
-//        mToolBar.setTitle("发现");
         mRvTools = findView(R.id.tools_rv_list);
-//        mRefreshLayout = findView(R.id.refreshLayout);
     }
 
     @Override
@@ -55,6 +50,15 @@ public class ToolsFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void initData() {
         query = new BmobQuery<>();
+        boolean isCache = query.hasCachedResult(Tools.class);
+
+        if(isCache){
+            query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 如果有缓存的话，则设置策略为CACHE_ELSE_NETWORK
+        }else{
+            query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 如果没有缓存的话，则设置策略为NETWORK_ELSE_CACHE
+        }
+
+        query.setMaxCacheAge(TimeUnit.DAYS.toMillis(3));//此表示缓存一天
         query.setLimit(10);
         query.findObjects(new FindListener<Tools>() {
             @Override
@@ -64,10 +68,13 @@ public class ToolsFragment extends BaseFragment implements View.OnClickListener 
                         toolsAdapter = new ToolsAdapter(getContext(), list);
                         mRvTools.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                         mRvTools.setAdapter(toolsAdapter);
+
                     }
                 }
             }
         });
+
+
     }
 
     @Override
