@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEEEEE"
-    android:orientation="vertical">
+    android:background="#EEEEEE">
 
-    <include layout="@layout/view_common_toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/view_common_toolbar" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/chat_lv_msg"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
     <LinearLayout
+        android:id="@+id/lv_op"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
         android:background="#EEEEEE"
-        android:orientation="horizontal"
         android:padding="4dp">
 
         <EditText
@@ -27,9 +23,9 @@
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:layout_weight="5"
+            android:background="@drawable/bg_et_msg"
             android:paddingLeft="4dp"
-            android:textSize="14sp"
-            android:background="@drawable/bg_et_msg" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/chat_tv_send"
@@ -39,9 +35,19 @@
             android:layout_weight="1"
             android:background="@drawable/bg_btn_send"
             android:gravity="center"
-            android:padding="6dp"
+            android:padding="10dp"
             android:text="发送"
             android:textColor="#FFFFFF"
             android:textSize="10sp" />
     </LinearLayout>
-</LinearLayout>
+
+
+    <ListView
+        android:id="@+id/chat_lv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/lv_op"
+        android:layout_below="@id/toolbar"
+        android:divider="@null"
+        android:dividerHeight="6dp" />
+</RelativeLayout>

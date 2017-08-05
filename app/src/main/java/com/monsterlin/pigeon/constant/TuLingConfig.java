@@ -10,9 +10,6 @@ package com.monsterlin.pigeon.constant;
  * @api ： http://www.tuling123.com/openapi/api
  */
 public class TuLingConfig {
-
-    /*
-     * TuLing APIKey
-     */
+    public static final String URL = "http://www.tuling123.com/openapi/api";
     public static final String APIKEY = "fcd7f1a8fd0b4048ae880e545d1ccf7b";
 }
