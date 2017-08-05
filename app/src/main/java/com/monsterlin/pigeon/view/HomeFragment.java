@@ -7,6 +7,8 @@ import android.widget.TextView;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseFragment;
 import com.monsterlin.pigeon.ui.chat.ChatActivity;
+import com.monsterlin.pigeon.ui.family.MyFamilyActivity;
+import com.monsterlin.pigeon.ui.sticker.StickerActivity;
 import com.monsterlin.pigeon.ui.weather.WeatherActivity;
 
 /**
@@ -52,8 +54,10 @@ public class HomeFragment extends BaseFragment {
     public void processClick(View v) {
         switch (v.getId()) {
             case R.id.home_tv_family:
+                startActivity(new Intent(getContext(), MyFamilyActivity.class));
                 break;
             case R.id.home_tv_sticker:
+                startActivity(new Intent(getContext(), StickerActivity.class));
                 break;
             case R.id.home_tv_weather:
                 startActivity(new Intent(getContext(), WeatherActivity.class));

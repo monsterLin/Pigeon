@@ -21,6 +21,7 @@ public class User extends BmobUser {
     private Boolean isJoin ;  //加入家庭
     private Family family ;  //加入的家庭
     private BmobFile userPhoto ; //用户头像
+    private String location ; // 地理位置
 
     public String getNick() {
         return nick;
@@ -76,5 +77,13 @@ public class User extends BmobUser {
 
     public void setUserPhoto(BmobFile userPhoto) {
         this.userPhoto = userPhoto;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
