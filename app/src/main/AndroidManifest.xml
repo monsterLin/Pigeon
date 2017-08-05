@@ -46,6 +46,7 @@
         <activity android:name=".ui.weather.WeatherActivity"/>
         <activity android:name=".ui.family.MyFamilyActivity"/>
         <activity android:name=".ui.sticker.StickerActivity"/>
+        <activity android:name=".ui.user.UserInfoActivity"/>
         <service android:name="com.amap.api.location.APSService"></service>
     </application>
 

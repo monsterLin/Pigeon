@@ -22,7 +22,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
-                android:src="@drawable/test_photo_03" />
+                android:src="@drawable/ic_default" />
 
             <TextView
                 android:id="@+id/family_tv_name"
