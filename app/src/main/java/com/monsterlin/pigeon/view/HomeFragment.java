@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseFragment;
 import com.monsterlin.pigeon.ui.chat.ChatActivity;
+import com.monsterlin.pigeon.ui.weather.WeatherActivity;
 
 /**
  * @author : monsterLin
@@ -55,6 +56,7 @@ public class HomeFragment extends BaseFragment {
             case R.id.home_tv_sticker:
                 break;
             case R.id.home_tv_weather:
+                startActivity(new Intent(getContext(), WeatherActivity.class));
                 break;
             case R.id.home_tv_rebot:
                 startActivity(new Intent(getContext(), ChatActivity.class));
