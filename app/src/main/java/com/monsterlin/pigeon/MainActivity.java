@@ -1,40 +1,45 @@
 package com.monsterlin.pigeon;
 
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
-import android.view.View;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
-import com.monsterlin.pigeon.base.BaseActivity;
+import com.monsterlin.pigeon.adapter.ViewPagerAdapter;
 import com.monsterlin.pigeon.view.HomeFragment;
 import com.monsterlin.pigeon.view.PersonFragment;
 import com.monsterlin.pigeon.view.ToolsFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
- *
- *                                                    __----~~~~~~~~~~~------___
- *                                   .  .   ~~//====......          __--~ ~~
- *                   -.            \_|//     |||\\  ~~~~~~::::... /~
- *                ___-==_       _-~o~  \/    |||  \\            _/~~-
- *        __---~~~.==~||\=_    -_--~/_-~|-   |\\   \\        _/~
- *    _-~~     .=~    |  \\-_    '-~7  /-   /  ||    \      /
- *  .~       .~       |   \\ -_    /  /-   /   ||      \   /
+ * __----~~~~~~~~~~~------___
+ * .  .   ~~//====......          __--~ ~~
+ * -.            \_|//     |||\\  ~~~~~~::::... /~
+ * ___-==_       _-~o~  \/    |||  \\            _/~~-
+ * __---~~~.==~||\=_    -_--~/_-~|-   |\\   \\        _/~
+ * _-~~     .=~    |  \\-_    '-~7  /-   /  ||    \      /
+ * .~       .~       |   \\ -_    /  /-   /   ||      \   /
  * /  ____  /         |     \\ ~-_/  /|- _/   .||       \ /
  * |~~    ~~|--~~~~--_ \     ~==-/   | \~--===~~        .\
- *          '         ~-|      /|    |-~\~~       __--~~
- *                      |-~~-_/ |    |   ~\_   _-~            /\
- *                           /  \     \__   \/~                \__
- *                       _--~ _/ | .-~~____--~-/                  ~~==.
- *                      ((->/~   '.|||' -_|    ~~-/ ,              . _||
- *                                 -_     ~\      ~~---l__i__i__i--~~_/
- *                                 _-~-__   ~)  \--______________--~~
- *                               //.-~~~-~_--~- |-------~~~~~~~~
- *                                      //.-~~~--\
- *                               神兽保佑
- *                              代码无BUG!
+ * '         ~-|      /|    |-~\~~       __--~~
+ * |-~~-_/ |    |   ~\_   _-~            /\
+ * /  \     \__   \/~                \__
+ * _--~ _/ | .-~~____--~-/                  ~~==.
+ * ((->/~   '.|||' -_|    ~~-/ ,              . _||
+ * -_     ~\      ~~---l__i__i__i--~~_/
+ * _-~-__   ~)  \--______________--~~
+ * //.-~~~-~_--~- |-------~~~~~~~~
+ * //.-~~~--\
+ * 神兽保佑
+ * 代码无BUG!
  */
+
 /**
  * @author : monsterLin
  * @email : monster941025@gmail.com
@@ -43,85 +48,76 @@ import com.roughike.bottombar.OnTabSelectListener;
  * @desc : ChatActivity
  * @version: 1.0
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
-    private int curIndex = -1;
+    private Toolbar mToolBar ;
     private BottomBar mBottomBar;
-    private String[] tags = {"homeFragment", "toolsFragment", "personFragment"};
+    private ViewPager mVpContent;
+    private ViewPagerAdapter adapter;
+
+    private List<Fragment> fragmentList;
+
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_main;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initView();
+        initViewPager();
+
     }
 
-    @Override
-    public void initViews() {
-        mBottomBar = findView(R.id.main_bottom_bar);
-    }
-
-    @Override
-    public void initListener() {
+    private void initView() {
+        mToolBar= (Toolbar) findViewById(R.id.common_toolbar);
+        mBottomBar= (BottomBar) findViewById(R.id.bottomBar );
+        mVpContent = (ViewPager) findViewById(R.id.vp_main_content);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-                        setSelect(0);
+                        mToolBar.setTitle("飞鸽");
+                        mVpContent.setCurrentItem(0);
                         break;
-//                    case R.id.tab_chat:
-//                        nextActivity(ChatActivity.class);
-//                        break;
                     case R.id.tab_tools:
-                        setSelect(1);
+                        mToolBar.setTitle("发现");
+                        mVpContent.setCurrentItem(1);
                         break;
                     case R.id.tab_person:
-                        setSelect(2);
+                        mToolBar.setTitle("我");
+                        mVpContent.setCurrentItem(2);
                         break;
+
                 }
             }
         });
     }
 
-    @Override
-    public void initData() {
-       // ToastUtils.showToast(this, BmobUser.getCurrentUser().getObjectId());
-    }
+    private void initViewPager() {
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new ToolsFragment());
+        fragmentList.add(new PersonFragment());
 
-    @Override
-    public void processClick(View v) {
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
+        mVpContent.setAdapter(adapter);
 
-    }
+        mVpContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-
-    private void setSelect(int i) {
-        if (curIndex == i)
-            return;
-
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tags[i]);
-        if (fragment == null) {
-            switch (i) {
-                case 0:
-                    fragment = new HomeFragment();
-                    break;
-                case 1:
-                    fragment = new ToolsFragment();
-                    break;
-                case 2:
-                    fragment = new PersonFragment();
-                    break;
-                default:
-                    break;
             }
-            getSupportFragmentManager().beginTransaction().add(R.id.main_contentContainer, fragment, tags[i]).commit();
-        }
 
-        for (int j = 0; j < 3; j++) {
-            Fragment f = getSupportFragmentManager().findFragmentByTag(tags[j]);
-            if (f != null) {
-                getSupportFragmentManager().beginTransaction().hide(f).commit();
+            @Override
+            public void onPageSelected(int position) {
+                mBottomBar.selectTabAtPosition(position, true);
             }
-        }
-        getSupportFragmentManager().beginTransaction().show(fragment).commit();
 
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
 }

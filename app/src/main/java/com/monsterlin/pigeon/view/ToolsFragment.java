@@ -1,18 +1,19 @@
 package com.monsterlin.pigeon.view;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.monsterlin.pigeon.R;
-import com.monsterlin.pigeon.constant.ApiConfig;
-import com.monsterlin.pigeon.ui.brower.BrowerActivity;
-import com.monsterlin.pigeon.ui.tools.TopNewsActivity;
+import com.monsterlin.pigeon.adapter.ToolsAdapter;
+import com.monsterlin.pigeon.base.BaseFragment;
+import com.monsterlin.pigeon.bean.Tools;
+
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * @author : monsterLin
@@ -23,46 +24,54 @@ import com.monsterlin.pigeon.ui.tools.TopNewsActivity;
  * @desc : 工具板块
  */
 
-public class ToolsFragment extends Fragment implements View.OnClickListener {
+public class ToolsFragment extends BaseFragment implements View.OnClickListener {
 
-    private View view;
-    private TextView mTvTopNews, mTvHealthy, mTvRumour;
+//    private Toolbar mToolBar;
+//    private RefreshLayout mRefreshLayout;
+    private RecyclerView mRvTools;
+    private ToolsAdapter toolsAdapter;
+    private BmobQuery<Tools> query;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_tools, container, false);
-        initView();
-        initEvents();
-        return view;
-    }
-
-    private void initEvents() {
-        mTvTopNews.setOnClickListener(this);
-        mTvHealthy.setOnClickListener(this);
-        mTvRumour.setOnClickListener(this);
-    }
-
-    private void initView() {
-        mTvTopNews = (TextView) view.findViewById(R.id.tools_tv_topNews);
-        mTvHealthy= (TextView) view.findViewById(R.id.tools_tv_healthy);
-        mTvRumour= (TextView) view.findViewById(R.id.tools_tv_rumour);
+    public int getLayoutId() {
+        return R.layout.fragment_tools;
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tools_tv_topNews:
-                startActivity(new Intent(getContext(), TopNewsActivity.class));
-                break;
-            case R.id.tools_tv_healthy:
+    public void initViews() {
+//        mToolBar = findView(R.id.common_toolbar);
+//        mToolBar.setTitle("发现");
+        mRvTools = findView(R.id.tools_rv_list);
+//        mRefreshLayout = findView(R.id.refreshLayout);
+    }
 
-                break;
-            case R.id.tools_tv_rumour:
-                Intent rumourIntent = new Intent(getContext(), BrowerActivity.class);
-                rumourIntent.putExtra("url", ApiConfig.RUMOUR_SMASH_WEBSITE);
-                startActivity(rumourIntent);
-                break;
-        }
+    @Override
+    public void initListener() {
+
+
+    }
+
+    @Override
+    public void initData() {
+        query = new BmobQuery<>();
+        query.setLimit(10);
+        query.findObjects(new FindListener<Tools>() {
+            @Override
+            public void done(List<Tools> list, BmobException e) {
+                if (e == null) {
+                    if (list.size() != 0) {
+                        toolsAdapter = new ToolsAdapter(getContext(), list);
+                        mRvTools.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        mRvTools.setAdapter(toolsAdapter);
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void processClick(View v) {
+
     }
 }

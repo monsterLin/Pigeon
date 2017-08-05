@@ -4,17 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/main_contentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/main_bottom_bar" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/view_common_toolbar" />
 
     <com.roughike.bottombar.BottomBar
-        android:id="@+id/main_bottom_bar"
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         app:bb_tabXmlResource="@xml/bottom_bar_tabs" />
 
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomBar"
+        android:layout_below="@id/toolbar" />
+
+
 </RelativeLayout>
+
+
