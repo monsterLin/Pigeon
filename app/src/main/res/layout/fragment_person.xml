@@ -15,8 +15,7 @@
             android:id="@+id/person_civ_userPhoto"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/test_photo_03" />
+            android:layout_margin="16dp" />
 
         <TextView
             android:id="@+id/person_tv_userName"
@@ -25,7 +24,6 @@
             android:layout_alignTop="@id/person_civ_userPhoto"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/person_civ_userPhoto"
-            android:text="monsterlin"
             android:textColor="@color/black" />
 
         <TextView
@@ -34,8 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/person_tv_userName"
             android:layout_marginTop="12dp"
-            android:layout_toRightOf="@id/person_civ_userPhoto"
-            android:text="飞鸽号：1234567" />
+            android:layout_toRightOf="@id/person_civ_userPhoto"/>
     </RelativeLayout>
 
 

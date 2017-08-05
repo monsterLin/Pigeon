@@ -1,6 +1,7 @@
 package com.monsterlin.pigeon.bean;
 
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * @author : monsterLin
@@ -13,11 +14,21 @@ import cn.bmob.v3.BmobUser;
 public class User extends BmobUser {
     //默认含有的字段为；username ， password , email , sessionToken , mobilePhoneNumber
 
+    private String nick ; //昵称
     private int age ; //用户年龄
     private int type ; // 0 : 子女 & 1 ：父母
     private Boolean isCreate ;  //创建家庭
     private Boolean isJoin ;  //加入家庭
     private Family family ;  //加入的家庭
+    private BmobFile userPhoto ; //用户头像
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
 
     public int getAge() {
         return age;
@@ -57,5 +68,13 @@ public class User extends BmobUser {
 
     public void setFamily(Family family) {
         this.family = family;
+    }
+
+    public BmobFile getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setUserPhoto(BmobFile userPhoto) {
+        this.userPhoto = userPhoto;
     }
 }

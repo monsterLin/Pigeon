@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
         mVpContent.setAdapter(adapter);
+        mVpContent.setOffscreenPageLimit(2);
 
         mVpContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

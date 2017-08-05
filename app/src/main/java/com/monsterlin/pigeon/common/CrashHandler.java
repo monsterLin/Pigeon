@@ -17,7 +17,6 @@ import android.widget.Toast;
  * @desc : crashHandler设置为单例模式
  */
 
-
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     private static CrashHandler crashHandler = null;
@@ -116,7 +115,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         new Thread() {
             @Override
             public void run() {
-                Log.e("系统异常信息：", "deviceInfo------" + deviceInfo + ":errorInfo" + errorInfo);
+                Log.e("system error:  ", "deviceInfo--->>>" + deviceInfo + "|||"+":errorInfo:  " + errorInfo);
             }
         }.start();
 
