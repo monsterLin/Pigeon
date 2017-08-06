@@ -1,6 +1,7 @@
 package com.monsterlin.pigeon.bean;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * @author : monsterLin
@@ -16,6 +17,7 @@ public class Family extends BmobObject{
 
     private String familyName ; //家庭名
     private User familyCreator ; //创建者
+    private BmobFile familyIcon ; //家庭头像
 
     public String getFamilyName() {
         return familyName;
@@ -33,6 +35,11 @@ public class Family extends BmobObject{
         this.familyCreator = familyCreator;
     }
 
+    public BmobFile getFamilyIcon() {
+        return familyIcon;
+    }
 
-
+    public void setFamilyIcon(BmobFile familyIcon) {
+        this.familyIcon = familyIcon;
+    }
 }

@@ -1,5 +1,6 @@
 package com.monsterlin.pigeon.ui.family;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -40,7 +41,7 @@ public class MyFamilyActivity extends BaseActivity {
     private BmobQuery<User> queryFamilyNumber;
     private BmobQuery<Family> queryFamilyInfo;
 
-    private TextView mTvFamilyName , mTvCreator , mTvCreateTime ;
+    private TextView mTvFamilyName, mTvCreator, mTvCreateTime;
 
     @Override
     public int getLayoutId() {
@@ -51,10 +52,10 @@ public class MyFamilyActivity extends BaseActivity {
     public void initViews() {
         mToolBar = findView(R.id.common_toolbar);
         initToolBar(mToolBar, "我的家庭", true);
-        mRvFamily=findView(R.id.family_rv_numbers);
-        mTvFamilyName=findView(R.id.family_tv_name);
-        mTvCreator=findView(R.id.family_tv_creator);
-        mTvCreateTime=findView(R.id.family_tv_createTime);
+        mRvFamily = findView(R.id.family_rv_numbers);
+        mTvFamilyName = findView(R.id.family_tv_name);
+        mTvCreator = findView(R.id.family_tv_creator);
+        mTvCreateTime = findView(R.id.family_tv_createTime);
     }
 
     @Override
@@ -65,19 +66,19 @@ public class MyFamilyActivity extends BaseActivity {
     @Override
     public void initData() {
         mCurrentUser = BmobUser.getCurrentUser(User.class);
-        queryFamilyInfo=new BmobQuery<>();
+        queryFamilyInfo = new BmobQuery<>();
         queryFamilyInfo.include("familyCreator");
         queryFamilyInfo.getObject(mCurrentUser.getFamily().getObjectId(), new QueryListener<Family>() {
             @Override
             public void done(Family family, BmobException e) {
-                if (e==null){
-                    if (family!=null){
-                        mTvFamilyName.setText("家庭名："+family.getFamilyName());
-                        mTvCreator.setText("创建者："+family.getFamilyCreator().getNick());
-                        mTvCreateTime.setText("创建时间："+family.getCreatedAt());
+                if (e == null) {
+                    if (family != null) {
+                        mTvFamilyName.setText("家庭名：" + family.getFamilyName());
+                        mTvCreator.setText("创建者：" + family.getFamilyCreator().getNick());
+                        mTvCreateTime.setText("创建时间：" + family.getCreatedAt());
                     }
-                }else {
-                    ToastUtils.showToast(MyFamilyActivity.this,e.getMessage());
+                } else {
+                    ToastUtils.showToast(MyFamilyActivity.this, e.getMessage());
                 }
             }
         });
@@ -90,7 +91,7 @@ public class MyFamilyActivity extends BaseActivity {
             public void done(List<User> list, BmobException e) {
                 if (e == null) {
                     if (list.size() != 0) {
-                        familyNumberAdapter=new FamilyNumberAdapter(MyFamilyActivity.this,list);
+                        familyNumberAdapter = new FamilyNumberAdapter(MyFamilyActivity.this, list);
                         mRvFamily.setAdapter(familyNumberAdapter);
                         mRvFamily.setLayoutManager(new LinearLayoutManager(MyFamilyActivity.this, LinearLayoutManager.VERTICAL, false));
                     }
@@ -117,9 +118,29 @@ public class MyFamilyActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_edit:
                 //判断是否为创建者
+                queryFamilyInfo = new BmobQuery<>();
+                queryFamilyInfo.include("familyCreator");
+                queryFamilyInfo.getObject(mCurrentUser.getFamily().getObjectId(), new QueryListener<Family>() {
+
+                    @Override
+                    public void done(Family family, BmobException e) {
+                        if (e == null) {
+                            String currentFamilyCreatorId = family.getFamilyCreator().getObjectId();
+                            if (currentFamilyCreatorId.equals(mCurrentUser.getObjectId())) {
+                                startActivity(new Intent(MyFamilyActivity.this, EditFamilyActivity.class));
+                            } else {
+                                ToastUtils.showToast(MyFamilyActivity.this, "抱歉，你不是创建者，无法进行编辑！");
+                            }
+                        }else {
+                            ToastUtils.showToast(MyFamilyActivity.this, e.getMessage());
+                        }
+
+
+                    }
+                });
 
                 break;
         }

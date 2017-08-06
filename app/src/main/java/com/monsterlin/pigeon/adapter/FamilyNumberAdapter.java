@@ -2,6 +2,7 @@ package com.monsterlin.pigeon.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.vholder.FamilyNumberVHolder;
 
 import java.util.List;
+
+import cn.bmob.v3.BmobUser;
 
 /**
  * @author : monsterLin
@@ -40,15 +43,29 @@ public class FamilyNumberAdapter extends RecyclerView.Adapter<FamilyNumberVHolde
 
     @Override
     public void onBindViewHolder(FamilyNumberVHolder holder, int position) {
-        holder.mTvNick.setText(numberList.get(position).getNick());
+        String nick = numberList.get(position).getNick();
+
+        if (TextUtils.isEmpty(nick)){
+            holder.mTvNick.setText("用户"+ BmobUser.getCurrentUser(User.class).getObjectId());
+        }else{
+            holder.mTvNick.setText(numberList.get(position).getNick());
+        }
+
         int type = numberList.get(position).getType();
         if (type == 0) {
             //子女
-            holder.mTvType.setText("父母");
+            holder.mIvType.setImageResource(R.drawable.ic_family_parent);
         } else if (type == 1) {
             //父母
-            holder.mTvType.setText("子女");
+            holder.mIvType.setImageResource(R.drawable.ic_family_child);
         }
+
+        holder.mIvUserInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
