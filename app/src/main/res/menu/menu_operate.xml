@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_create_family"
-        android:title="@string/action_create_family"
-        android:icon="@drawable/ic_create_family"
+        android:id="@+id/action_ok"
+        android:title="@string/action_ok"
+        android:icon="@drawable/ic_ok"
         app:showAsAction="ifRoom"/>
 </menu>

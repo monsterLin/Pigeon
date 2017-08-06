@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.Family;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.utils.ToastUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author : monsterLin
@@ -42,6 +45,7 @@ public class MyFamilyActivity extends BaseActivity {
     private BmobQuery<Family> queryFamilyInfo;
 
     private TextView mTvFamilyName, mTvCreator, mTvCreateTime;
+    private CircleImageView mFamilyCivPhoto ;
 
     @Override
     public int getLayoutId() {
@@ -56,6 +60,7 @@ public class MyFamilyActivity extends BaseActivity {
         mTvFamilyName = findView(R.id.family_tv_name);
         mTvCreator = findView(R.id.family_tv_creator);
         mTvCreateTime = findView(R.id.family_tv_createTime);
+        mFamilyCivPhoto=findView(R.id.family_civ_userPhoto);
     }
 
     @Override
@@ -73,6 +78,10 @@ public class MyFamilyActivity extends BaseActivity {
             public void done(Family family, BmobException e) {
                 if (e == null) {
                     if (family != null) {
+                        String photoUrl = family.getFamilyIcon().getFileUrl();
+                        if (!TextUtils.isEmpty(photoUrl)){
+                            Picasso.with(MyFamilyActivity.this).load(family.getFamilyIcon().getFileUrl()).into(mFamilyCivPhoto);
+                        }
                         mTvFamilyName.setText("家庭名：" + family.getFamilyName());
                         mTvCreator.setText("创建者：" + family.getFamilyCreator().getNick());
                         mTvCreateTime.setText("创建时间：" + family.getCreatedAt());
@@ -145,5 +154,12 @@ public class MyFamilyActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+
     }
 }

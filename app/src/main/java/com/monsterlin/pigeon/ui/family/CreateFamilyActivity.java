@@ -69,7 +69,7 @@ public class CreateFamilyActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_create_family, menu);
+        getMenuInflater().inflate(R.menu.menu_operate, menu);
         return true;
     }
 
@@ -77,7 +77,7 @@ public class CreateFamilyActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id){
-            case R.id.action_create_family:
+            case R.id.action_ok:
                 String familyName = mEdtFamilyName.getText().toString();
                 if (!TextUtils.isEmpty(familyName)){
                     final Family family = new Family();

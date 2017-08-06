@@ -49,6 +49,8 @@
         <activity android:name=".ui.user.UserInfoActivity"/>
         <activity android:name=".ui.family.EditFamilyActivity"/>
         <service android:name="com.amap.api.location.APSService"></service>
+
+
     </application>
 
 </manifest>
