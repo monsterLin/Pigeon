@@ -60,6 +60,8 @@ public class EditFamilyActivity extends BaseActivity {
     private String mCurrentPhotoStr;
     private Bitmap mPhotoBitmap;
 
+    private String familyName;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_family_edit;
@@ -88,11 +90,11 @@ public class EditFamilyActivity extends BaseActivity {
             @Override
             public void done(Family family, BmobException e) {
                 if (e == null) {
-                    String familyName = family.getFamilyName();
+                    familyName = family.getFamilyName();
                     if (!TextUtils.isEmpty(familyName)) {
                         mEdtFamilyName.setText(familyName);
                         String photoUrl = family.getFamilyIcon().getFileUrl();
-                        if (!TextUtils.isEmpty(photoUrl)){
+                        if (!TextUtils.isEmpty(photoUrl)) {
                             Picasso.with(EditFamilyActivity.this).load(photoUrl).into(mFamilyPhoto);
                         }
                     }
@@ -140,16 +142,16 @@ public class EditFamilyActivity extends BaseActivity {
                                     family.update(mCurrentUser.getFamily().getObjectId(), new UpdateListener() {
                                         @Override
                                         public void done(BmobException e) {
-                                            if (e==null){
-                                                ToastUtils.showToast(EditFamilyActivity.this,"更新家庭信息成功");
+                                            if (e == null) {
+                                                ToastUtils.showToast(EditFamilyActivity.this, "更新家庭信息成功");
                                                 AppManager.getAppManager().finishActivity();
-                                            }else {
-                                                ToastUtils.showToast(EditFamilyActivity.this,"更新家庭信息失败："+e.getMessage());
+                                            } else {
+                                                ToastUtils.showToast(EditFamilyActivity.this, "更新家庭信息失败：" + e.getMessage());
                                             }
                                         }
                                     });
-                                }else {
-                                    ToastUtils.showToast(EditFamilyActivity.this,"请正确填写信息");
+                                } else {
+                                    ToastUtils.showToast(EditFamilyActivity.this, "请正确填写信息");
                                 }
 
                             } else {
@@ -160,8 +162,22 @@ public class EditFamilyActivity extends BaseActivity {
                     });
 
 
-                } else {
-                    ToastUtils.showToast(EditFamilyActivity.this, "图片路径：null!!");
+                } else if (familyName.equals(mEdtFamilyName.getText().toString())) {
+                    ToastUtils.showToast(EditFamilyActivity.this, "无信息更新");
+                } else if (!familyName.equals(mEdtFamilyName.getText().toString())) {
+                    Family family = new Family();
+                    family.setFamilyName(mEdtFamilyName.getText().toString());
+                    family.update(mCurrentUser.getFamily().getObjectId(), new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+                                ToastUtils.showToast(EditFamilyActivity.this, "更新家庭信息成功");
+                                AppManager.getAppManager().finishActivity();
+                            } else {
+                                ToastUtils.showToast(EditFamilyActivity.this, "更新家庭信息失败：" + e.getMessage());
+                            }
+                        }
+                    });
                 }
                 break;
         }

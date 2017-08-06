@@ -87,7 +87,7 @@ public class MyFamilyActivity extends BaseActivity {
                         mTvCreateTime.setText("创建时间：" + family.getCreatedAt());
                     }
                 } else {
-                    ToastUtils.showToast(MyFamilyActivity.this, e.getMessage());
+                    ToastUtils.showToast(MyFamilyActivity.this, "GetCurrentFamily："+e.getMessage());
                 }
             }
         });
@@ -105,7 +105,7 @@ public class MyFamilyActivity extends BaseActivity {
                         mRvFamily.setLayoutManager(new LinearLayoutManager(MyFamilyActivity.this, LinearLayoutManager.VERTICAL, false));
                     }
                 } else {
-                    ToastUtils.showToast(MyFamilyActivity.this, e.getMessage());
+                    ToastUtils.showToast(MyFamilyActivity.this, "QueryNumber："+e.getMessage());
                 }
             }
         });
@@ -144,7 +144,7 @@ public class MyFamilyActivity extends BaseActivity {
                                 ToastUtils.showToast(MyFamilyActivity.this, "抱歉，你不是创建者，无法进行编辑！");
                             }
                         }else {
-                            ToastUtils.showToast(MyFamilyActivity.this, e.getMessage());
+                            ToastUtils.showToast(MyFamilyActivity.this, "isCreator ："+e.getMessage());
                         }
 
 

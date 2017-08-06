@@ -11,7 +11,6 @@ import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.utils.ToastUtils;
-import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 
 import cn.bmob.v3.BmobQuery;
@@ -62,8 +61,9 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     public void initData() {
         objectId = getIntent().getStringExtra("objectId");
-        Logger.e("UserInfoActivity："+objectId);
+
         query = new BmobQuery<>();
+        query.include("family");
         query.getObject(objectId, new QueryListener<User>() {
             @Override
             public void done(User user, BmobException e) {
@@ -108,7 +108,7 @@ public class UserInfoActivity extends BaseActivity {
                     if (typeInt == 0) {
                         mTvType.setText("关         系： 子女");
                     } else if (typeInt == 1) {
-                        mTvFamily.setText("关         系： 父母");
+                        mTvType.setText("关         系： 父母");
                     }
 
 

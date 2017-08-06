@@ -27,7 +27,7 @@
             android:labelFor="@id/editFamily_edt_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:inputType="text" />
 
     </android.support.design.widget.TextInputLayout>
 </LinearLayout>
