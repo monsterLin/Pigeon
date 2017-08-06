@@ -120,7 +120,7 @@ public class MyFamilyActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        getMenuInflater().inflate(R.menu.menu_family_edit, menu);
         return true;
     }
 

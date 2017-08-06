@@ -10,6 +10,7 @@ import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseFragment;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.ui.user.UserInfoActivity;
+import com.monsterlin.pigeon.utils.ToastUtils;
 import com.squareup.picasso.Picasso;
 
 import cn.bmob.v3.BmobUser;
@@ -80,7 +81,14 @@ public class PersonFragment extends BaseFragment {
     public void processClick(View v) {
         switch (v.getId()){
             case R.id.person_rl:
-                startActivity(new Intent(getContext(), UserInfoActivity.class));
+                String objectId = mCurrentUser.getObjectId();
+                if (!TextUtils.isEmpty(objectId)){
+                    Intent userInfoIntent = new Intent(getContext(), UserInfoActivity.class);
+                    userInfoIntent.putExtra("objectId",objectId);
+                    startActivity(userInfoIntent);
+                }else {
+                    ToastUtils.showToast(getContext(),"无用户ID");
+                }
                 break;
         }
     }

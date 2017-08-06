@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/ic_edit"
+        android:title="@string/action_change_pass"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_user_chanage_pass"
+        android:icon="@drawable/ic_user_chanage_pass"
+        android:title="@string/action_change_pass"
+        app:showAsAction="ifRoom" />
+</menu>

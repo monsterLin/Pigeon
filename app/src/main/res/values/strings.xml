@@ -31,7 +31,7 @@
     <string name="tools_tv_healthy">健康资讯</string>
     <string name="tools_tv_rumour">辟谣助手</string>
     <string name="action_ok">确认</string>
-    <string name="action_edit">编辑</string>
+    <string name="action_change_pass">修改密码</string>
 
 
 </resources>
