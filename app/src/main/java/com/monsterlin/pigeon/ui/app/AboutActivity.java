@@ -76,6 +76,7 @@ public class AboutActivity extends BaseActivity {
                 nextActivity(UpgradeExplainActivity.class);
                 break;
             case R.id.about_tv_thanks:
+                nextActivity(ThanksActivity.class);
                 break;
             case R.id.about_tv_check:
                 ToastUtils.showToast(this, "已是最新版");

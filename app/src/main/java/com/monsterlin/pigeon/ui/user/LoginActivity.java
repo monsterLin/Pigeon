@@ -60,7 +60,7 @@ public class LoginActivity extends BaseActivity {
         mEdtUserName = findView(R.id.login_edt_userName);
         mEdtUserPass = findView(R.id.login_edt_userPass);
 
-        mUserNameWrapper.setHint("飞鸽号／手机号");
+        mUserNameWrapper.setHint("手机号");
         mUserPassWrapper.setHint("密码");
 
         mBtnLogin = findView(R.id.login_btn);
