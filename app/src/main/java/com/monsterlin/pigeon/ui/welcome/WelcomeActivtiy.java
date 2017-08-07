@@ -58,7 +58,7 @@ public class WelcomeActivtiy extends BaseActivity {
 
                     if (isFirst) {
                         AppManager.getAppManager().finishActivity();
-                        nextActivity(GuideAppActivity.class); //app引导页
+                        nextActivity(GuidePageActivity.class); //app引导页
 
                     } else {
                         bmobUser = BmobUser.getCurrentUser(User.class);

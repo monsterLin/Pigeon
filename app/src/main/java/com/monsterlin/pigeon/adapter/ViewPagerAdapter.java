@@ -12,7 +12,7 @@ import java.util.List;
  * @ date : 2017/1/15
  * @ github : https://github.com/monsterLin
  * @ blog : http://monsterlin.com/
- * @ describe :
+ * @ describe : viewpager适配器
  */
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> fragmentList;
