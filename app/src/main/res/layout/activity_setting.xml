@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/aWhite"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_common_toolbar" />
+
+
+
+
+    <TextView
+        android:id="@+id/about_tv_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/mm_submenu_normal"
+        android:padding="12dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_tv_recommend"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/about_tv_website"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/mm_submenu_normal"
+        android:padding="12dp"
+        android:text="@string/about_tv_website"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/about_tv_upgrade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/mm_submenu_normal"
+        android:padding="12dp"
+        android:text="@string/about_tv_upgrade"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/about_tv_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:drawableEnd="@drawable/mm_submenu_normal"
+        android:padding="12dp"
+        android:text="@string/about_tv_check"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+</LinearLayout>

@@ -30,8 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/family_civ_userPhoto"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
-                android:text="家庭名：我的家庭" />
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:id="@+id/family_tv_creator"
@@ -39,8 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/family_tv_name"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
-                android:text="创建人：monsterlin" />
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:id="@+id/family_tv_createTime"
@@ -48,8 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/family_tv_creator"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
-                android:text="创建时间：2017-02-17" />
+                android:layout_marginBottom="8dp" />
 
         </RelativeLayout>
 
