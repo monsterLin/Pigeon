@@ -15,7 +15,8 @@
         android:layout_marginBottom="1dp"
         android:layout_marginTop="8dp"
         android:background="@color/white"
-        android:drawableEnd="@drawable/mm_submenu_normal"
+        android:drawableEnd="@drawable/ic_point_right"
+        android:gravity="center_vertical"
         android:padding="12dp"
         android:text="清除缓存"
         android:textColor="@color/black"
@@ -27,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@color/white"
-        android:drawableEnd="@drawable/mm_submenu_normal"
+        android:drawableEnd="@drawable/ic_point_right"
+        android:gravity="center_vertical"
         android:padding="12dp"
         android:text="意见反馈"
         android:textColor="@color/black"
@@ -40,7 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
         android:background="@color/white"
-        android:drawableEnd="@drawable/mm_submenu_normal"
+        android:drawableEnd="@drawable/ic_point_right"
+        android:gravity="center_vertical"
         android:padding="12dp"
         android:text="版权信息"
         android:textColor="@color/black"
@@ -52,12 +55,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:drawableEnd="@drawable/mm_submenu_normal"
+        android:drawableEnd="@drawable/ic_point_right"
+        android:gravity="center_vertical"
         android:padding="12dp"
         android:text="关于飞鸽"
         android:textColor="@color/black"
         android:textSize="15sp" />
-
 
 
 </LinearLayout>

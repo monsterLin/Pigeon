@@ -33,7 +33,7 @@ public class BrowerActivity extends BaseActivity {
     @Override
     public void initViews() {
         mToolBar = findView(R.id.common_toolbar);
-        initToolBar(mToolBar, "浏览器", true);
+        initToolBar(mToolBar, "飞鸽", true);
         mProWebView = findView(R.id.brower_pwv);
     }
 
