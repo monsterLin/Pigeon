@@ -50,6 +50,8 @@
         <activity android:name=".ui.family.EditFamilyActivity"/>
         <activity android:name=".ui.user.UpdateUserInfoActivity"/>
         <activity android:name=".ui.setting.SettingActivity"/>
+        <activity android:name=".ui.welcome.WelcomeActivtiy"/>
+        <activity android:name=".ui.welcome.GuideActivity"/>
         <service android:name="com.amap.api.location.APSService"></service>
 
 

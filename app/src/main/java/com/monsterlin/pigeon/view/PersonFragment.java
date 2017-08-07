@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.base.BaseFragment;
 import com.monsterlin.pigeon.bean.User;
+import com.monsterlin.pigeon.ui.setting.SettingActivity;
 import com.monsterlin.pigeon.ui.user.UserInfoActivity;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.squareup.picasso.Picasso;
@@ -31,7 +32,9 @@ public class PersonFragment extends BaseFragment {
     private CircleImageView mCivUserPhoto;
     private TextView mTvName, mTvID;
     private User mCurrentUser;
-    private RelativeLayout mRLUser ;
+    private RelativeLayout mRLUser;
+
+    private TextView mTvSetting;
 
     @Override
     public int getLayoutId() {
@@ -43,12 +46,14 @@ public class PersonFragment extends BaseFragment {
         mCivUserPhoto = findView(R.id.person_civ_userPhoto);
         mTvName = findView(R.id.person_tv_userName);
         mTvID = findView(R.id.person_tv_userID);
-        mRLUser=findView(R.id.person_rl);
+        mRLUser = findView(R.id.person_rl);
+        mTvSetting = findView(R.id.person_tv_setting);
     }
 
     @Override
     public void initListener() {
         setOnClick(mRLUser);
+        setOnClick(mTvSetting);
     }
 
     @Override
@@ -61,17 +66,17 @@ public class PersonFragment extends BaseFragment {
 
         if (!TextUtils.isEmpty(nick)) {
             mTvName.setText(nick);
-        }else {
-            mTvName.setText("用户"+objectId);
+        } else {
+            mTvName.setText("用户" + objectId);
         }
 
         if (!TextUtils.isEmpty(objectId)) {
-            mTvID.setText("飞鸽号："+objectId);
+            mTvID.setText("飞鸽号：" + objectId);
         }
 
-        if (userPhotoFile==null){
+        if (userPhotoFile == null) {
             mCivUserPhoto.setImageResource(R.drawable.ic_default);
-        }else {
+        } else {
             Picasso.with(getContext()).load(userPhotoFile.getFileUrl()).into(mCivUserPhoto);
         }
 
@@ -79,16 +84,20 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     public void processClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.person_rl:
                 String objectId = mCurrentUser.getObjectId();
-                if (!TextUtils.isEmpty(objectId)){
+                if (!TextUtils.isEmpty(objectId)) {
                     Intent userInfoIntent = new Intent(getContext(), UserInfoActivity.class);
-                    userInfoIntent.putExtra("objectId",objectId);
+                    userInfoIntent.putExtra("objectId", objectId);
                     startActivity(userInfoIntent);
-                }else {
-                    ToastUtils.showToast(getContext(),"无用户ID");
+                } else {
+                    ToastUtils.showToast(getContext(), "无用户ID");
                 }
+                break;
+
+            case R.id.person_tv_setting:
+                startActivity(new Intent(getContext(), SettingActivity.class));
                 break;
         }
     }

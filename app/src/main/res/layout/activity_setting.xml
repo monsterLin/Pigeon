@@ -8,56 +8,56 @@
     <include layout="@layout/view_common_toolbar" />
 
 
-
-
     <TextView
-        android:id="@+id/about_tv_recommend"
+        android:id="@+id/setting_tv_clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
+        android:layout_marginTop="8dp"
         android:background="@color/white"
         android:drawableEnd="@drawable/mm_submenu_normal"
         android:padding="12dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/about_tv_recommend"
+        android:text="清除缓存"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/about_tv_website"
+        android:id="@+id/setting_tv_advice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@color/white"
         android:drawableEnd="@drawable/mm_submenu_normal"
         android:padding="12dp"
-        android:text="@string/about_tv_website"
+        android:text="意见反馈"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
 
     <TextView
-        android:id="@+id/about_tv_upgrade"
+        android:id="@+id/setting_tv_license"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
         android:background="@color/white"
         android:drawableEnd="@drawable/mm_submenu_normal"
         android:padding="12dp"
-        android:text="@string/about_tv_upgrade"
+        android:text="版权信息"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
 
     <TextView
-        android:id="@+id/about_tv_check"
+        android:id="@+id/setting_tv_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:drawableEnd="@drawable/mm_submenu_normal"
         android:padding="12dp"
-        android:text="@string/about_tv_check"
+        android:text="关于飞鸽"
         android:textColor="@color/black"
         android:textSize="15sp" />
+
+
 
 </LinearLayout>
