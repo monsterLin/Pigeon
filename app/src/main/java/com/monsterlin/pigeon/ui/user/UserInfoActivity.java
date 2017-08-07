@@ -15,6 +15,7 @@ import com.monsterlin.pigeon.utils.ToastUtils;
 import com.squareup.picasso.Picasso;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
@@ -62,7 +63,15 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     public void initData() {
         objectId = getIntent().getStringExtra("objectId");
+        if (!TextUtils.isEmpty(objectId)){
+            initUserInfo(objectId);
+        }else {
+            initUserInfo(BmobUser.getCurrentUser(User.class).getObjectId());
+        }
 
+    }
+
+    private void initUserInfo(final String objectId) {
         query = new BmobQuery<>();
         query.include("family");
         query.getObject(objectId, new QueryListener<User>() {
@@ -118,7 +127,6 @@ public class UserInfoActivity extends BaseActivity {
                 }
             }
         });
-
     }
 
     @Override
@@ -143,5 +151,11 @@ public class UserInfoActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 }
