@@ -48,6 +48,7 @@
         <activity android:name=".ui.sticker.StickerActivity"/>
         <activity android:name=".ui.user.UserInfoActivity"/>
         <activity android:name=".ui.family.EditFamilyActivity"/>
+        <activity android:name=".ui.user.UpdateUserInfoActivity"/>
         <service android:name="com.amap.api.location.APSService"></service>
 
 

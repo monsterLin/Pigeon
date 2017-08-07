@@ -32,6 +32,8 @@
     <string name="tools_tv_rumour">辟谣助手</string>
     <string name="action_ok">确认</string>
     <string name="action_change_pass">修改密码</string>
+    <string name="updateInfo_rr_child">子女</string>
+    <string name="updateInfo_rr_parent">父母</string>
 
 
 </resources>
