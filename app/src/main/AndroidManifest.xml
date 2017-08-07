@@ -26,7 +26,7 @@
             android:name="com.amap.api.v2.apikey"
             android:value="8f75b0b78c8a7c24fa02bcea71000bc9" />
 
-        <activity android:name=".ui.user.LoginActivity">
+        <activity android:name=".ui.welcome.WelcomeActivtiy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,15 +43,16 @@
         <activity android:name=".ui.chat.ChatActivity" />
         <activity android:name=".ui.brower.BrowerActivity" />
         <activity android:name=".ui.family.CreateFamilyActivity" />
-        <activity android:name=".ui.weather.WeatherActivity"/>
-        <activity android:name=".ui.family.MyFamilyActivity"/>
-        <activity android:name=".ui.sticker.StickerActivity"/>
-        <activity android:name=".ui.user.UserInfoActivity"/>
-        <activity android:name=".ui.family.EditFamilyActivity"/>
-        <activity android:name=".ui.user.UpdateUserInfoActivity"/>
-        <activity android:name=".ui.setting.SettingActivity"/>
-        <activity android:name=".ui.welcome.WelcomeActivtiy"/>
-        <activity android:name=".ui.welcome.GuideActivity"/>
+        <activity android:name=".ui.weather.WeatherActivity" />
+        <activity android:name=".ui.family.MyFamilyActivity" />
+        <activity android:name=".ui.sticker.StickerActivity" />
+        <activity android:name=".ui.user.UserInfoActivity" />
+        <activity android:name=".ui.family.EditFamilyActivity" />
+        <activity android:name=".ui.user.UpdateUserInfoActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name=".ui.user.LoginActivity" />
+        <activity android:name=".ui.welcome.GuideAppActivity" />
+
         <service android:name="com.amap.api.location.APSService"></service>
 
 

@@ -45,7 +45,7 @@ public class LoginActivity extends BaseActivity {
     private BmobUser bmobUser;
     private Bundle bundle;
 
-    private boolean isExist = false ;
+    private boolean isExist = false;
 
     @Override
     public int getLayoutId() {
@@ -82,19 +82,19 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void initData() {
         bmobUser = BmobUser.getCurrentUser();
-        if (bmobUser != null) {
-
-            isExist=SPUtils.getBoolean(FamilyConfig.SPEXIST,false);
-
-            if (isExist) {
-                AppManager.getAppManager().finishActivity();
-                nextActivity(MainActivity.class);
-            } else {
-                AppManager.getAppManager().finishActivity();
-                nextActivity(GuideFamilyActivity.class);
-            }
-
-        }
+//        if (bmobUser != null) {
+//
+//            isExist = SPUtils.getBoolean(FamilyConfig.SPEXIST, false);
+//
+//            if (isExist) {
+//                AppManager.getAppManager().finishActivity();
+//                nextActivity(MainActivity.class);
+//            } else {
+//                AppManager.getAppManager().finishActivity();
+//                nextActivity(GuideFamilyActivity.class);
+//            }
+//
+//        }
     }
 
     @Override
@@ -116,14 +116,12 @@ public class LoginActivity extends BaseActivity {
                                     boolean isJoin = user.getIsJoin();
                                     boolean isCreate = user.getIsCreate();
 
-                                    if (isJoin||isCreate) {
+                                    if (isJoin || isCreate) {
                                         dialog.dismissDialog();
                                         AppManager.getAppManager().finishActivity();
                                         SPUtils.putBoolean(FamilyConfig.SPEXIST, true);
                                         nextActivity(MainActivity.class);
                                     }
-
-
 
                                 } else {
                                     dialog.dismissDialog();

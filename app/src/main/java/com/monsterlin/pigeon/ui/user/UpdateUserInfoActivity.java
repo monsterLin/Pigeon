@@ -121,8 +121,9 @@ public class UpdateUserInfoActivity extends BaseActivity {
             mRRParent.setChecked(true);
         }
 
-        if (!TextUtils.isEmpty(mCurrentUser.getUserPhoto().getFileUrl())){
-            Picasso.with(UpdateUserInfoActivity.this).load(mCurrentUser.getUserPhoto().getFileUrl()).into(mCivPhoto);
+        BmobFile userPhotoFile = mCurrentUser.getUserPhoto();
+        if (userPhotoFile!=null){
+            Picasso.with(UpdateUserInfoActivity.this).load(userPhotoFile.getFileUrl()).into(mCivPhoto);
         }else {
             mCivPhoto.setImageResource(R.drawable.ic_default);
         }

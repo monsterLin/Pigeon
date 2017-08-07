@@ -9,4 +9,5 @@ package com.monsterlin.pigeon.constant;
  * @desc : 程序启动相关配置
  */
 public class AppConfig {
+    public static final String SPFIST = "isFirst" ;
 }
