@@ -26,6 +26,12 @@
 
 ![pigeon](https://raw.githubusercontent.com/monsterLin/Pigeon/master/pigeon_2017_08_08.png)
 
+### 逻辑分析
+
+#### 登陆逻辑分析
+
+![loginLogic](https://raw.githubusercontent.com/monsterLin/Pigeon/master/pigeon_login_anylise.png)
+
 ### 体验试用
 
 ### 相关流程
