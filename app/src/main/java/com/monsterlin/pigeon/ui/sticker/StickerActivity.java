@@ -82,6 +82,7 @@ public class StickerActivity extends BaseActivity {
         //TODO 分页查询
         stickerQuery = new BmobQuery<>();
         stickerQuery.include("user,family");
+        stickerQuery.order("-updatedAt");
         stickerQuery.findObjects(new FindListener<Sticker>() {
             @Override
             public void done(List<Sticker> list, BmobException e) {
