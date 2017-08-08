@@ -1,6 +1,7 @@
 package com.monsterlin.pigeon.ui.user;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -148,6 +149,9 @@ public class UserInfoActivity extends BaseActivity {
                 startActivity(new Intent(UserInfoActivity.this,UpdateUserInfoActivity.class));
                 break;
             case R.id.action_user_chanage_pass:
+                Bundle bundle = new Bundle();
+                bundle.putInt("sign", 1);
+                nextActivity(RegisterOrResetActivity.class, bundle);
                 break;
         }
         return super.onOptionsItemSelected(item);
