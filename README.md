@@ -10,7 +10,7 @@
 
 ### 开发进度
 
-> 更新时间：2017 08 08
+> 更新时间：2017年08月08日
 
 ![pigeon](https://raw.githubusercontent.com/monsterLin/Pigeon/master/pigeon_2017_08_08.png)
 
