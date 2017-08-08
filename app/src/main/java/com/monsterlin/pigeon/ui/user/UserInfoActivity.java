@@ -38,6 +38,7 @@ public class UserInfoActivity extends BaseActivity {
     private CircleImageView mCivUserPhoto;
     private TextView mTvNick, mTvAge, mTvPhone, mTvFamily, mTvType;
     private BmobQuery<User> query;
+    private boolean isShowEdit = true;
 
     @Override
     public int getLayoutId() {
@@ -66,6 +67,7 @@ public class UserInfoActivity extends BaseActivity {
         objectId = getIntent().getStringExtra("objectId");
         if (!TextUtils.isEmpty(objectId)){
             initUserInfo(objectId);
+            isShowEdit=false;
         }else {
             initUserInfo(BmobUser.getCurrentUser(User.class).getObjectId());
         }
@@ -137,8 +139,12 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_user_edit, menu);
-        return true;
+        if (isShowEdit){
+            getMenuInflater().inflate(R.menu.menu_user_edit, menu);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override

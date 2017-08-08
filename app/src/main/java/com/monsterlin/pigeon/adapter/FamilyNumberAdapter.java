@@ -1,6 +1,7 @@
 package com.monsterlin.pigeon.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.bean.User;
+import com.monsterlin.pigeon.ui.user.UserInfoActivity;
 import com.monsterlin.pigeon.vholder.FamilyNumberVHolder;
 
 import java.util.List;
@@ -42,7 +44,7 @@ public class FamilyNumberAdapter extends RecyclerView.Adapter<FamilyNumberVHolde
     }
 
     @Override
-    public void onBindViewHolder(FamilyNumberVHolder holder, int position) {
+    public void onBindViewHolder(FamilyNumberVHolder holder, final int position) {
         String nick = numberList.get(position).getNick();
 
         if (TextUtils.isEmpty(nick)){
@@ -63,7 +65,9 @@ public class FamilyNumberAdapter extends RecyclerView.Adapter<FamilyNumberVHolde
         holder.mIvUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent userInfoIntent = new Intent(mContext, UserInfoActivity.class);
+                userInfoIntent.putExtra("objectId",numberList.get(position).getObjectId());
+                mContext.startActivity(userInfoIntent);
             }
         });
     }
