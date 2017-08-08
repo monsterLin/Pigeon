@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.monsterlin.pigeon.adapter.ViewPagerAdapter;
+import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.view.HomeFragment;
 import com.monsterlin.pigeon.view.PersonFragment;
 import com.monsterlin.pigeon.view.ToolsFragment;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppManager.getAppManager().addActivity(MainActivity.this);
         initView();
         initViewPager();
 

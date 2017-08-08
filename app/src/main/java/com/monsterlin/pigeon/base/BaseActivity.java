@@ -11,6 +11,8 @@ import android.view.View;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.widget.LoadingDialog;
 
+import cn.bmob.v3.BmobInstallation;
+
 /**
  * @author : Hensen_
  * @desc : Activity的基类

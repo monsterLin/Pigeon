@@ -53,6 +53,7 @@
         <activity android:name=".ui.user.LoginActivity" />
         <activity android:name=".ui.welcome.GuidePageActivity" />
         <activity android:name=".ui.app.ThanksActivity"/>
+        <activity android:name=".ui.app.AdviceActivity"/>
 
         <service android:name="com.amap.api.location.APSService"></service>
 
