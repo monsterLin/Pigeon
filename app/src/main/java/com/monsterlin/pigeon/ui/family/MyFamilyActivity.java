@@ -70,6 +70,7 @@ public class MyFamilyActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        dialog.showDialog();
         mCurrentUser = BmobUser.getCurrentUser(User.class);
         queryFamilyInfo = new BmobQuery<>();
         queryFamilyInfo.include("familyCreator");
@@ -87,6 +88,7 @@ public class MyFamilyActivity extends BaseActivity {
                         mTvCreateTime.setText("创建时间：" + family.getCreatedAt());
                     }
                 } else {
+                    dialog.dismissDialog();
                     ToastUtils.showToast(MyFamilyActivity.this, "GetCurrentFamily："+e.getMessage());
                 }
             }
@@ -103,8 +105,10 @@ public class MyFamilyActivity extends BaseActivity {
                         familyNumberAdapter = new FamilyNumberAdapter(MyFamilyActivity.this, list);
                         mRvFamily.setAdapter(familyNumberAdapter);
                         mRvFamily.setLayoutManager(new LinearLayoutManager(MyFamilyActivity.this, LinearLayoutManager.VERTICAL, false));
+                        dialog.dismissDialog();
                     }
                 } else {
+                    dialog.dismissDialog();
                     ToastUtils.showToast(MyFamilyActivity.this, "QueryNumber："+e.getMessage());
                 }
             }

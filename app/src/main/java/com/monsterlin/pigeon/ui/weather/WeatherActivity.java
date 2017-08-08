@@ -66,6 +66,7 @@ public class WeatherActivity extends BaseActivity implements WeatherSearch.OnWea
 
     @Override
     public void initData() {
+        dialog.showDialog();
         initLocation();
 
     }
@@ -111,11 +112,14 @@ public class WeatherActivity extends BaseActivity implements WeatherSearch.OnWea
 
                     mLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
                 } else {
+                    dialog.dismissDialog();
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                     Log.e("AmapError", "location Error, ErrCode:"
                             + amapLocation.getErrorCode() + ", errInfo:"
                             + amapLocation.getErrorInfo());
                 }
+            }else {
+                dialog.dismissDialog();
             }
         }
 
@@ -151,8 +155,10 @@ public class WeatherActivity extends BaseActivity implements WeatherSearch.OnWea
                 mWeatherWind.setText(weatherlive.getWindDirection()+"风  "+weatherlive.getWindPower()+"级");
                 mWeatherTemp.setText("温度  "+weatherlive.getTemperature()+"°");
                 mWeatherHumidity.setText("湿度  "+weatherlive.getHumidity()+"%");
+                dialog.dismissDialog();
             }
         }else {
+            dialog.dismissDialog();
             ToastUtils.showToast(WeatherActivity.this,"No Result：" + rCode);
         }
     }

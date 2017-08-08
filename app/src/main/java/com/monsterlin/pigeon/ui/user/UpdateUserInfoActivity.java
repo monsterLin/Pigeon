@@ -94,6 +94,7 @@ public class UpdateUserInfoActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
         mCurrentUser = BmobUser.getCurrentUser(User.class);
 
         if (!TextUtils.isEmpty(mCurrentUser.getNick())) {
@@ -154,6 +155,7 @@ public class UpdateUserInfoActivity extends BaseActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_ok:
+                dialog.showDialog();
                 boolean isSelectPhoto = isValue(mCurrentPhotoStr);
                 updateUserInfo(isSelectPhoto);
                 break;
@@ -189,14 +191,17 @@ public class UpdateUserInfoActivity extends BaseActivity {
                                 @Override
                                 public void done(BmobException e) {
                                     if (e == null) {
+                                        dialog.dismissDialog();
                                         AppManager.getAppManager().finishActivity();
                                         ToastUtils.showToast(UpdateUserInfoActivity.this, "更新个人资料成功");
                                     } else {
+                                        dialog.dismissDialog();
                                         ToastUtils.showToast(UpdateUserInfoActivity.this, "UpdateUserInfo : " + e.getMessage());
                                     }
                                 }
                             });
                         } else {
+                            dialog.dismissDialog();
                             ToastUtils.showToast(UpdateUserInfoActivity.this, "UploadFile : " + e.getMessage());
                         }
                     }
@@ -212,9 +217,11 @@ public class UpdateUserInfoActivity extends BaseActivity {
                     @Override
                     public void done(BmobException e) {
                         if (e == null) {
+                            dialog.dismissDialog();
                             AppManager.getAppManager().finishActivity();
                             ToastUtils.showToast(UpdateUserInfoActivity.this, "更新个人资料成功");
                         } else {
+                            dialog.dismissDialog();
                             ToastUtils.showToast(UpdateUserInfoActivity.this, "UpdateUserInfo : " + e.getMessage());
                         }
                     }
@@ -222,6 +229,7 @@ public class UpdateUserInfoActivity extends BaseActivity {
 
             }
         } else {
+            dialog.dismissDialog();
             ToastUtils.showToast(UpdateUserInfoActivity.this, "请正确填写信息");
         }
 

@@ -38,7 +38,18 @@ public class UserInfoActivity extends BaseActivity {
     private CircleImageView mCivUserPhoto;
     private TextView mTvNick, mTvAge, mTvPhone, mTvFamily, mTvType;
     private BmobQuery<User> query;
-    private boolean isShowEdit = true;
+    private boolean isMenu = false;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        objectId = getIntent().getStringExtra("objectId");
+        if (objectId.equals(BmobUser.getCurrentUser(User.class).getObjectId())) {
+            isMenu = true;
+        } else {
+            isMenu = false;
+        }
+    }
 
     @Override
     public int getLayoutId() {
@@ -64,11 +75,11 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        dialog.showDialog();
         objectId = getIntent().getStringExtra("objectId");
-        if (!TextUtils.isEmpty(objectId)){
+        if (!TextUtils.isEmpty(objectId)) {
             initUserInfo(objectId);
-            isShowEdit=false;
-        }else {
+        } else {
             initUserInfo(BmobUser.getCurrentUser(User.class).getObjectId());
         }
 
@@ -81,6 +92,8 @@ public class UserInfoActivity extends BaseActivity {
             @Override
             public void done(User user, BmobException e) {
                 if (e == null) {
+                    dialog.dismissDialog();
+
                     BmobFile userPhotoFile = user.getUserPhoto();
                     String nickString = user.getNick();
                     int ageInt = user.getAge();
@@ -126,6 +139,7 @@ public class UserInfoActivity extends BaseActivity {
 
 
                 } else {
+                    dialog.dismissDialog();
                     ToastUtils.showToast(UserInfoActivity.this, "" + e.getMessage());
                 }
             }
@@ -139,10 +153,10 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (isShowEdit){
+        if (isMenu) {
             getMenuInflater().inflate(R.menu.menu_user_edit, menu);
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -152,7 +166,7 @@ public class UserInfoActivity extends BaseActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_edit:
-                startActivity(new Intent(UserInfoActivity.this,UpdateUserInfoActivity.class));
+                startActivity(new Intent(UserInfoActivity.this, UpdateUserInfoActivity.class));
                 break;
             case R.id.action_user_chanage_pass:
                 Bundle bundle = new Bundle();

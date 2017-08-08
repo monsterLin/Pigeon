@@ -84,6 +84,7 @@ public class EditFamilyActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        dialog.showDialog();
         mCurrentUser = BmobUser.getCurrentUser(User.class);
         familyQuery = new BmobQuery<>();
         familyQuery.getObject(mCurrentUser.getFamily().getObjectId(), new QueryListener<Family>() {
@@ -93,11 +94,20 @@ public class EditFamilyActivity extends BaseActivity {
                     familyName = family.getFamilyName();
                     if (!TextUtils.isEmpty(familyName)) {
                         mEdtFamilyName.setText(familyName);
+
                         String photoUrl = family.getFamilyIcon().getFileUrl();
                         if (!TextUtils.isEmpty(photoUrl)) {
                             Picasso.with(EditFamilyActivity.this).load(photoUrl).into(mFamilyPhoto);
                         }
+
+                        dialog.dismissDialog();
+
+                    }else {
+                        dialog.dismissDialog();
                     }
+                }else {
+                    dialog.dismissDialog();
+                    ToastUtils.showToast(EditFamilyActivity.this,"GetFamilyInfo : "+e.getMessage());
                 }
             }
         });
@@ -126,6 +136,7 @@ public class EditFamilyActivity extends BaseActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_ok:
+                dialog.showDialog();
                 if (!TextUtils.isEmpty(mCurrentPhotoStr)) {
 
                     final BmobFile famiyIconFile = new BmobFile(new File(mCurrentPhotoStr));
@@ -143,19 +154,23 @@ public class EditFamilyActivity extends BaseActivity {
                                         @Override
                                         public void done(BmobException e) {
                                             if (e == null) {
+                                                dialog.dismissDialog();
                                                 ToastUtils.showToast(EditFamilyActivity.this, "更新家庭信息成功");
                                                 AppManager.getAppManager().finishActivity();
                                             } else {
+                                                dialog.dismissDialog();
                                                 ToastUtils.showToast(EditFamilyActivity.this, "更新家庭信息失败：" + e.getMessage());
                                             }
                                         }
                                     });
                                 } else {
+                                    dialog.dismissDialog();
                                     ToastUtils.showToast(EditFamilyActivity.this, "请正确填写信息");
                                 }
 
                             } else {
                                 //上传失败
+                                dialog.dismissDialog();
                                 ToastUtils.showToast(EditFamilyActivity.this, e.getMessage());
                             }
                         }
@@ -163,6 +178,7 @@ public class EditFamilyActivity extends BaseActivity {
 
 
                 } else if (familyName.equals(mEdtFamilyName.getText().toString())) {
+                    dialog.dismissDialog();
                     ToastUtils.showToast(EditFamilyActivity.this, "无信息更新");
                 } else if (!familyName.equals(mEdtFamilyName.getText().toString())) {
                     Family family = new Family();
@@ -171,9 +187,11 @@ public class EditFamilyActivity extends BaseActivity {
                         @Override
                         public void done(BmobException e) {
                             if (e == null) {
+                                dialog.dismissDialog();
                                 ToastUtils.showToast(EditFamilyActivity.this, "更新家庭信息成功");
                                 AppManager.getAppManager().finishActivity();
                             } else {
+                                dialog.dismissDialog();
                                 ToastUtils.showToast(EditFamilyActivity.this, "更新家庭信息失败：" + e.getMessage());
                             }
                         }
