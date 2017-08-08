@@ -9,8 +9,11 @@ import android.view.ViewGroup;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.bean.Sticker;
 import com.monsterlin.pigeon.vholder.StickerVHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * @author : monsterLin
@@ -42,7 +45,29 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerVHolder> {
 
     @Override
     public void onBindViewHolder(StickerVHolder holder, int position) {
+        holder.mTvDate.setText(stickerList.get(position).getUpdatedAt());
         holder.mTvContent.setText(stickerList.get(position).getContent());
+        holder.mTvNick.setText(stickerList.get(position).getUser().getNick());
+
+        BmobFile bmobFile = stickerList.get(position).getUser().getUserPhoto();
+        if (bmobFile!=null){
+            Picasso.with(mContext).load(bmobFile.getFileUrl()).into(holder.mCivUserPhoto);
+        }else {
+            holder.mCivUserPhoto.setImageResource(R.drawable.ic_default);
+        }
+
+        int typeInt = stickerList.get(position).getUser().getType();
+
+        if (typeInt==0){
+            //子女
+            holder.mRlSticker.setBackgroundResource(R.color.syellow);
+        }else if (typeInt==1){
+            //父母
+            holder.mRlSticker.setBackgroundResource(R.color.sblue);
+        }
+
+
+
     }
 
     @Override

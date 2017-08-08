@@ -39,5 +39,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_sticker_new" />
+        android:src="@drawable/ic_edit" />
 </RelativeLayout>

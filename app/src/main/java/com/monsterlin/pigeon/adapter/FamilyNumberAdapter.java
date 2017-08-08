@@ -12,10 +12,11 @@ import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.ui.user.UserInfoActivity;
 import com.monsterlin.pigeon.vholder.FamilyNumberVHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * @author : monsterLin
@@ -45,10 +46,20 @@ public class FamilyNumberAdapter extends RecyclerView.Adapter<FamilyNumberVHolde
 
     @Override
     public void onBindViewHolder(FamilyNumberVHolder holder, final int position) {
+
+        BmobFile userPhotoFile = numberList.get(position).getUserPhoto();
+
+        if (userPhotoFile!=null){
+            Picasso.with(mContext).load(numberList.get(position).getUserPhoto().getFileUrl()).into(holder.mIvIcon);
+        }else {
+            holder.mIvIcon.setImageResource(R.drawable.ic_default);
+
+        }
+
         String nick = numberList.get(position).getNick();
 
         if (TextUtils.isEmpty(nick)){
-            holder.mTvNick.setText("用户"+ BmobUser.getCurrentUser(User.class).getObjectId());
+            holder.mTvNick.setText("用户"+ numberList.get(position).getObjectId());
         }else{
             holder.mTvNick.setText(numberList.get(position).getNick());
         }
