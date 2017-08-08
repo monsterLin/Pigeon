@@ -1,8 +1,8 @@
 ## 飞鸽
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/monsterLin/Pigeon/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/monsterLin/Pigeon.svg)](https://github.com/monsterLin/Pigeon/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/monsterLin/Pigeon.svg)](https://github.com/monsterLin/Pigeon/network)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/monsterLin/Pigeon.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 
 ### 前言
 
