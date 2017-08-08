@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sticker_tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:text="20170201 15:24:32"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/sticker_tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sticker_tv_date"
+            android:layout_marginLeft="12dp"
+            android:text="平时注意身体"
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:id="@+id/sticker_tv_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/sticker_tv_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="12dp"
+            android:gravity="bottom"
+            android:text="monsterlin"
+            android:textColor="@color/black" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/sticker_civ_userPhoto"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@id/sticker_tv_nick"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/sticker_tv_nick"
+            android:src="@drawable/ic_default" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -8,6 +8,7 @@ import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.adapter.ToolsAdapter;
 import com.monsterlin.pigeon.base.BaseFragment;
 import com.monsterlin.pigeon.bean.Tools;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +32,9 @@ public class ToolsFragment extends BaseFragment implements View.OnClickListener 
     private ToolsAdapter toolsAdapter;
     private BmobQuery<Tools> query;
 
+    private RefreshLayout mRefreshLayout;
+    private static boolean isFirstEnter = true;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_tools;
@@ -39,6 +43,12 @@ public class ToolsFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void initViews() {
         mRvTools = findView(R.id.tools_rv_list);
+        mRefreshLayout=findView(R.id.refreshLayout);
+
+        if (isFirstEnter) {
+            isFirstEnter = false;
+            mRefreshLayout.autoRefresh();
+        }
     }
 
     @Override

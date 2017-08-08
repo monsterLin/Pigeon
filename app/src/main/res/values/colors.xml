@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#e77172</color>
     <color name="colorPrimaryDark">#e77172</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#fff</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="borrow">#FFEBB9</color>
@@ -14,4 +14,8 @@
 
     <color name="bg_main">#f3f3f3</color>
     <color name="gray_">#d0d9d6</color>
+
+    <color name="syellow">#fed2b1</color>
+    <color name="sblue">#c0dfdb</color>
+    <color name="spink">#c0dfdb</color>
 </resources>
