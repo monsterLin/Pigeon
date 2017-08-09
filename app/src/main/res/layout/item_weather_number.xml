@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/weather_number_iv_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_default" />
+
+    <TextView
+        android:id="@+id/weather_number_tv_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试用户名"
+        android:layout_toRightOf="@id/weather_number_iv_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"/>
+
+    <ImageView
+        android:id="@+id/weather_number_iv_sms"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="12dp"
+        android:src="@drawable/ic_weather_sms"/>
+
+    <TextView
+        android:id="@+id/weather_number_tv_weather"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="12dp"
+        android:gravity="center"
+        android:layout_toLeftOf="@id/weather_number_iv_sms"
+        android:text="多云"/>
+
+</RelativeLayout>

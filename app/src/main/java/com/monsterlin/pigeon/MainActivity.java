@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 
 import com.monsterlin.pigeon.adapter.ViewPagerAdapter;
 import com.monsterlin.pigeon.common.AppManager;
+import com.monsterlin.pigeon.utils.ToastUtils;
 import com.monsterlin.pigeon.view.HomeFragment;
 import com.monsterlin.pigeon.view.PersonFragment;
 import com.monsterlin.pigeon.view.ToolsFragment;
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPagerAdapter adapter;
 
     private List<Fragment> fragmentList;
+    private long exitTime = 0;
 
 
     @Override
@@ -125,6 +128,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    public void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+
+            ToastUtils.showToast(MainActivity.this,"再按一次退出");
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 
 }

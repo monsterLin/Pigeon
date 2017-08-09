@@ -37,6 +37,7 @@
     <string name="about_tv_thanks">鸣谢致敬</string>
     <string name="action_exit">注销</string>
     <string name="advice_tv_text">欢迎您对我们的程序提出宝贵的建议</string>
+    <string name="weather_tv_tips">家人天气：</string>
 
 
 </resources>
