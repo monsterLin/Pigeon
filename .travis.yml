@@ -1,7 +1,16 @@
-language: android
-notifications :false
+language: android  # 构建语言
+
+sudo: false  # 开启基于容器的Travis CI任务，让编译效率更高。
+
+notifications :false   # 每次构建的时候是否通知
+
+branches: master # 指定构建分支
+
 android:
   components:
-    - build-tools-25.0.3
-    - android-25
-    - extra
+  - build-tools-23.0.1
+  - android-23
+  - extra-android-m2repository
+  - extra-android-support
+  - tools
+  
