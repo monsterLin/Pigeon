@@ -55,6 +55,7 @@
         <activity android:name=".ui.app.ThanksActivity"/>
         <activity android:name=".ui.app.AdviceActivity"/>
         <activity android:name=".ui.setting.NewStickerActivity"/>
+        <activity android:name=".ui.sticker.MyStickerActivity"/>
 
         <service android:name="com.amap.api.location.APSService"></service>
 

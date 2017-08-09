@@ -5,6 +5,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.monsterlin.pigeon.R;
@@ -118,5 +120,21 @@ public class StickerActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         initData();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_sticker,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_mySticker:
+                nextActivity(MyStickerActivity.class);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

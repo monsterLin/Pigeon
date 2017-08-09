@@ -30,6 +30,19 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerVHolder> {
     private List<Sticker> stickerList ;
     private LayoutInflater mInflater ;
 
+    public interface  OnItemClickListener{
+        void OnItemClick(int position, View view);
+        void OnItemLongClick(int position, View view);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public  void setOnItemClickListener(OnItemClickListener listener){
+        this.mOnItemClickListener=listener;
+    }
+
+
+
     public StickerAdapter(Context mContext, List<Sticker> stickerList) {
         this.mContext = mContext;
         this.stickerList = stickerList;
@@ -44,7 +57,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerVHolder> {
     }
 
     @Override
-    public void onBindViewHolder(StickerVHolder holder, int position) {
+    public void onBindViewHolder(final StickerVHolder holder, int position) {
         holder.mTvDate.setText(stickerList.get(position).getUpdatedAt());
         holder.mTvContent.setText(stickerList.get(position).getContent());
         holder.mTvNick.setText(stickerList.get(position).getUser().getNick());
@@ -66,6 +79,27 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerVHolder> {
             holder.mRlSticker.setBackgroundResource(R.color.sblue);
         }
 
+        if (mOnItemClickListener!=null){
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    int LayoutPosition=holder.getLayoutPosition(); //得到布局的position
+                    mOnItemClickListener.OnItemClick(LayoutPosition,holder.itemView);
+
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int LayoutPosition=holder.getLayoutPosition(); //得到布局的position
+                    mOnItemClickListener.OnItemLongClick(LayoutPosition,holder.itemView);
+                    return false;
+                }
+            });
+        }
 
 
     }
