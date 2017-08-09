@@ -5,8 +5,6 @@ sudo: false  # 开启基于容器的Travis CI任务，让编译效率更高。
 notifications:      # 每次构建的时候是否通知，如果不想收到通知邮箱（个人感觉邮件贼烦），那就设置false吧
   email: false
 
-branches: master # 指定构建分支
-
 android:
   components:
   - build-tools-23.0.1
