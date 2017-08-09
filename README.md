@@ -1,4 +1,4 @@
-![banner](http://oszh5svp5.bkt.clouddn.com/pigeon_banner_show.png)
+![banner](http://oszh5svp5.bkt.clouddn.com/pigeon_banner_show_01.png)
 
 ## 飞鸽
 
@@ -24,6 +24,8 @@
 
 ### 开发日志
 
+> 关于符号的意思，请点击[传送门](https://github.com/monsterLin/GithubFun)
+
 - 2017年7月4日，项目开始搭建 :tada:
 - 2017年7月6日，完成项目的基本框架的搭建 :art:
 - 2017年7月11日，完成登陆，注册的功能 :sparkles:
@@ -32,6 +34,7 @@
 - 2017年8月4日，修复家庭部分的业务逻辑 :art: :bug:
 - 2017年8月7日，升级UI，确定app主题格局 :lipstick:
 - 2017年8月9日，1.0 雏形完成 :bookmark:
+- 2017年8月9日，添加CI构建系统 :construction_worker:
 
 ### 开发进度
 
