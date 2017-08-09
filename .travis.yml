@@ -13,3 +13,6 @@ android:
   - extra-android-support
   - tools
   
+before_install:     
+ - chmod +x gradlew  # 改变gradlew的访问权限
+  
