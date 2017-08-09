@@ -69,7 +69,7 @@ public class AboutActivity extends BaseActivity {
                 break;
             case R.id.about_tv_website:
                 Bundle b = new Bundle();
-                b.putString("url","https://www.baidu.com");
+                b.putString("url","http://pigeon.monsterlin.com/");
                 nextActivity(BrowerActivity.class,b);
                 break;
             case R.id.about_tv_upgrade:

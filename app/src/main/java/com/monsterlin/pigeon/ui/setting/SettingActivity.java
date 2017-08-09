@@ -73,7 +73,7 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.setting_tv_license:
                 Bundle b = new Bundle();
-                b.putString("url", "https://www.baidu.com");
+                b.putString("url", "http://pigeon.monsterlin.com/license.html");
                 nextActivity(BrowerActivity.class, b);
                 break;
             case R.id.setting_tv_about:
