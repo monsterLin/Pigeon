@@ -23,9 +23,9 @@
 
 ### 开发进度
 
-> 更新时间：2017年08月08日
+> 更新时间：2017年08月09日
 
-![pigeon](https://raw.githubusercontent.com/monsterLin/Pigeon/master/pigeon_2017_08_08.png)
+![pigeon](https://raw.githubusercontent.com/monsterLin/Pigeon/master/pigeon_progress.png)
 
 ### 逻辑分析
 
