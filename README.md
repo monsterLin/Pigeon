@@ -1,6 +1,7 @@
 ## 飞鸽
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/monsterLin/Pigeon/master/LICENSE)
+[![Build Status](https://travis-ci.org/monsterLin/interview.svg?branch=master)](https://travis-ci.org/monsterLin/interview)
 [![GitHub stars](https://img.shields.io/github/stars/monsterLin/Pigeon.svg?style=social&label=Stars)](https://github.com/monsterLin/Pigeon/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/monsterLin/Pigeon.svg?style=social&label=Fork)](https://github.com/monsterLin/Pigeon/network)
 
