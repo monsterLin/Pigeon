@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/view_common_toolbar" />
+
+
+    <LinearLayout
+        android:id="@+id/lv_op"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="#EEEEEE"
+        android:padding="4dp">
+
+        <EditText
+            android:id="@+id/chat_edt_message"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:layout_weight="5"
+            android:background="@drawable/bg_et_msg"
+            android:paddingLeft="4dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/chat_tv_send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_send"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="发送"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/chat_lv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/lv_op"
+        android:layout_below="@id/toolbar"
+        android:divider="@null"
+        android:dividerHeight="6dp" />
+</RelativeLayout>

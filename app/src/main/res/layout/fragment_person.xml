@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/aWhite"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/person_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/white">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/person_civ_userPhoto"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="16dp" />
+
+        <TextView
+            android:id="@+id/person_tv_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/person_civ_userPhoto"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/person_civ_userPhoto"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/person_tv_userID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/person_tv_userName"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@id/person_civ_userPhoto"/>
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/person_tv_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_setting"
+        android:gravity="center_vertical"
+        android:padding="12dp"
+        android:drawablePadding="10dp"
+        android:text="设置"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+</LinearLayout>

@@ -1,3 +1,43 @@
 <resources>
-    <string name="app_name">Pigeon</string>
+    <string name="app_name">飞鸽</string>
+    <string name="login_edt_userName">手机号</string>
+    <string name="login_edt_userPass">密码</string>
+    <string name="login_btn">登陆</string>
+    <string name="login_tv_register">手机注册</string>
+    <string name="login_tv_forgetPass">忘记密码</string>
+    <string name="tv_tips">手机号码可作为登陆账号，是找回密码的重要凭证</string>
+    <string name="forgetPass_edt_num">请输入你绑定的手机号</string>
+    <string name="forgetPass_btn">找回密码</string>
+    <string name="forgetPass_tv_tips">找回密码会将验证码发送至你绑定的手机号中，请注意查收</string>
+    <string name="about_tv_upgrade">升级说明</string>
+    <string name="about_tv_version">飞鸽 1.0</string>
+    <string name="about_tv_recommend">推荐给好友</string>
+    <string name="about_tv_website">官方网站</string>
+    <string name="about_tv_check">检查新版本</string>
+    <string name="tv_loading">请稍后&#8230;</string>
+    <string name="btn_getSmsCode">一键获取</string>
+    <string name="familyGuide_edt_searchFamily">创建者飞鸽号</string>
+    <string name="familyGuide_tv_create">没有家庭？创建家庭</string>
+    <string name="familyGuide_tv_tips">体验全部功能请创建或者加入家庭</string>
+    <string name="familyGuide_btn_share">分享</string>
+    <string name="family_edt_create">请输入家庭名</string>
+    <string name="edt_smsCode">验证码</string>
+    <string name="test_familyGuide_banner_tip">宣传图位置</string>
+    <string name="test_upgrade_txt">升级说明</string>
+    <string name="test_home_txt">主页</string>
+    <string name="test_person_txt">个人中心</string>
+    <string name="test_tools_txt">工具</string>
+    <string name="tools_tv_topNews">今日资讯</string>
+    <string name="tools_tv_healthy">健康资讯</string>
+    <string name="tools_tv_rumour">辟谣助手</string>
+    <string name="action_ok">确认</string>
+    <string name="action_change_pass">修改密码</string>
+    <string name="updateInfo_rr_child">子女</string>
+    <string name="updateInfo_rr_parent">父母</string>
+    <string name="about_tv_thanks">鸣谢致敬</string>
+    <string name="action_exit">注销</string>
+    <string name="advice_tv_text">欢迎您对我们的程序提出宝贵的建议</string>
+    <string name="weather_tv_tips">家人天气：</string>
+
+
 </resources>

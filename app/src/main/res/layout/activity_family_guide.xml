@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_common_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingTop="20dp">
+
+
+        <TextView
+            android:id="@+id/familyGuide_tv_pigeonId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white" />
+
+
+        <Button
+            android:id="@+id/familyGuide_btn_share"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/familyGuide_tv_pigeonId"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/familyGuide_tv_pigeonId"
+            android:background="@drawable/shape_copy_style"
+            android:text="@string/familyGuide_btn_share"
+            android:textColor="@color/colorPrimary" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/familyGuide_tv_pigeonId"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text="@string/familyGuide_tv_tips"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/familyGuide_familyIdWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/familyGuide_edt_searchFamily"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_search"
+            android:hint="@string/familyGuide_edt_searchFamily"
+            android:inputType="text" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/familyGuide_tv_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="end"
+        android:text="@string/familyGuide_tv_create" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/test_familyGuide_banner_tip"/>
+</LinearLayout>
