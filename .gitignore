@@ -8,3 +8,5 @@
 /build
 /captures
 .externalNativeBuild
+/release.keystore.jks
+/gradle.properties
