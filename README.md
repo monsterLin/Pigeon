@@ -36,6 +36,10 @@
 - 2017年8月9日，1.0 雏形完成 :bookmark:
 - 2017年8月9日，添加CI构建系统 :construction_worker:
 
+### 数据模型
+
+![database](http://oszh5svp5.bkt.clouddn.com/database.png)
+
 ### 开发进度
 
 > 更新时间：2017年08月09日
