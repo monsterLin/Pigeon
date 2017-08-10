@@ -22,6 +22,7 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
@@ -79,12 +80,20 @@ public class MyFamilyActivity extends BaseActivity {
             public void done(Family family, BmobException e) {
                 if (e == null) {
                     if (family != null) {
-                        String photoUrl = family.getFamilyIcon().getFileUrl();
-                        if (!TextUtils.isEmpty(photoUrl)){
-                            Picasso.with(MyFamilyActivity.this).load(family.getFamilyIcon().getFileUrl()).into(mFamilyCivPhoto);
+
+                        BmobFile photoFile = family.getFamilyIcon();
+                        if (photoFile!=null){
+                            Picasso.with(MyFamilyActivity.this).load(photoFile.getFileUrl()).into(mFamilyCivPhoto);
+                        }else {
+                            mFamilyCivPhoto.setImageResource(R.drawable.ic_default);
                         }
+
                         mTvFamilyName.setText("家庭名：" + family.getFamilyName());
-                        mTvCreator.setText("创建者：" + family.getFamilyCreator().getNick());
+
+                        if (!TextUtils.isEmpty(family.getFamilyCreator().getNick())){
+                            mTvCreator.setText(family.getFamilyCreator().getNick());
+                        }
+
                         mTvCreateTime.setText("创建时间：" + family.getCreatedAt());
                     }
                 } else {

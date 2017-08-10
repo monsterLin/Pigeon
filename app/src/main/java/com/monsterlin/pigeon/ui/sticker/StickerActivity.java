@@ -13,6 +13,7 @@ import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.adapter.StickerAdapter;
 import com.monsterlin.pigeon.base.BaseActivity;
 import com.monsterlin.pigeon.bean.Sticker;
+import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.ui.setting.NewStickerActivity;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -22,6 +23,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
@@ -41,6 +43,7 @@ public class StickerActivity extends BaseActivity {
     private RefreshLayout mRefreshLayout;
     private static boolean isFirstEnter = true;
     private BmobQuery<Sticker> stickerQuery;
+    private User mCurrentUser ;
 
     @Override
     public int getLayoutId() {
@@ -82,14 +85,17 @@ public class StickerActivity extends BaseActivity {
     @Override
     public void initData() {
         //TODO 分页查询
+        mCurrentUser= BmobUser.getCurrentUser(User.class);
         stickerQuery = new BmobQuery<>();
         stickerQuery.include("user,family");
         stickerQuery.order("-updatedAt");
+        stickerQuery.addWhereEqualTo("user",mCurrentUser);
+        stickerQuery.addWhereEqualTo("family",mCurrentUser.getFamily());
         stickerQuery.findObjects(new FindListener<Sticker>() {
             @Override
             public void done(List<Sticker> list, BmobException e) {
                 if (e == null) {
-                    if (list != null) {
+                    if (list.size()!=0) {
                         stickerAdapter = new StickerAdapter(StickerActivity.this, list);
                         mStickerRv.setLayoutManager(new LinearLayoutManager(StickerActivity.this));
                         mStickerRv.setItemAnimator(new DefaultItemAnimator());

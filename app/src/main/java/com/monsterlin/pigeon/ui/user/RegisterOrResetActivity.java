@@ -15,7 +15,6 @@ import com.monsterlin.pigeon.constant.BmobConfig;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.monsterlin.pigeon.widget.CountDownButtonHelper;
 import com.monsterlin.pigeon.widget.LoadingDialog;
-import com.orhanobut.logger.Logger;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -114,11 +113,9 @@ public class RegisterOrResetActivity extends BaseActivity {
                         @Override
                         public void done(Integer smsCode, BmobException e) {
                             if (e == null) {
-                                Logger.i("本次验证码为：" + smsCode);
                                 ToastUtils.showToast(RegisterOrResetActivity.this, "验证码发送完毕");
-                                mEdtSmsCode.setText(smsCode);
                             } else {
-                                Logger.e(e.getMessage());
+                                ToastUtils.showToast(RegisterOrResetActivity.this, "验证码发送失败："+e.getMessage());
                             }
                         }
                     });

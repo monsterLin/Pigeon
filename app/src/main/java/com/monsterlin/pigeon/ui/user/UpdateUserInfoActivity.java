@@ -99,8 +99,6 @@ public class UpdateUserInfoActivity extends BaseActivity {
 
         if (!TextUtils.isEmpty(mCurrentUser.getNick())) {
             mEdtNick.setText(mCurrentUser.getNick());
-        } else {
-            mEdtNick.setText("用户" + mCurrentUser.getObjectId());
         }
 
         if (mCurrentUser.getAge() == 0) {

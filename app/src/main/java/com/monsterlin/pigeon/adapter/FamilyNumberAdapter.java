@@ -58,9 +58,7 @@ public class FamilyNumberAdapter extends RecyclerView.Adapter<FamilyNumberVHolde
 
         String nick = numberList.get(position).getNick();
 
-        if (TextUtils.isEmpty(nick)){
-            holder.mTvNick.setText("用户"+ numberList.get(position).getObjectId());
-        }else{
+        if (!TextUtils.isEmpty(nick)){
             holder.mTvNick.setText(numberList.get(position).getNick());
         }
 
