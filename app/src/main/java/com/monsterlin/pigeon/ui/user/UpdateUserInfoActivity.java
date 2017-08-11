@@ -1,11 +1,10 @@
 package com.monsterlin.pigeon.ui.user;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -21,8 +20,11 @@ import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.common.AppManager;
 import com.monsterlin.pigeon.utils.ToastUtils;
 import com.squareup.picasso.Picasso;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
@@ -48,13 +50,13 @@ public class UpdateUserInfoActivity extends BaseActivity {
     private Toolbar mToolBar;
     private User mCurrentUser;
 
-    private Bitmap mPhotoBitmap;
-
     private String nickStr, ageString;
     private int typeInt;
-    private String mCurrentPhotoStr;
 
-    private static final int NORMAL_PICK_CODE = 0x003;
+    private Bitmap mPhotoBitmap;
+    private String mCurrentPhotoStr;
+    private static final int REQUEST_SELECT_PICTURE = 0x01;
+
 
     @Override
     public int getLayoutId() {
@@ -121,9 +123,9 @@ public class UpdateUserInfoActivity extends BaseActivity {
         }
 
         BmobFile userPhotoFile = mCurrentUser.getUserPhoto();
-        if (userPhotoFile!=null){
+        if (userPhotoFile != null) {
             Picasso.with(UpdateUserInfoActivity.this).load(userPhotoFile.getFileUrl()).into(mCivPhoto);
-        }else {
+        } else {
             mCivPhoto.setImageResource(R.drawable.ic_default);
         }
 
@@ -133,9 +135,11 @@ public class UpdateUserInfoActivity extends BaseActivity {
     public void processClick(View v) {
         switch (v.getId()) {
             case R.id.updateInfo_civ_photo:
-                Intent intent = new Intent(Intent.ACTION_PICK);
+                Intent intent = new Intent();
                 intent.setType("image/*");
-                startActivityForResult(intent, NORMAL_PICK_CODE);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(Intent.createChooser(intent, getString(R.string.label_select_picture)), REQUEST_SELECT_PICTURE);
                 break;
         }
     }
@@ -242,28 +246,56 @@ public class UpdateUserInfoActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        switch (requestCode) {
-
-            case NORMAL_PICK_CODE:
-                //TODO 临时的方法，可能产生内存溢出
-                if (intent != null) {
-                    Uri uri = intent.getData();
-                    Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-                    cursor.moveToFirst();
-
-                    int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                    mCurrentPhotoStr = cursor.getString(idx);
-
-                    cursor.close();
-
-                    mPhotoBitmap = BitmapFactory.decodeFile(mCurrentPhotoStr);
-
-                    mCivPhoto.setImageBitmap(mPhotoBitmap);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_SELECT_PICTURE) {
+                final Uri selectedUri = data.getData();
+                if (selectedUri != null) {
+                    startCropActivity(data.getData());
+                } else {
+                    ToastUtils.showToast(UpdateUserInfoActivity.this,"类型不匹配");
                 }
-
-                break;
+            } else if (requestCode == UCrop.REQUEST_CROP) {
+                handleCropResult(data);
+            }
         }
-        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode == UCrop.RESULT_ERROR) {
+            handleCropError(data);
+        }
     }
+
+    private void startCropActivity(@NonNull Uri uri) {
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s = sdf.format(d);
+
+        String destinationFileName = s + ".jpg";
+
+        UCrop uCrop = UCrop.of(uri, Uri.fromFile(new File(getCacheDir(), destinationFileName)));
+
+        uCrop = uCrop.useSourceImageAspectRatio();
+
+        uCrop.start(UpdateUserInfoActivity.this);
+    }
+
+    private void handleCropResult(@NonNull Intent result) {
+        final Uri resultUri = UCrop.getOutput(result);
+        if (resultUri != null) {
+            mCurrentPhotoStr = resultUri.getPath();
+            mPhotoBitmap = BitmapFactory.decodeFile(resultUri.getPath());
+            mCivPhoto.setImageBitmap(mPhotoBitmap);
+        }
+
+
+    }
+
+    private void handleCropError(@NonNull Intent result) {
+        final Throwable cropError = UCrop.getError(result);
+        if (cropError != null) {
+            ToastUtils.showToast(UpdateUserInfoActivity.this,cropError.getMessage());
+        } else {
+            ToastUtils.showToast(UpdateUserInfoActivity.this,"handleCropError");
+        }
+    }
+
 }

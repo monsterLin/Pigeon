@@ -69,6 +69,9 @@ dependencies {
     compile('com.zhy:okhttputils:2.6.2') {
         exclude group: 'com.squareup.okhttp3'
     }
+    compile ('com.github.yalantis:ucrop:2.2.1'){
+        exclude group: 'com.squareup.okhttp3'
+    }
     compile 'com.amap.api:search:latest.integration'
     compile 'com.amap.api:map2d:latest.integration'
     compile 'com.amap.api:location:latest.integration'
