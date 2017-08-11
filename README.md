@@ -160,6 +160,8 @@
 
 ### 程序欣赏
 
+[观赏地址](http://oszh5svp5.bkt.clouddn.com/simple_pigeon_show.mp4)
+
 ### 鸣谢
 
 - @ 西柚 ：提供设计支持
