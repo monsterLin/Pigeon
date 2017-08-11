@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.monsterlin.pigeon.R;
 import com.monsterlin.pigeon.bean.User;
 import com.monsterlin.pigeon.ui.user.UserInfoActivity;
+import com.monsterlin.pigeon.utils.PhoneUtil;
 import com.monsterlin.pigeon.vholder.FamilyNumberVHolder;
 import com.squareup.picasso.Picasso;
 
@@ -49,16 +50,16 @@ public class FamilyNumberAdapter extends RecyclerView.Adapter<FamilyNumberVHolde
 
         BmobFile userPhotoFile = numberList.get(position).getUserPhoto();
 
-        if (userPhotoFile!=null){
+        if (userPhotoFile != null) {
             Picasso.with(mContext).load(numberList.get(position).getUserPhoto().getFileUrl()).into(holder.mIvIcon);
-        }else {
+        } else {
             holder.mIvIcon.setImageResource(R.drawable.ic_default);
 
         }
 
         String nick = numberList.get(position).getNick();
 
-        if (!TextUtils.isEmpty(nick)){
+        if (!TextUtils.isEmpty(nick)) {
             holder.mTvNick.setText(numberList.get(position).getNick());
         }
 
@@ -75,8 +76,17 @@ public class FamilyNumberAdapter extends RecyclerView.Adapter<FamilyNumberVHolde
             @Override
             public void onClick(View v) {
                 Intent userInfoIntent = new Intent(mContext, UserInfoActivity.class);
-                userInfoIntent.putExtra("objectId",numberList.get(position).getObjectId());
+                userInfoIntent.putExtra("objectId", numberList.get(position).getObjectId());
                 mContext.startActivity(userInfoIntent);
+            }
+        });
+
+
+        holder.mIvPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phone = numberList.get(position).getMobilePhoneNumber();
+                PhoneUtil.call(mContext, phone);
             }
         });
     }
