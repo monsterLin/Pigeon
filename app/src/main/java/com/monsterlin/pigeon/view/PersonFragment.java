@@ -66,8 +66,6 @@ public class PersonFragment extends BaseFragment {
 
         if (!TextUtils.isEmpty(nick)) {
             mTvName.setText(nick);
-        } else {
-            mTvName.setText("用户" + objectId);
         }
 
         if (!TextUtils.isEmpty(objectId)) {

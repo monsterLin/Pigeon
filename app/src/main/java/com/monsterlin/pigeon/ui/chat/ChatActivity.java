@@ -61,7 +61,7 @@ public class ChatActivity extends BaseActivity {
     @Override
     public void initData() {
         mDatas = new ArrayList<>();
-        mDatas.add(new ChatMessage("你好，我的主人(≧∇≦)", ChatMessage.Type.INCOMING, new Date()));
+        mDatas.add(new ChatMessage("图灵机器人前来报道（＾◇＾）", ChatMessage.Type.INCOMING, new Date()));
         mAdapter = new ChatMessageAdapter(this, mDatas);
         mLvMsg.setAdapter(mAdapter);
     }

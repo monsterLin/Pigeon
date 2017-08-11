@@ -33,9 +33,9 @@ import cn.bmob.v3.listener.UpdateListener;
  */
 public class CreateFamilyActivity extends BaseActivity {
 
-    private Toolbar mToolBar ;
-    private TextInputLayout mFamilyNameWrappter ;
-    private EditText mEdtFamilyName ;
+    private Toolbar mToolBar;
+    private TextInputLayout mFamilyNameWrappter;
+    private EditText mEdtFamilyName;
     private User bmobUser;
 
     @Override
@@ -45,11 +45,11 @@ public class CreateFamilyActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mToolBar=findView(R.id.common_toolbar);
-        initToolBar(mToolBar,"创建家庭",true);
-        mFamilyNameWrappter=findView(R.id.createFamily_NameWrappter);
+        mToolBar = findView(R.id.common_toolbar);
+        initToolBar(mToolBar, "创建家庭", true);
+        mFamilyNameWrappter = findView(R.id.createFamily_NameWrappter);
         mFamilyNameWrappter.setHint("家庭名");
-        mEdtFamilyName=findView(R.id.createFamily_edt_name);
+        mEdtFamilyName = findView(R.id.createFamily_edt_name);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class CreateFamilyActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        bmobUser=BmobUser.getCurrentUser(User.class);
+
     }
 
     @Override
@@ -76,42 +76,51 @@ public class CreateFamilyActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_ok:
+                bmobUser = BmobUser.getCurrentUser(User.class);
                 String familyName = mEdtFamilyName.getText().toString();
-                if (!TextUtils.isEmpty(familyName)){
-                    final Family family = new Family();
-                    family.setFamilyName(familyName);
-                    family.setFamilyCreator(bmobUser);
-                    family.save(new SaveListener<String>() {
-                        @Override
-                        public void done(String s, BmobException e) {
-                            if (e == null) {
-                                User user = new User();
-                                user.setIsCreate(true);
-                                user.setIsJoin(false);
-                                user.setFamily(family);
-                                user.update(bmobUser.getObjectId(), new UpdateListener() {
-                                    @Override
-                                    public void done(BmobException e) {
-                                        if (e==null){
-                                            SPUtils.putBoolean(FamilyConfig.SPEXIST,true);
-                                            ToastUtils.showToast(CreateFamilyActivity.this, "家庭创建成功");
-                                            AppManager.getAppManager().finishActivity(GuideFamilyActivity.class);
-                                            AppManager.getAppManager().finishActivity();
-                                            nextActivity(MainActivity.class);
 
-                                        }else {
-                                            ToastUtils.showToast(CreateFamilyActivity.this,"更新家庭信息失败："+e.getMessage());
-                                        }
+                if (!TextUtils.isEmpty(familyName)) {
+                    if (bmobUser != null) {
+                        final Family family = new Family();
+                        family.setFamilyName(familyName);
+                        family.setFamilyCreator(bmobUser);
+                        family.save(new SaveListener<String>() {
+                            @Override
+                            public void done(String s, BmobException e) {
+                                if (e == null) {
+                                    if (family != null) {
+                                        User user = new User();
+                                        user.setIsCreate(true);
+                                        user.setIsJoin(false);
+                                        user.setFamily(family);
+                                        user.setNick("用户"+bmobUser.getObjectId());
+                                        user.update(bmobUser.getObjectId(), new UpdateListener() {
+                                            @Override
+                                            public void done(BmobException e) {
+//                                                if (e == null) {
+                                                    SPUtils.putBoolean(FamilyConfig.SPEXIST, true);
+                                                    ToastUtils.showToast(CreateFamilyActivity.this, "家庭创建成功");
+                                                    AppManager.getAppManager().finishActivity(GuideFamilyActivity.class);
+                                                    AppManager.getAppManager().finishActivity();
+                                                    nextActivity(MainActivity.class);
+
+//                                                } else {
+                                                // bmob 9015  &&  java.util.ConcurrentModificationException
+//                                                    ToastUtils.showToast(CreateFamilyActivity.this, "更新家庭信息失败：" + e.getMessage() + "|||" + e.getErrorCode());
+//                                                }
+                                            }
+                                        });
                                     }
-                                });
-
-                            } else {
-                                ToastUtils.showToast(CreateFamilyActivity.this, "创建家庭失败：" + e.getMessage());
+                                } else {
+                                    ToastUtils.showToast(CreateFamilyActivity.this, "创建家庭失败：" + e.getMessage());
+                                }
                             }
-                        }
-                    });
+                        });
+                    } else {
+                        ToastUtils.showToast(CreateFamilyActivity.this, "cache bmobuser not found");
+                    }
                 }
 
 

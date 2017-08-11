@@ -61,6 +61,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="12dp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_shape"
         android:text="@string/login_btn" />
 
     <LinearLayout

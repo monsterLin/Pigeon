@@ -18,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @desc : 家庭成员
  */
 public class FamilyNumberVHolder extends RecyclerView.ViewHolder {
-    public ImageView mIvType , mIvUserInfo;
+    public ImageView mIvType , mIvUserInfo , mIvPhone;
     public TextView mTvNick;
     public CircleImageView mIvIcon;
 
@@ -28,5 +28,6 @@ public class FamilyNumberVHolder extends RecyclerView.ViewHolder {
         mIvType = (ImageView) itemView.findViewById(R.id.number_iv_type);
         mIvUserInfo = (ImageView) itemView.findViewById(R.id.number_iv_userInfo);
         mTvNick = (TextView) itemView.findViewById(R.id.number_tv_nick);
+        mIvPhone= (ImageView) itemView.findViewById(R.id.number_iv_phone);
     }
 }

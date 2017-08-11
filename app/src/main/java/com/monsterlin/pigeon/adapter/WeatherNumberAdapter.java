@@ -63,8 +63,6 @@ public class WeatherNumberAdapter extends RecyclerView.Adapter<WeatherNumberVHol
         String nick = userList.get(position).getNick();
         if (!TextUtils.isEmpty(nick)) {
             holder.mTvNick.setText(nick);
-        } else {
-            holder.mTvNick.setText("用户" + userList.get(position).getObjectId());
         }
 
         holder.mCivSms.setOnClickListener(new View.OnClickListener() {

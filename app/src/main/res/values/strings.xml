@@ -38,6 +38,7 @@
     <string name="action_exit">注销</string>
     <string name="advice_tv_text">欢迎您对我们的程序提出宝贵的建议</string>
     <string name="weather_tv_tips">家人天气：</string>
+    <string name="label_select_picture">选择图片</string>
 
 
 </resources>

@@ -109,8 +109,6 @@ public class UserInfoActivity extends BaseActivity {
 
                     if (!TextUtils.isEmpty(nickString)) {
                         mTvNick.setText("昵         称：" + nickString);
-                    } else {
-                        mTvNick.setText("昵         称：" + "用户" + objectId);
                     }
 
                     if (ageInt <= 0) {
