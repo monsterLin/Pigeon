@@ -37,7 +37,7 @@ public class PigeonApplication extends BaseApplication {
         SophixManager.getInstance().setContext(this)
                 .setAppVersion(appVersion)
                 .setAesKey(null)
-                .setEnableDebug(true)
+                .setEnableDebug(false)
                 .setPatchLoadStatusStub(new PatchLoadStatusListener() {
                     @Override
                     public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
