@@ -2,28 +2,28 @@
 engines:
   rubocop:
     enabled: true
-    #checks:
-    #	Rubocop/Metrics/ClassLength:
-    #  	enabled: false
-  golint:
-   	enabled: true
-  eslint:
-    enabled: true
-  csslint:
-    enabled: true
   duplication:
-  	enabled: true
+    enabled: true
     config:
-    	languages:
-      - ruby
-      	#mass_threshold: 30
-      - javascript
+      languages:
+      - "ruby"
+  fixme:
+    enabled: true
+    exclude_paths:
+      - config/engines.yml
+  markdownlint:
+    enabled: true
+    checks:
+      MD002: # "First header should be a h1 header"
+        enabled: false
+  shellcheck:
+    enabled: true
 ratings:
   paths:
-  - app/**
-  - lib/**
+  - "bin/*"
   - "**.rb"
-  - "**.go"
+  - "**.md"
 exclude_paths:
-- spec/**/*
-- "**/vendor/**/*"
+  - .bundle/
+  - spec/**/*
+  - benchmarks/**/*
